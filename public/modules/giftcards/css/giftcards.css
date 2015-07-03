@@ -399,9 +399,9 @@ label.inputlabel {
 }
 
 .flatRowListItem {
-    background-color: rgba(0,0,0,0.15) ;
+    background-color: rgba(0,0,0,0.1) ;
     border: none;
-    margin-bottom: 2px;
+    margin-bottom: 1px;
     padding: 5px;
     padding-left: 15px;
     border-radius: 0px !important;
