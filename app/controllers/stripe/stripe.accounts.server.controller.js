@@ -5,21 +5,23 @@ stripe = require('stripe')(config.clientID, config.clientSecret),
 _ = require('lodash'),
 Q = require('q'),
 message = null;
+
 /**
  * Create a Account
  */
+
 exports.createAStripeManagedAccount = function(req, res){
    //each rtripe controller needs a
    stripe.accounts.create({
       managed:true,
       country:'US',
-      email:req.user.email,
+      email: req.user.email,
       metadata:{
          phoneNumber:req.user.username,
       },
       description:'this was created for the LocalightWebService',
    }).then(function handler(response){
-      return response.id;
+      return res.response.id;
    }).catch(function errorHandler(errResponse){
       console.log(errResponse);
       return res.status(400).send({
@@ -27,6 +29,7 @@ exports.createAStripeManagedAccount = function(req, res){
       });
    });
 };
+
 /**
  * Retrieve a Account details
  */

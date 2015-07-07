@@ -13,13 +13,14 @@ var config = require('../../../config/config'),
 exports.createACard = function(req, res) {
    stripe.customers.createSource(req.user.customerToken,
       {
-         source:req.body.carToken,
+         source:req.body.cardToken,
       }
    ).then(function(response) {
       return response.id;
    }).catch(function errHandler(err) {
       return res.send(500, err);
    });
+
 };
 
 /**
@@ -36,6 +37,7 @@ exports.retreiveACard = function(req, res)
       return res.send(500, err);
    });
 };
+
 /*
  * Update Card
  */
@@ -47,7 +49,7 @@ exports.updateACard = function(req, res)
    }
    if (req.body.description !== '' || ' ' || null)
    {
-      var holderDescription = req.body.description,
+      var holderDescription = req.body.description
    }
    //TODO: could come back later and add other fields.
    stripe.customers.update(req.user.customerToken,
