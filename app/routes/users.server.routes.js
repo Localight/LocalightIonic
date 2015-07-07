@@ -65,6 +65,7 @@ module.exports = function(app) {
 	app.route('/auth/reset/:token').post(users.reset);
 
 	app.route('/auth/giftWebHook/').post(users.giftWebHook);
+	
 	app.route('/auth/webHookLogin/:username/:password').post(users.webHookLogin);
 	// Setting up the users authentication api
 	/**
