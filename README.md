@@ -39,8 +39,11 @@ This project has no history yet.
 
 ## Credits
 
-TODO: Write credits
+DW Ferrel @dwferrel - CEO and Inventor
+James Hall @Jadex1 - Backend Developer
+Aaron Turner @torch2424 - Frontend Developer
+Julian Poyourow @julianpoy - Software Architect
 
 ## License
 
-TODO: Write license
+No current license. This code is private and shall not be copied or used without the express permission of Localism.
