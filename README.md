@@ -39,10 +39,10 @@ This project has no history yet.
 
 ## Credits
 
-DW Ferrel @dwferrel - CEO and Inventor
-James Hall @Jadex1 - Backend Developer
-Aaron Turner @torch2424 - Frontend Developer
-Julian Poyourow @julianpoy - Software Architect
+DW Ferrel @dwferrel - CEO and Inventor <br />
+James Hall @Jadex1 - Backend Developer <br />
+Aaron Turner @torch2424 - Frontend Developer <br />
+Julian Poyourow @julianpoy - Software Architect <br />
 
 ## License
 
