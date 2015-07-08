@@ -5,8 +5,8 @@ This will encourage community, and help people become more involved in local sho
 
 ## Installation
 
-To install this project, you must have the following installed on your machine:
-NodeJS - https://nodejs.org/
+To install this project, you must have the following installed on your machine:  <br />
+NodeJS - https://nodejs.org/  <br />
 MongoDB - https://www.mongodb.org/
 
 Clone the repository into your local computer.
