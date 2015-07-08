@@ -24,6 +24,9 @@ All yeoman commands work with this project.
 
 ## Contributing
 
+This project is currently private, so noone without permission can view it.
+You should use branching rather than forking to contribute, however here are instructions on forking should you not have write-access.
+
 1. Fork it!
 2. Create your feature branch: `git checkout -b my-new-feature`
 3. Commit your changes: `git commit -am 'Add some feature'`
@@ -32,7 +35,7 @@ All yeoman commands work with this project.
 
 ## History
 
-TODO: Write history
+This project has no history yet.
 
 ## Credits
 
