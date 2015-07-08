@@ -18,7 +18,9 @@ Any changes you make to project files will be auto-reloaded.
 
 ## Usage
 
-TODO: Write usage instructions
+This project is currently in development.
+You can use git commands, and this project is scaffolded using yeoman.
+All yeoman commands work with this project.
 
 ## Contributing
 
