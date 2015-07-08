@@ -9,11 +9,11 @@ To install this project, you must have the following installed on your machine: 
 NodeJS - https://nodejs.org/  <br />
 MongoDB - https://www.mongodb.org/
 
-Clone the repository into your local computer.
-Open a terminal window and run "mongod". This will start the mongodb server. Leave that window open.
-Open a second terminal window. This will be your development window.
-Run "npm install". This will install all of the dependencies of the project onto your computer.
-You can then use "grunt" to host a local web server of the live project directory. You will then be able to view the site at localhost:3000.
+Clone the repository into your local computer. <br />
+Open a terminal window and run "mongod". This will start the mongodb server. Leave that window open. <br />
+Open a second terminal window. This will be your development window. <br />
+Run "npm install". This will install all of the dependencies of the project onto your computer. <br />
+You can then use "grunt" to host a local web server of the live project directory. You will then be able to view the site at localhost:3000. <br />
 Any changes you make to project files will be auto-reloaded.
 
 ## Usage
