@@ -14,8 +14,9 @@ module.exports = function(app) {
 		.post(users.requiresLogin, giftcards.create);
 	app.route('/giftcards/:giftcardId')
 		.get(users.requiresLogin, giftcards.hasAuthorization, giftcards.read)
-		.put(users.requiresLogin, giftcards.hasAuthorization, giftcards.spendAGiftcard)
 		.delete(users.requiresLogin, giftcards.hasAuthorization, giftcards.delete);
+	app.route('giftcards/:giftcardId/:amount')
+		.put(users.requiresLogin, giftcards.hasAuthorization, giftcards.spendAGiftcard);
 		//.post(users.requireLogin, giftcards.hasAuthorization, giftcards.send);// to send a giftcard we need two things.
 		// a username(later a phone number) and a giftcard to send.
    	// Finish by binding the Giftcard middleware

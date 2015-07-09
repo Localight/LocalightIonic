@@ -85,6 +85,7 @@ exports.twilioWebHookLogin = function(req, res) {
             console.log(err);
             res.status(400).send(err);
          } else {
+
             // I need to figure how to log in the user and redirect them.
             //res.json(user);
             return res.json(user);
@@ -151,7 +152,7 @@ exports.twilioWebHook = function(req, res) {
                function(token, user, done) {
                   console.log('sending off the message');
                   client.messages.create({
-                     body: 'http://lbgift.com/auth/twilioWebHookLogin/' + token,
+                     body: 'http://lbgift.com/#!/giftcards/create/' + token,
                      to: req.body.From,
                      from: '+15624454688'
                   }, function(err, message) {
