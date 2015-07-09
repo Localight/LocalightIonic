@@ -6,11 +6,14 @@
 	<img class="center upside" src="/modules/giftcards/img/up-arrow-wht.png">
 
 	<!--Merchants name -->
-	<h2 class="whiteText center">{{getMerchant()}}</h2>
+	<h2 class="whiteText center">{{merchants[Id].name}}</h2>
 
 
 	<!-- Our Tricon Pad -->
 	<!-- Our table for tricon, the dialpad -->
+	<h1 class = "center whiteText" style="padding: 10px;">
+		{{pressedTricon}}
+	</h1>
 	<table class="dialPad upside" align="center">
 
 		<tr ng-repeat="n in tableLayout">

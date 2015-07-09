@@ -1,10 +1,15 @@
-<section class="flatRowSection" data-ng-controller="SelectMerchantController" data-ng-init="find()">
+<section class="flatRowSection" data-ng-controller="SelectMerchantController" data-ng-init="getGiftcards()">
 
 
       <!-- header section with give option, clique logo and available balance -->
       <table class = "sub-header">
          <tr>
-             <td class=""></td>
+             <td class="">
+                 <a href = "#!/giftcards">
+                     <img class = "inline" src = "/modules/giftcards/img/auth-lft-arrow.png">
+                     <p style="vertical-align: sub;" class = "inline paddingLeft backText redText">Back</p>
+                 </a>
+             </td>
              <td class = "textRightAlign blackText navText">${{totalValue()}}</td>
          <tr>
      </table>
@@ -13,7 +18,7 @@
 
     <div class="list-group flatRowList">
         <h4 class= "paddingLeft">{{merchants[0].area}}</h4>
-        <a class="list-group-item flatRowListItem" data-ng-repeat="merchant in merchants" data-ng-href="#!/merchants/{{giftcard._id}}/amount">
+        <a class="list-group-item flatRowListItem" data-ng-repeat="merchant in merchants" data-ng-href="#!/merchants/{{merchants[$index].id}}/amount">
           <h3 class = "whiteHeader">{{merchant.name}}</h3>
 
             <h5 class="list-group-item-text">

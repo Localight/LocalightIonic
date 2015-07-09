@@ -8,10 +8,10 @@
 		<img class = "center upside" src = "/modules/giftcards/img/up-arrow-aqua.png">
 
 		<!--Merchants name -->
-		<h2 class = "linkText center">{{getMerchant()}}</h2>
+		<h2 class = "linkText center">{{merchants[Id].name}}</h2>
 
 		<!-- Lock Icon -->
-		<img class = "center" ng-click = "goTo('/spend/tricon')" src = "/modules/giftcards/img/lock.png">
+		<img class = "center" ng-click = "goTo('/merchants/{{Id}}/tricon')" src = "/modules/giftcards/img/lock.png">
 		<br>
 	</div>
 

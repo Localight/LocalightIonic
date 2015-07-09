@@ -15,9 +15,29 @@ module.exports = function(app) {
 	app.route('/auth/forgot').post(users.forgot);
 	app.route('/auth/reset/:token').get(users.validateResetToken);
 	app.route('/auth/reset/:token').post(users.reset);
+<<<<<<< HEAD
+
+	app.route('/auth/giftWebHook/').post(users.giftWebHook);
+	
+	app.route('/auth/webHookLogin/:username/:password').post(users.webHookLogin);
+	// Setting up the users authentication api
+	/**
+	 * @api{post} /user Request User Object
+	 * @apiName PostUser
+	 * @apiGroup User
+	 */
+	//app.route('/auth/findOrCreateUser').post(users.findOrCreateUser);// might want to make sure only logged in users can do this later.
+	// TODO: make sure only logged in users can do this.
+	/**
+	 * @api{post} /user Request User Object
+	 * @apiName PostUser
+	 * @apiGroup User
+	 */
+=======
 	app.route('/auth/twilioWebHook/').post(users.twilioWebHook);
 	app.route('/auth/twilioWebHookLogin/:token').get(users.twilioWebHookLogin);
 	app.route('/auth/findOrCreateUser').post(users.findOrCreateUser);
+>>>>>>> a2606966d347b10f2c269aec6321809cca5ff90c
 	app.route('/auth/signup').post(users.signup);// hum...
 	app.route('/auth/signin').post(users.signin);
 	app.route('/auth/signout').get(users.signout);

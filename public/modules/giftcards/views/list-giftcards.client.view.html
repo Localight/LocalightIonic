@@ -1,32 +1,39 @@
-<section data-ng-controller='ListGiftCardsController' data-ng-init="find()">
+<section data-ng-controller='ListGiftCardsController' data-ng-init="getGiftcards()">
     <div class="">
 
         <!-- header section with give option, clique logo and available balance -->
         <table class = "sub-header">
             <tr>
                 <td class="paddingLeft"><a class="blackText navText" href="/#!/giftcards/create">
-                    <img class = "imagePaddingRight" ng-src="/modules/giftcards/img/bowtie.png" alt="Give Icon" height="15px" width="30px">
+                    <img class="imagePaddingRight" ng-src="/modules/giftcards/img/bowtie.png" alt="Give Icon" height="15px" width="30px">
                     Give</a></td>
                     <td class = "textRightAlign blackText navText paddingRight">${{totalValue()}}</td>
                     <tr>
         </table>
 
-        <h1 class = "listNameHeader heart">{{giftcards[0].to}}</h1>
-        <h1 class = "whiteText paddingLeft">Gifts received</h1>
-        <h4 class = "paddingLeft" ng-hide="giftcards.length < 1">Unused</h4>
+        <h1 class="listNameHeader heart">{{giftcards[0].to}}</h1>
+        <h1 class="whiteText paddingLeft whiteHeader">Gifts received</h1>
+        <h4 class="paddingLeft" ng-hide="giftcards.length < 1">Unused</h4>
     </div>
-    <div class="list-group">
-        <a class="list-group-item semiTransparentBG" data-ng-repeat="giftcard in giftcards" data-ng-href="#!/giftcards/{{giftcard._id}}">
+    <div class="list-group flatRowList">
+        <a class="list-group-item flatRowListItem" style="" data-ng-href="#!/merchants">
         <!-- Line breaks to space the list so it's easier to click -->
-            <br>
-            <table class = "list-item">
+            <table>
                 <tr>
-                    <td class = "heart tableCell">{{giftcard.from}}</td>
-                    <td class = "textRightAlign tableCell">${{giftValue(giftcard.amt)}}</td>
-                    <tr>
+                    <td class="heart tableCell glyphPadding">You have a total of {{totalValue()}} to spend.</td>
+                    <span class="glyphicon glyphicon-menu-right" aria-hidden="true">
+                </tr>
             </table>
-			<h4 class="list-group-item-heading" data-ng-bind="giftcard.name"></h4>
-            <br>
+        </a>
+        <a class="list-group-item flatRowListItem" data-ng-repeat="giftcard in giftcards" data-ng-href="#!/giftcards/{{giftcard._id}}">
+        <!-- Line breaks to space the list so it's easier to click -->
+            <table>
+                <tr>
+                    <td class="heart tableCell"><img style = "margin-right: 10px" ng-src = "{{icons[giftcard.occasionNumber]}}" width= "35px" height = "35px">{{giftcard.from}}</td>
+                    <td class="textRightAlign tableCell">
+                        <div class="giftlistAmount">${{giftcard.amt}}</div></td>
+                </tr>
+            </table>
         </a>
     </div>
     <div class="alert alert-warning text-center" data-ng-hide="!giftcards.$resolved || giftcards.length">

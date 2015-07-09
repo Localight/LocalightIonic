@@ -1,6 +1,7 @@
-# Project Name
+# LocalLight
 
-TODO: Write a project description
+This project is a local giftcard. Our object is to make a community where you can electronically send giftcards to your friends, and use those giftcards at local shops.
+This will encourage community, and help people become more involved in local shops.
 
 ## Installation
 

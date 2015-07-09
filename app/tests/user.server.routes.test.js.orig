@@ -1,4 +1,8 @@
+<<<<<<< HEAD
  'use strict';
+=======
+<!-- 'use strict';
+>>>>>>> a2606966d347b10f2c269aec6321809cca5ff90c
 
 var should = require('should'),
    request = require('supertest'),
@@ -38,7 +42,11 @@ describe('User-Auth Tests', function() {
       });
    });
 
+<<<<<<< HEAD
    it('should be able to return a user id, given a phoneNumber, firstName', function(done) {
+=======
+   it('should be able to return a user id, given a phoneNumber', function(done) {
+>>>>>>> a2606966d347b10f2c269aec6321809cca5ff90c
       console.log(credentials);
       agent.post('/auth/signin')
          .send(credentials)
@@ -54,8 +62,14 @@ describe('User-Auth Tests', function() {
             }
             var payload = {
                mobileNumber:'2223334444'
+<<<<<<< HEAD
                //firstName:'Carl'
             };
+=======
+            };
+               //firstName:'Carl'
+
+>>>>>>> a2606966d347b10f2c269aec6321809cca5ff90c
             agent.post('/auth/findOrCreateUser')
                .send(payload)
                .expect(200)
@@ -125,6 +139,16 @@ describe('User-Auth Tests', function() {
 //             });
 //          }); //end signin function
 //    }); // end test block for charge
+<<<<<<< HEAD
+//
+//    afterEach(function(done) {
+//       User.remove().exec();
+//       done();
+//    }); // end after each block
+//
+// }); // end describe block for user stripe tests
+ 
+=======
 
    // afterEach(function(done) {
    //    User.remove().exec();
@@ -133,3 +157,4 @@ describe('User-Auth Tests', function() {
 
 // }); // end describe block for user stripe tests
  -->
+>>>>>>> a2606966d347b10f2c269aec6321809cca5ff90c

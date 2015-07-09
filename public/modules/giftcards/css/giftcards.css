@@ -123,9 +123,9 @@ input, textarea {
 /* Background Image */
 .localStreet {
   position: fixed;
-  top: 40%;
+  bottom: 0px;
   width: 100%;
-  height: 60%; /* 60% + 40% (from "top") = 100% of the screen's height*/
+  height: 400px; /* 60% + 40% (from "top") = 100% of the screen's height*/
   z-index: -2;
   background-size: cover;
   background-position: center top;
@@ -133,6 +133,18 @@ input, textarea {
   transition: opacity 1s ease-out 0s; /* CSS property, duration, timing-function, delay */
   -o-transition: opacity 1s ease-out 0s;
   -webkit-transition: opacity 1s ease-out 0s;
+}
+
+@media screen and ( min-height: 1000px ){
+    .localStreet {
+        height: 650px;
+    }
+}
+
+@media screen and ( max-height: 500px ){
+    .localStreet {
+        height: 300px;
+    }
 }
 
 #localStreetNoBlur {
@@ -396,6 +408,7 @@ label.inputlabel {
 
 .whiteHeader{
     color: white;
+    font-weight: 300 !important;
 }
 
 .flatRowListItem {
@@ -407,9 +420,17 @@ label.inputlabel {
     border-radius: 0px !important;
 }
 
+.flatRowListItem table {
+    width: 100%;
+}
+
+.flatRowListItem .glyphPadding {
+    padding-right: 50px;
+}
+
 .flatRowListItem h3 {
     margin: 0px;
-    font-weight: 100 !important;
+    font-weight: 300 !important;
 }
 
 .flatRowListItem .glyphicon {
@@ -418,6 +439,51 @@ label.inputlabel {
     padding-top: 5px;
     padding-right: 5px;
     font-size: 50px;
+}
+
+.giftlistAmount {
+    float: right;
+    color: white;
+    padding: 5px;
+    font-size: 1.4em;
+    border-radius: 5px;
+    border: 1px solid white;
+}
+
+.giftcardContainer {
+    background-color:rgba(37,81,79, 0.75);
+    border-radius: 5px;
+    padding: 10px;
+    margin: 15px;
+    color: white;
+}
+
+.giftcardButtonContainer {
+    text-align: center;
+}
+
+.giftcardButtonSave, .giftcardButtonUse {
+  -webkit-border-radius: 10;
+  -moz-border-radius: 10;
+  border-radius: 10px;
+  font-size: 20px;
+  background: rgba(0,0,0,0.4);
+  padding: 10px 20px 10px 20px;
+  text-decoration: none;
+  color: lightcoral;
+  margin-bottom: 10px;
+  display: inline-block;
+  white-space: pre;
+}
+
+.giftcardButtonUse {
+    padding: 10px 30px 10px 30px;
+    color: lightseagreen;
+}
+
+.giftcardButtonSave:hover, .giftcardButtonUse:hover {
+  text-decoration: none;
+  color: lightgrey;
 }
 /* End Clique Code Styles */
 
@@ -722,32 +788,8 @@ label.inputlabel {
     font-size: 2em;
 }
 
-.list-item {
-    width: 100%;
-    font-size: 2em;
-}
-
 .textRightAlign {
     text-align: right;
-}
-
-.semiTransparentBG {
-    background-color:rgba(0, 0, 0, 0.15);
-}
-
-.semiTransparentBGRounded {
-    background-color:rgba(37,81,79, 0.75);
-    border-radius: 5px;
-}
-
-.buttonBGRounded{
-    background-color: #E9EEF6;
-    padding: 10px;
-    border-radius: 7px;
-}
-
-.list-group:hover{
-    background-color:rgba(37,81,79, 0.5);
 }
 
 .occasionMessage{
@@ -767,7 +809,11 @@ label.inputlabel {
 }
 
 .linkText {
-    color: #5ac4c0;
+    color: #56b4af;
+}
+
+.placeHolderTextStyle {
+    color: lightgrey;
 }
 
 .largerText {
@@ -781,11 +827,6 @@ label.inputlabel {
     display: block;
 }
 
-.buttonFont {
-    font-size: 1.2em;
-    font-weight: bold;
-}
-
 .paddingRight {
     padding-right: 10px;
 }
@@ -796,10 +837,6 @@ label.inputlabel {
 
 .paddingTop {
     padding-top: 10px;
-}
-
-.occasionPadding{
-    padding: 10px;
 }
 
 .navText {
@@ -825,6 +862,14 @@ label.inputlabel {
     -ms-transform: rotate(180deg); /* IE 9 */
     -webkit-transform: rotate(180deg); /* Chrome, Safari, Opera */
     transform: rotate(180deg);
+}
+
+textarea {
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
+
+	width: 100%;
 }
 
 

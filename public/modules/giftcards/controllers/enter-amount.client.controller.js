@@ -1,10 +1,13 @@
 'use strict';
 
-angular.module('giftcards').controller('EnterAmountController', ['$scope', '$location',
-	function($scope, $location) {
+angular.module('giftcards').controller('EnterAmountController', ['$scope', '$location', '$stateParams', '$cookieStore',
+	function($scope, $location, $stateParams, $cookieStore) {
 
 		//Switch overlay on
 		document.getElementById('darkerOverlay').style.display = "block";
+
+		//Get our merchant ID
+		$scope.Id = $stateParams.merchantId;
 
 		//Initialize scope.giftcards
 		$scope.giftcards = null;
@@ -40,7 +43,7 @@ angular.module('giftcards').controller('EnterAmountController', ['$scope', '$loc
 		];
 
 		// Find a list of Giftcards
-		$scope.find = function() {
+		$scope.getGiftcards = function() {
 			//$scope.giftcards = Giftcards.query();
 
 			//FOr testing, hardcoding scope giftcards
@@ -98,6 +101,13 @@ angular.module('giftcards').controller('EnterAmountController', ['$scope', '$loc
 			//Also, do not allow zero to be press if no trailing non zero in the stack
 			if(i != -1)
 			{
+				//Remove the warnings if there are somehow
+				if($scope.warning == true || $scope.totalWarning == true)
+				{
+					$scope.warning = false;
+					$scope.totalWarning = false;
+				}
+
 				//Add to our amount from right to left, so just concatanate to the string
 				//push i onto the queue
 				//Increase stack size,
@@ -131,7 +141,7 @@ angular.module('giftcards').controller('EnterAmountController', ['$scope', '$loc
 				}
 
 				//Get our total value
-				var total = parseInt($scope.totalValue());
+				var total = parseInt($scope.totalValue() * 100);
 				//Also, check if the amount is greater than our maxes
 				if(answer > total)
 				{
@@ -238,12 +248,10 @@ angular.module('giftcards').controller('EnterAmountController', ['$scope', '$loc
 		}
 
 		//Function to go back to selecting merchants
-		$scope.goTo = function(place)
-		{
+		$scope.goTo = function(place) {
 			//Save our final amount if the path is to pay
-			if(place == "/#!/")
-			{
-
+			if(place == "/merchants/" + $scope.Id + "/tilt") {
+				$cookieStore.put('igosdmbmtv', $scope.trueAmount);
 			}
 
 			$location.path(place);

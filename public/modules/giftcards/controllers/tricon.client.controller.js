@@ -1,10 +1,49 @@
 'use strict';
 
-angular.module('giftcards').controller('TriconController', ['$scope',
-	function($scope) {
+angular.module('giftcards').controller('TriconController', ['$scope', '$stateParams', '$location', '$cookieStore',
+	function($scope, $stateParams, $location, $cookieStore) {
 
 		//Switch overlay on
 		document.getElementById('darkerOverlay').style.display = "block";
+
+		//Our pressed tricon ***
+		$scope.pressedTricon = "";
+
+		//Get our merchant ID
+		$scope.Id = $stateParams.merchantId;
+
+		//Our merchants
+		$scope.merchants = [{
+			area: "4th Street Retro Row",
+			name: "Goldies On 4th",
+			id: 0,
+			address: "2106 E 4th St, Long Beach, CA"
+		},{
+			area: "4th Street Retro Row",
+			name: "Aji Peruvian Cuisine",
+			id: 1,
+			address: "2308 E 4th St, Long Beach, CA"
+		},{
+			area: "4th Street Retro Row",
+			name: "P3 Artisan Pizza",
+			id: 2,
+			address: "2306 E 4th St, Long Beach, CA"
+		},{
+			area: "4th Street Retro Row",
+			name: "The Social List",
+			id: 3,
+			address: "2105 E 4th St, Long Beach, CA"
+		},{
+			area: "4th Street Retro Row",
+			name: "Lola's",
+			id: 4,
+			address: "2030 E 4th St, Long Beach, CA"
+		},{
+			area: "4th Street Retro Row",
+			name: "Portfolio's Coffee",
+			id: 5,
+			address: "2300 E 4th St, Long Beach, CA"
+		}]
 
 		//Shuffles an array using the Fisher-Yates algorithm
 		$scope.shuffle = function(array) {
@@ -32,6 +71,15 @@ angular.module('giftcards').controller('TriconController', ['$scope',
 			//console.log("Tricon Pressed: " + $scope.images[id]);
 			//
 			event.currentTarget.style.backgroundPositionY = '-100px';
+
+			//And, add a star to pressed tricon
+			$scope.pressedTricon = $scope.pressedTricon + "*";
+
+			//Check if it has more than 2 characters, if it does, go to the confirmation page
+			if($scope.pressedTricon.length > 2)
+			{
+				$location.path("/merchants/" + $scope.Id + "/confirmation")
+			}
 		}
 
 		//When tricon is unpressed, this function will be launched
@@ -67,8 +115,13 @@ angular.module('giftcards').controller('TriconController', ['$scope',
 		//Get the amount we are going to send the server
 		$scope.getAmount = function()
 		{
-			//Replace this with a backend call eventually
-			return (parseInt(1000) / 100).toFixed(2);
+			//Retrive the cookie with our amount
+			var amount = $cookieStore.get("igosdmbmtv");
+			if(!amount)
+			{
+				$scope.goTo("/merchants/" + $scope.Id + "/amount");
+			}
+			return (parseInt(amount) / 100).toFixed(2);
 		}
 
 		//Get the merchant we are going to send the server

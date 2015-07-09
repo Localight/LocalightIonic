@@ -1,4 +1,4 @@
-<div ng-controller="EnterAmountController" ng-init = "find()">
+<div ng-controller="EnterAmountController" ng-init = "getGiftcards()">
 
 
 
@@ -12,7 +12,7 @@
            <h6 class ="linkText"> Enter the amount you would like to spend.</h6>
            </td>
 
-           <td class="textRightAlign paddingRight" style="padding-top: 15px;" ng-click="goTo('/spend/tilt')" ng-show="clicked == true" my-touchstart="pressButton(10)" my-touchend="pressButton(-1)">
+           <td class="textRightAlign paddingRight" style="padding-top: 15px;" my-touchstart="goTo('/merchants/{{Id}}/tilt')" ng-show="clicked == true">
                 <p class="inline paddingLeft backText linkText" style="vertical-align: top;">Pay</p>
                <img class="inline" style="vertical-align: text-bottom;" src="/modules/giftcards/img/auth-rt-arrow.png">
            </td>
@@ -21,7 +21,7 @@
 
    <!-- Warning no values greater than $500 -->
    <h5 class = "redText paddingRight center" style="margin-left: 10px; margin-right: 10px;" ng-show = "warning == true">Sorry, No values greater than $500</h5>
-   <h5 class = "redText paddingRight center" style="margin-left: 10px; margin-right: 10px;" ng-show = "totalWarning == true">Sorry, No values greater than your balance: ${{totalValue() / 100}}</h5>
+   <h5 class = "redText paddingRight center" style="margin-left: 10px; margin-right: 10px;" ng-show = "totalWarning == true">Sorry, No values greater than your balance: ${{totalValue()}}</h5>
 
     <!-- Our table for spending, the dialpad -->
     <table class="dialPad" align="center">

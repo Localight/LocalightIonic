@@ -104,23 +104,23 @@
         <!-- Credit Card Logo Img -->
         <img id="creditcardimg" ng-src="{{cardTypeImg}}">
         <!-- Credit Card Number Input -->
-        <input type="text" name="clique_input_creditcardnumber1" id="clique_input_creditcardnumber1" class="profont credit_card_number" placeholder="XXXX" size="4" maxlength="4" ng-minlength="4" pattern="\d*" ng-model="cc.number1" onKeyUp="if(document.getElementById('clique_input_creditcardnumber1').value.length > 3){document.getElementById('clique_input_creditcardnumber2').focus();}" required>
-        <input type="text" name="clique_input_creditcardnumber2" id="clique_input_creditcardnumber2" class="profont credit_card_number" placeholder="XXXX" size="4" maxlength="4" ng-minlength="4" pattern="\d*" ng-model="cc.number2" onKeyUp="if(document.getElementById('clique_input_creditcardnumber2').value.length > 3){document.getElementById('clique_input_creditcardnumber3').focus();}" required>
-        <input type="text" name="clique_input_creditcardnumber3" id="clique_input_creditcardnumber3" class="profont credit_card_number" placeholder="XXXX" size="4" maxlength="4" ng-minlength="4" pattern="\d*" ng-model="cc.number3" onKeyUp="if(document.getElementById('clique_input_creditcardnumber3').value.length > 3){document.getElementById('clique_input_creditcardnumber4').focus();}" required>
-        <input type="text" name="clique_input_creditcardnumber4" id="clique_input_creditcardnumber4" class="profont credit_card_number" placeholder="XXXX" size="4" maxlength="4" ng-minlength="4" pattern="\d*" ng-model="cc.number4" required>
+        <input type="text" name="clique_input_creditcardnumber1" id="clique_input_creditcardnumber1" class="profont credit_card_number" placeholder="XXXX" size="4" maxlength="4" ng-minlength="4" pattern="\d*" ng-model="cc.number1" onKeyUp="if(document.getElementById('clique_input_creditcardnumber1').value.length > 3){document.getElementById('clique_input_creditcardnumber2').focus();}">
+        <input type="text" name="clique_input_creditcardnumber2" id="clique_input_creditcardnumber2" class="profont credit_card_number" placeholder="XXXX" size="4" maxlength="4" ng-minlength="4" pattern="\d*" ng-model="cc.number2" onKeyUp="if(document.getElementById('clique_input_creditcardnumber2').value.length > 3){document.getElementById('clique_input_creditcardnumber3').focus();}">
+        <input type="text" name="clique_input_creditcardnumber3" id="clique_input_creditcardnumber3" class="profont credit_card_number" placeholder="XXXX" size="4" maxlength="4" ng-minlength="4" pattern="\d*" ng-model="cc.number3" onKeyUp="if(document.getElementById('clique_input_creditcardnumber3').value.length > 3){document.getElementById('clique_input_creditcardnumber4').focus();}">
+        <input type="text" name="clique_input_creditcardnumber4" id="clique_input_creditcardnumber4" class="profont credit_card_number" placeholder="XXXX" size="4" maxlength="4" ng-minlength="4" pattern="\d*" ng-model="cc.number4">
         <!-- Checkmark box to the left -->
         <div class="checkmark"></div>
       </div>
       <!-- lower box that within same box but differnet background -->
       <div id="creditcardinfo" class="paymentcontainer filledIn">
         <!-- Date input for credit card -->
-        <input type="text" name="clique_input_expiry_m" id="clique_input_expiry_m" class="profont expiry credit_card_expiry" placeholder="MM" maxlength="2" ng-minlength="2" size="5" pattern="\d*" ng-model="formData.ExpiryM" ng-focus="expiryFocus()" required>
-        <input type="text" name="clique_input_expiry_y" id="clique_input_expiry_y" class="profont expiry credit_card_expiry" placeholder="YYYY" maxlength="4" ng-minlength="4" size="5" pattern="\d*" ng-model="formData.ExpiryY" ng-focus="expiryFocus()" required>
+        <input type="text" name="clique_input_expiry_m" id="clique_input_expiry_m" class="profont expiry credit_card_expiry" placeholder="MM" maxlength="2" ng-minlength="2" size="5" pattern="\d*" ng-model="formData.ExpiryM" ng-focus="expiryFocus()">
+        <input type="text" name="clique_input_expiry_y" id="clique_input_expiry_y" class="profont expiry credit_card_expiry" placeholder="YYYY" maxlength="4" ng-minlength="4" size="5" pattern="\d*" ng-model="formData.ExpiryY" ng-focus="expiryFocus()">
         <!-- CVV for Credit Card -->
         <!-- TODO: Come back and split up the month and year -->
-        <input type="text" name="clique_input_cvv" id="clique_input_cvv" class="profont expiry credit_card_cvc" placeholder="CVC" maxlength="3" ng-minlength="3" size="5" pattern="\d*" ng-model="cc.cvc" ng-focus="expiryFocus()" required>
+        <input type="text" name="clique_input_cvv" id="clique_input_cvv" class="profont expiry credit_card_cvc" placeholder="CVC" maxlength="3" ng-minlength="3" size="5" pattern="\d*" ng-model="cc.cvc" ng-focus="expiryFocus()">
         <!-- Zip for credit card -->
-        <input type="text" name="clique_input_zip" id="clique_input_zip" numbers-only="numbers-only" class="profont expiry number" placeholder="ZIP" maxlength="5" ng-minlength="5" size="5" pattern="\d*" ng-model="formData.ZIPcode" ng-focus="expiryFocus()" required>
+        <input type="text" name="clique_input_zip" id="clique_input_zip" numbers-only="numbers-only" class="profont expiry number" placeholder="ZIP" maxlength="5" ng-minlength="5" size="5" pattern="\d*" ng-model="formData.ZIPcode" ng-focus="expiryFocus()">
         <!-- Second checkbox -->
         <div class="checkmark"></div>
       </div>
@@ -169,7 +169,7 @@
         <label class="inputlabel" for="clique_input_phonenumber">
           <img alt="Enter Phone Number" src="../modules/giftcards/img/phone.png" />
         </label>
-        <input type="text" ng-keyup="mask('clique_input_phonenumber')" name="clique_input_phonenumber" id="clique_input_phonenumber" class="helveticaInput rightColumn phone_number" placeholder="(XXX) XXX-XXXX" maxlength="13" ng-minlength="13" pattern="\d*" data-ng-model="gc.phoneNumber" required>
+        <input type="text" ng-keyup="mask('clique_input_phonenumber')" name="clique_input_phonenumber" id="clique_input_phonenumber" class="helveticaInput rightColumn phone_number" placeholder="(XXX) XXX-XXXX" maxlength="13" ng-minlength="13" pattern="\d*" data-ng-model="gc.phoneNumber">
       </div>
       <!--From-->
       <div>

@@ -10,7 +10,7 @@ angular.module('giftcards').controller('ListGiftCardsController', ['$scope',
 		$scope.giftcards = null;
 
 		// Find a list of Giftcards
-		$scope.find = function() {
+		$scope.getGiftcards = function() {
 			//$scope.giftcards = Giftcards.query();
 
 			//FOr testing, hardcoding scope giftcards
@@ -25,7 +25,8 @@ angular.module('giftcards').controller('ListGiftCardsController', ['$scope',
 					from: 'Tony',
 					message: "hi",
 					districtNumber: 'number',
-					occasionMessage: "Variety is the spice of life. So I'm giving you the gift of choice!"
+					occasionMessage: "Variety is the spice of life. So I'm giving you the gift of choice!",
+					occasionNumber: "2"
 				},
 				{
 					_id: "2",
@@ -36,7 +37,8 @@ angular.module('giftcards').controller('ListGiftCardsController', ['$scope',
 					from: 'Frank',
 					message: "hi",
 					districtNumber: 'number',
-					occasionMessage: "Congratulations on your baby!"
+					occasionMessage: "Congratulations on your baby!",
+					occasionNumber: "5"
 				}
 			]
 		}
@@ -60,5 +62,30 @@ angular.module('giftcards').controller('ListGiftCardsController', ['$scope',
 			//Return the total value as a formatted string
 			return (parseInt(amt) / 100).toFixed(2);
 		}
+
+		//Array of occasion Icons, simply a link to their icon
+		$scope.icons =
+		[
+			//Anniversary
+			"/modules/giftcards/img/occasion-anniversary-icon-wht.png",
+			//Baby
+			"/modules/giftcards/img/occasion-baby-icon-wht.png",
+			//Birthday
+			"/modules/giftcards/img/occasion-birthday-icon-wht.png",
+			//Congrats
+			"/modules/giftcards/img/occasion-congrats-icon-wht.png",
+			//Present (Custom Icon)
+			"/modules/giftcards/img/occasion-custom-icon-wht.png",
+			//Get Well Soon
+			"/modules/giftcards/img/occasion-getwell-icon-wht.png",
+			//Love
+			"/modules/giftcards/img/occasion-love-icon-wht.png",
+			//Sympathy
+			"/modules/giftcards/img/occasion-sympathy-icon-wht.png",
+			//Thank You
+			"/modules/giftcards/img/occasion-thankyou-icon-wht.png",
+			//Wedding
+			"/modules/giftcards/img/occasion-wedding-icon-wht.png"
+		]
 	}
 ]);

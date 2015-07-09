@@ -1,0 +1,45 @@
+<section data-ng-controller="ThankYouController" ng-init = "getGiftcards()">
+
+	<!-- our nav/status bar -->
+	<!-- header section with give option, clique logo and available balance -->
+	<table class = "sub-header">
+		<tr>
+			<td class="paddingLeft"><a class="blackText navText" href="/#!/giftcards/create">
+				<img class = "imagePaddingRight" ng-src="/modules/giftcards/img/bowtie.png" alt="Give Icon" height="15px" width="30px">
+				Give</a></td>
+				<td class = "textRightAlign blackText navText paddingRight">${{totalValue()}}</td>
+				<tr>
+	</table>
+	
+	<!-- Occasion Icon -->
+	<img class = "center" style = "margin-top: 10px" ng-src = "{{icons[giftcards[0].occasionNumber]}}" width= "75px" height = "75px">
+
+	<!-- Our occasion Heading -->
+	<h1 class = "center heart" style = "margin-top: 5px">{{giftcards[0].occasionHeading}}</h1>
+
+	<!-- Our message -->
+	<h4 class = "center">${{purchaseValue}} was successfully transferred.
+		Wanna send a thank you to {{giftcards[0].from}}?</h4>
+
+	<!-- div to enter thank you note -->
+	<form>
+		<div class = "giftcardContainer" ng-init = "setTextArea()">
+			<!-- Our text area and sign off, may be used in order to position the character counter -->
+				<!-- input box, value must be done in the controller -->
+				<textarea id = "thankYouNote" ng-keydown="countCharacters()" type="text" class = "largerText" ng-trim="false" maxlength = "160" rows = "4" autofocus>
+				</textarea>
+				<!-- Person's name in the lower right hand corner -->
+				<div class = "textRightAlign">
+				<p style = "display:inline-block" class = "textRightAlign heart">~ {{giftcards[0].from}}</p>
+				<p ng-init = "countCharacters()" style = "display:inline-block; padding-left: 10px;" class = "placeHolderTextStyle textRightAlign">{{charCount}}</p>
+				</div>
+		</div>
+
+		<!-- our two buttons -->
+		<div class="giftcardButtonContainer">
+			<a class="giftcardButtonSave" style = "padding-right: 33px; padding-left: 33px;" href="/#!/final">Remind Me</a>
+			<a class="giftcardButtonUse" href="/#!/giftcards/create">Send It Now</a>
+		</div>
+
+	</form>
+</section>

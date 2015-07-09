@@ -35,7 +35,7 @@ var UserSchema = new Schema({
       type: String,
       trim: true,
       default: '',
- //     validate: [validateLocalStrategyProperty, 'Please fill in your first name']
+//      validate: [validateLocalStrategyProperty, 'Please fill in your first name']
    },
    /**
     * lastName, the last name of the user, most of the time what we display in app. Must be String all alpha characters, 3 - 35 characters long. no spaces
@@ -66,7 +66,7 @@ var UserSchema = new Schema({
       type: String,
       //TODO: add regular expression for customer Token, using match.
       match: [/cus_[\w\d._%+-]+/, 'This value entered for the Stripe Customer Token does not match the correct format ({VALUE})'],
-//      required: 'Stripe Customer Token Required.'
+      required: 'Stripe Customer Token Required.'
    },
    stripeCardToken: {
       // A user may only have one primary card.
@@ -112,7 +112,8 @@ var UserSchema = new Schema({
       type: String,
       trim: true,
       default: '',
-      //validate: [validateLocalStrategyProperty, 'Please fill in your email'], match: [/.+\@.+\..+/, 'Please fill a valid email address']
+      //validate: [validateLocalStrategyProperty, 'Please fill in your email'],
+      match: [/.+\@.+\..+/, 'Please fill a valid email address']
    },
    /**
     * username, probably the most important fact about this is that the username
@@ -124,16 +125,17 @@ var UserSchema = new Schema({
     */
    username: {
       type: String,
+      trim: true,
       unique: 'testing error message',
-      match: [/d{10}/, 'Please fill a valid phone number'], // should match the format of a string phonenumber
-      //required: 'Please fill in a mobile number',
-      trim: true
+      match: [/^\s*(?:\+?(\d{1,3}))?[-. (]*(\d{3})[-. )]*(\d{3})[-. ]*(\d{4})(?: *x(\d+))?\s*$/, 'Please fill a valid ten-digit phone number'], // should match the format of a string phonenumber
+      required: 'Please fill in a mobile number',
+
    },
    // if a user wants to
    password: {
       type: String,
       default: '',
-      //	validate: [validateLocalStrategyPassword, 'Password should be longer']
+      	//validate: [validateLocalStrategyPassword, 'Password should be longer']
    },
    salt: {
       type: String

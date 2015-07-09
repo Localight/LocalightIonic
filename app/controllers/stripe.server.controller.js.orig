@@ -1,0 +1,23 @@
+ 'use strict';
+/**
+ * Module dependencies.
+ */
+var _ = require('lodash');
+
+/**
+ * Extend stripe controller
+ */
+module.exports = _.extend(
+	  require('./stripe/stripe.charges.server.controller'),
+     require('./stripe/stripe.accounts.server.controller'),
+     require('./stripe/stripe.cards.server.controller'),
+<<<<<<< HEAD
+     require('./stripe/stripe.customers.server.controller'),
+     require('./stripe/stripe.refunds.server.controller'),
+     require('./stripe/stripe.transfers.server.controller')
+=======
+     require('./stripe/stripe.customers.server.controller')
+   //  require('./stripe.refund.server.controller'),
+   //  require('.stripe.transfer.server.controller');
+>>>>>>> a2606966d347b10f2c269aec6321809cca5ff90c
+);
