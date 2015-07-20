@@ -131,7 +131,7 @@ GiftcardSchema.methods.sendTextToFriend = function(friendNumber) {
 
    return client.messages.create({
       body: 'You have a new giftcard in your account!',// put link in to log user in and view list of cards.
-      to: friendNumber,
+      to: '+1'+friendNumber,
       from: '+15624454688',
    }, function(err, message) {
       if (err) {
