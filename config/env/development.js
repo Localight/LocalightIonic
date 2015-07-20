@@ -2,7 +2,7 @@
 module.exports = {
 	db: 'mongodb://localws:password@ds059702.mongolab.com:59702/localismdev',
 	app: {
-		title: 'Clique - Development Environment'
+		title: 'Localight Web Service - Development Environment'
 	},
 	twilio:{
 		accountSID: process.env.ACCOUNT_SID || 'AC9bfd970cef5934b23e69f1ef72812a23',

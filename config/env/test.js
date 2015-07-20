@@ -4,7 +4,7 @@ module.exports = {
 	db: 'mongodb://localhost/clique-test',
 	port: 3001,
 	app: {
-		title: 'Clique - Test Environment'
+		title: 'Localight Web Service - Test Environment'
 	},
 	twilio: {
       accountSID: process.env.ACCOUNT_SID || 'AC3f3d26948bcaffbde196abc45c3e7b89',
