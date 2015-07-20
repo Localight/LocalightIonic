@@ -1,5 +1,4 @@
-'use strict';
-// I want to change gift card to CliqueCard, will do that later though.
+'use strict'; // I want to change gift card to CliqueCard, will do that later though.
 // What if the giftcards, held an array of the transactions? The giftcard it's self had more that i kept track of?
 //
 /**
@@ -14,13 +13,18 @@ var mongoose = require('mongoose'),
    client = require('twilio')(config.twilio.accountSID, config.twilio.authTOKEN),
    smtpTransport = nodemailer.createTransport(config.mailer.options),
    //  twilioService = require('../services/twilio/outgoingTwilioText.service'),
-   // User = require('./user.server.model'),
+   User = require('./user.server.model'),
    Schema = mongoose.Schema;
 /**
  * Giftcard Schema,
  * Included are the validations for the mongoose model.
  */
 var GiftcardSchema = new Schema({
+
+   spendersFirstName:{
+      type:String,
+      required:'please enter the name of your friend'
+   },
    amount: {
       type: Number,
       min: 0,
@@ -29,38 +33,49 @@ var GiftcardSchema = new Schema({
       required: 'Please enter an amount to purchase between 0 and 500000'
    }, // need to make sure it's always a number and never zero or a negative number.
    // for initial purchase.
-   stripeOrderId: {
+   purchasersFirstName:{
       type: String,
-      match: [/ch_[\w\d._%+-]+/, 'This value entered for the stripeId does not match ({VALUE})'],
-      //TODO: write regular expresion to match "ch_"[0-2](spaces) for the stripe id.
-      required: 'Please provide the stripeOrderId in the correct format.'
-   }, // I should only get one stripeOrderId once
+      require:'Please enter your first name.'
+   },
    /**
     *  Message, the message that the user wishes for another user to see.
     *  a message doesn't need to have a string attached to it.
     */
-   occasion: {
+   ocassion: {
       type: String,
       default: 'A gift for you!'
    },
+   dateToSend:{
+      type: String, // add string
+      default: 'we dont have dates yet',
+   },
+   spenderMobileNumber:{
+      type:String,// make it match a phone number regex
+      trim:true,
+      match:[/^\s*(?:\+?(\d{1,3}))?[-. (]*(\d{3})[-. )]*(\d{3})[-. ]*(\d{4})(?: *x(\d+))?\s*$/, 'Please fill a valid ten-digit phone number'],
+      required: 'Please fill in a mobile number for your friend',
+   },
+
+   purchaserEmailAddress:{
+      trim: true,
+      type:String,// Make it match email validate that it's a valid email.
+      match: [/.+\@.+\..+/, 'Please fill a valid email address'],
+   },
+
    //TODO: probably going to need to store the a refernce to the image the user is sending back.
    created: {
       type: Date,
       default: Date.now
    },
-   dateToSendText:{
-      type:Date,
-      default:Date.now
+   spenderOfGiftCardId: {
+      type: Schema.ObjectId,
+      ref: 'User',
+      required: 'Please, enter the user id to send this giftcard too.'
    },
-   emailToSendReceipt: {
-      type:String,
-      match: [/.+\@.+\..+/, 'Please fill a valid email address'],
-      required:'Please fill in a Email to send the reciept to.'
-   },
-   phoneNumberToTextTo:{
-      type:String,
-      //TODO:add the regular expression for phone number
-      required:'Please add the number of your friend.'
+   purchaserOfGiftCardId: {
+      type: Schema.ObjectId,
+      ref: 'User',
+      required: 'Please, enter the user id who is sending the giftcard.'
    },
    // subledger transaction id's
    // This is the intial transaction id, but we will also contain a array of subledger transactions.
@@ -78,16 +93,22 @@ var GiftcardSchema = new Schema({
    //       default: Date.now
    //    },
    // }],
-   purchaserOfGiftCard: {
-      type: Schema.ObjectId,
-      ref: 'User',
-      required: 'Please, enter the user id who is sending the giftcard.'
+
+   districtCode: {
+      type:String,
+      default: 'dont know what to do with this yet',
    },
-   spenderOfGiftCard: {
-      type: Schema.ObjectId,
-      ref: 'User',
-      required: 'Please, enter the user id to send this giftcard too.'
-   }
+
+   // purchasersPhoneNumber:{
+   //    type: String
+   // }, // will represent the user buying the giftcard as there username.
+   stripeOrderId: {
+      type: String,
+      match: [/ch_[\w\d._%+-]+/, 'This value entered for the stripeId does not match ({VALUE})'],
+      //TODO: write regular expresion to match "ch_"[0-2](spaces) for the stripe id.
+      required: 'Please provide the stripeOrderId in the correct format.'
+   }, // I should only get one stripeOrderId once
+
 });
 /**
  * Hook a pre save method to verify that the spenderofgiftcard and purchaserofgiftcard are not the
@@ -95,13 +116,35 @@ var GiftcardSchema = new Schema({
  * people are completely different and un related if we wanted too
  */
 GiftcardSchema.post('save', function() {
-   this.fireOffRecipet(this.emailToSendReceipt);
-   this.emailToSendReceipt = undefined;
-   this.sendTextToFriend(this.phoneNumberToTextTo);
-   this.phoneNumberToTextTo = undefined;
+
+   this.fireOffRecipet(this.purchaserEmailAddress);
+
+   // User.findById({
+   //    _id: this.purchaserOfGiftCard
+   // }).exec(function(err, user){
+   //    if(err){
+   //       return err;
+   //    }
+   //    if(!user){
+   //       return (new Error('Failed to locate User '+user));
+   //    }
+   //
+   // });
+   this.sendTextToFriend(this.spenderMobileNumber);
+   // User.findById({
+   //    _id: this.spenderOfGiftCard
+   // }).exec(function(err, user){
+   //    if(err){
+   //       return err;
+   //    }
+   //    if(!user){
+   //       return (new Error('Failed to locate User '+user));
+   //    }
+   //
+   // });
 });
+
 //TODO: need to create method that accepts email, and fire off reciept email.
-//
 GiftcardSchema.methods.fireOffRecipet = function(anEmail) {
    //TODO: implement fire off to email.
    //NOTE: need to create a html template for the email.
