@@ -12,7 +12,7 @@
  angular.module('angularLocalightApp')
  .factory('Users', ['$resource', function($resource) {
 
- return $resource( '/users',
+ return $resource( 'http://localhost:3000/users',
      { }, {
          get: {
              method: 'GET',
@@ -32,7 +32,7 @@
 angular.module('angularLocalightApp')
 .factory('Login', ['$resource', function($resource) {
 
-return $resource( '/users/login',
+return $resource( 'http://localhost:3000/users/login',
     { }, {
         submit: {
             method: 'POST',
@@ -46,7 +46,7 @@ return $resource( '/users/login',
 angular.module('angularLocalightApp')
 .factory('Join', ['$resource', function($resource) {
 
-return $resource( '/users/join',
+return $resource( 'http://localhost:3000/users/join',
     { }, {
         submit: {
             method: 'POST',
