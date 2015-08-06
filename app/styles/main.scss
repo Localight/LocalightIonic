@@ -836,19 +836,19 @@ label.inputlabel {
 /* Placeholder text */
 
 ::-webkit-input-placeholder {
-   color: black;
+   color: grey;
 }
 
 :-moz-placeholder { /* Firefox 18- */
-   color: black;
+   color: grey;
 }
 
 ::-moz-placeholder {  /* Firefox 19+ */
-   color: black;
+   color: grey;
 }
 
 :-ms-input-placeholder {
-   color: black;
+   color: grey;
 }
 
 /* Placeholder text ends */
