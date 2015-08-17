@@ -30,6 +30,7 @@ angular.module('angularLocalightApp')
 
         //Switch overlay on
 		document.getElementById('darkerOverlay').style.display = "block";
+        document.body.style.backgroundColor = "#316D6B";
 
         //get our session token from the cookies
         $scope.sessionToken = $cookies.get("sessionToken");
