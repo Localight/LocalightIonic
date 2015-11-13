@@ -705,7 +705,7 @@ angular.module('angularLocalightApp')
         $scope.submitGiftcard = function() {
 
             //Start loading
-            var loadRequest = loadingSpinner.load("Getting Giftcards...");
+            var loadRequest = loadingSpinner.load("Sending Giftcard...");
 
 
             //Creating the users Json

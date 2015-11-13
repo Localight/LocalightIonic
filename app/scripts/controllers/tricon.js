@@ -183,7 +183,9 @@ angular.module('angularLocalightApp')
                         loadingSpinner.showError("Status: " + err.status + " " + err.data.msg,
                         "Status: " + err.status + " " + err.data.msg);
                     }
-                    return;
+
+                    //Stop the loading spinner
+                    loadingSpinner.stopLoading(loadRequest);
                 });
 			}
 		}
