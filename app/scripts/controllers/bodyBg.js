@@ -16,17 +16,17 @@ angular.module('angularLocalightApp')
       return ($location.path().indexOf(route) > -1);
     }
 
-    var invalidDevice = function(){
-        window.location = "https://www.youtube.com/watch?v=dQw4w9WgXcQ";
-    }
-
-    if (navigator.maxTouchPoints <= 1 || navigator.plugins.length > 0) {
-      invalidDevice();
-    } else if (window.chrome) {
-      if (window.chrome.webstore) {
-        invalidDevice();
-      }
-    };
+    // var invalidDevice = function(){
+    //     window.location = "https://www.youtube.com/watch?v=dQw4w9WgXcQ";
+    // }
+    //
+    // if (navigator.maxTouchPoints <= 1 || navigator.plugins.length > 0) {
+    //   invalidDevice();
+    // } else if (window.chrome) {
+    //   if (window.chrome.webstore) {
+    //     invalidDevice();
+    //   }
+    // };
 
     $timeout(function(){
         var html = document.getElementsByTagName("html");
