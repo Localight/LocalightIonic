@@ -1,6 +1,5 @@
 <!-- The Loading Spinner that will show on page load -->
-<div ng-class = "{spinner: loading}" ng-init = "loading = false;">
-</div>
+<div ng-include src = "'views/loadingSpinner.html'"></div>
 
 <!-- call whatever method you want on submit -->
 <section ng-hide="showPage2">
@@ -317,13 +316,20 @@
     gc.amount">
 
 
+    <!-- Error messages from the backend -->
+    <div data-ng-show="(backendError && backendRes.length > 1)" class="text-danger form-incomplete createGiftCardWidth createBackendError">
+      <strong>{{backendRes}}</strong>
+    </div>
+
       <button class="proceed_button" id="continue_button"
           ng-disabled="!(giftcardForm.$valid && gc.amount && gc.occasion && cardValidated) || loading"
-          ng-click="tokenizeInfo();">Continue</button>
+          ng-click="tokenizeInfo();backendError = false;">Continue</button>
     </div>
+
     <div data-ng-show="error" class="text-danger">
       <strong data-ng-bind="error"></strong>
     </div>
+
     </div>
    </form>
   </section>

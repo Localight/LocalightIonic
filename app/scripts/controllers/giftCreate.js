@@ -9,7 +9,7 @@
 */
 angular.module('angularLocalightApp')
 .controller('CreategiftcardCtrl', function($scope, $http, $routeParams, $location, $window, rotationCheck, $timeout,
-    $log, $q, $cookies, OccasionService, Users, Join, Giftcards, LocationByCode, $document) {
+    $log, $q, $cookies, OccasionService, Users, Join, Giftcards, LocationByCode, $document, loadingSpinner) {
 
         this.awesomeThings = [
             'HTML5 Boilerplate',
@@ -18,6 +18,10 @@ angular.module('angularLocalightApp')
         ];
 
         $scope.cc = {};
+
+        //Initialize the loading service
+        $scope.loadHandler = loadingSpinner.loading;
+        $scope.errorHandler = loadingSpinner.error;
 
         //****
         //Page initialization
@@ -188,14 +192,16 @@ angular.module('angularLocalightApp')
             //Check if we met our condition and our length is good
             if($scope.gc.code != null){
                 if ($scope.gc.code.toString().length == 5) {
-                    //Show the loading spinner
-                    $scope.loading = true;
+
+                    //Start loading
+                    var loadRequest = loadingSpinner.load("Getting Location Code...");
 
                     LocationByCode.get({
                         code: $scope.gc.code
                     }, function(data, status){
-                        //Hide the loading spinner
-                        $scope.loading = false;
+
+                        //Stop Loading
+                        loadingSpinner.stopLoading(loadRequest);
 
                         $scope.location.name = data.name;
                         $scope.location = data;
@@ -213,9 +219,12 @@ angular.module('angularLocalightApp')
                         //And set the active field to the occasions
                         $scope.setActiveField(document.getElementById("clique_input_code").getAttribute("nextId"));
                     }, function(err){
-                        //Hide the loading spinner
-                        $scope.loading = false;
-                        alert("Wrong code!");
+
+                        //Stop Loading
+                        loadingSpinner.stopLoading(loadRequest);
+
+
+                        alert("Wrong code, please check the code you entered, or try another.");
                     });
 
                 }
@@ -641,8 +650,8 @@ angular.module('angularLocalightApp')
          */
         $scope.tokenizeInfo = function() {
 
-            //Show(true)/Hide(false) the loading spinner
-            $scope.loading = true;
+            //Start loading
+            var loadRequest = loadingSpinner.load("Checking Card...");
 
             //Disable button while tokenzing the card
             $scope.tokenzing = true;
@@ -658,8 +667,9 @@ angular.module('angularLocalightApp')
                 "exp_year": $scope.cc.ExpiryY
             }, function(status, response) {
                 if (response.error) {
-                    //Show(true)/Hide(false) the loading spinner
-                    $scope.loading = false;
+
+                    //Stop Loading
+                    loadingSpinner.stopLoading(loadRequest);
 
                     //Display card error message
                     $scope.tokenizeFailure = true;
@@ -671,8 +681,8 @@ angular.module('angularLocalightApp')
                     //Show the next page
                     $scope.showPage2 = true;
 
-                    //Show(true)/Hide(false) the loading spinner
-                    $scope.loading = false;
+                    //Stop Loading
+                    loadingSpinner.stopLoading(loadRequest);
 
                     //timeout and focus on the phone field
                     $timeout(function() {
@@ -693,8 +703,9 @@ angular.module('angularLocalightApp')
 
         //Finally SUBMIT EVERYTHING to the backend!
         $scope.submitGiftcard = function() {
-            //Show(true)/Hide(false) the loading spinner
-            $scope.loading = true;
+
+            //Start loading
+            var loadRequest = loadingSpinner.load("Getting Giftcards...");
 
 
             //Creating the users Json
@@ -705,7 +716,7 @@ angular.module('angularLocalightApp')
             };
 
             //If it is successful, Update the spending user
-            var updateUser;
+            var updateUser = "";
             Users.update(payload,
                 function(data, status) {
 
@@ -748,32 +759,55 @@ angular.module('angularLocalightApp')
                         //Go to the sent page
                         $location.path("/sent");
 
-                        //Show(true)/Hide(false) the loading spinner
-                        $scope.loading = false;
+                        //Stop Loading
+                        loadingSpinner.stopLoading(loadRequest);
                 },
                 function(err) {
 
-                    //Show(true)/Hide(false) the loading spinner
-                    $scope.loading = false;
+                    //Stop Loading
+                    loadingSpinner.stopLoading(loadRequest);
 
                     //Error, Inform the user of the status
                     console.log("Status: " + err.status + " " + err.data.msg);
+
+                    if(err.status == 412 || 500)
+                    {
+                        //The card was declined!
+                        updateUser = "I'm sorry but the card information you entered seems to be invalid, or the card was declined. Please check and fix your card information.";
+                    }
+                    else {
+                        updateUser = "I'm sorry, an unexpected error has occured. Please contact a developer with your situation, and inform them of the status code: " + err.status;
+                    }
+
                     $scope.backendError = true;
-                    $scope.backendRes = updateUser.msg;
+                    $scope.backendRes = updateUser;
+
+                    //Switch back the pages, and scroll to the bottom
+                    $scope.showPage2 = false;
+                    $timeout(function () {
+                        window.scrollTo(0, document.body.scrollHeight);
+                    }, 0);
                 });
             },
             function(err) {
 
-                //Show(true)/Hide(false) the loading spinner
-                $scope.loading = false;
+                //Stop Loading
+                loadingSpinner.stopLoading(loadRequest);
 
                 //Re enable the submit button
                 $scope.giftSubmit = false;
 
                 //Error, Inform the user of the status
                 console.log("Status: " + err.status + " " + err.data.msg);
+                updateUser = "I'm sorry, an unexpected error has occured. Please contact a developer with your situation, and inform them of the status code: " + err.status;
                 $scope.backendError = true;
-                $scope.backendRes = updateUser.msg;
+                $scope.backendRes = updateUser;
+
+                //Switch back the pages, and scroll to the bottom
+                $scope.showPage2 = false;
+                $timeout(function () {
+                    window.scrollTo(0, document.body.scrollHeight);
+                }, 0);
             });
         }
 

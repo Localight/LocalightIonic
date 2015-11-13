@@ -8,7 +8,7 @@
  * Controller of the angularLocalightApp
  */
 angular.module('angularLocalightApp')
-  .controller('MainpanelCtrl', function ($scope, $cookies, $location, Owners, LocationByOwner) {
+  .controller('MainpanelCtrl', function ($scope, $cookies, $location, Owners, LocationByOwner, loadingSpinner) {
 
     this.awesomeThings = [
       'HTML5 Boilerplate',
@@ -16,11 +16,18 @@ angular.module('angularLocalightApp')
       'Karma'
     ];
 
+    //Initialize the loading service
+    $scope.loadHandler = loadingSpinner.loading;
+    $scope.errorHandler = loadingSpinner.error;
+
     //Grab our session token from the cookies
     var sessionToken = $cookies.get("sessionToken");
 
     //Get our owner info on page load
     $scope.getOwner = function() {
+
+        //Start loading
+        var loadRequest = loadingSpinner.load("Getting Owner Info...");
 
         //First set up some JSON for the session token
         var payload = {
@@ -29,6 +36,9 @@ angular.module('angularLocalightApp')
 
         Owners.get(payload,
         function(data, status){
+
+            //Stop Loading
+            loadingSpinner.stopLoading(loadRequest);
 
             //Success, save the data to scope
             $scope.owner = data;
@@ -39,6 +49,10 @@ angular.module('angularLocalightApp')
         //check for errors
         function(err)
         {
+
+            //Stop the loading spinner
+            loadingSpinner.stopLoading(loadRequest);
+
             //Create the error object
             $scope.error = {
                 isError : true,
@@ -63,6 +77,9 @@ angular.module('angularLocalightApp')
     //get the locations from the backend
     $scope.getLocations = function() {
 
+        //Start loading
+        var loadRequest = loadingSpinner.load("Getting Locations...");
+
         //Json to send to the backend
         var payload = {
             "id" : $scope.owner._id
@@ -74,11 +91,15 @@ angular.module('angularLocalightApp')
             //Success, save the data from the backend in scope
             $scope.locations = data;
 
-            //Show(true)/Hide(false) the loading spinner
-            $scope.loading = false;
+            //Stop Loading
+            loadingSpinner.stopLoading(loadRequest);
         },
         function(err)
         {
+
+            //Stop Loading
+            loadingSpinner.stopLoading(loadRequest);
+
             //Error, Create the error object
             $scope.error = {
                 isError : true,
@@ -144,6 +165,9 @@ angular.module('angularLocalightApp')
     //Delete a location
     $scope.deleteLocation = function(theLocation) {
 
+        //Start loading
+        var loadRequest = loadingSpinner.load("Deleting Location...");
+
         console.log("THIS DOESNT WORK YET, BACKEND IS NOT READY :(");
 
         //First set up some JSON for the session token
@@ -156,9 +180,16 @@ angular.module('angularLocalightApp')
 
             //Success, save the data from the backend to scope
             $scope.owner = data;
+
+            //Stop Loading
+            loadingSpinner.stopLoading(loadRequest);
         },
         function(err)
         {
+
+            //Stop Loading
+            loadingSpinner.stopLoading(loadRequest);
+
             //Error, Create the error object
             $scope.error = {
                 isError : true,

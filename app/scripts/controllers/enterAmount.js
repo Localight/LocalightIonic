@@ -8,13 +8,17 @@
  * Controller of the angularLocalightApp
  */
 angular.module('angularLocalightApp')
-  .controller('EnterAmountCtrl', function ($scope, $location, $routeParams, $cookies, Giftcards, rotationCheck) {
+  .controller('EnterAmountCtrl', function ($scope, $location, $routeParams, $cookies, Giftcards, rotationCheck, loadingSpinner) {
 
     this.awesomeThings = [
       'HTML5 Boilerplate',
       'AngularJS',
       'Karma'
     ];
+
+    //Initialize the loading service
+    $scope.loadHandler = loadingSpinner.loading;
+    $scope.errorHandler = loadingSpinner.error;
 
     //Reset the rotation alert boolean
     rotationCheck.reset();
@@ -77,6 +81,9 @@ angular.module('angularLocalightApp')
     // Find a list of Giftcards
 	$scope.getGiftcards = function() {
 
+        //Start loading
+        var loadRequest = loadingSpinner.load("Getting Giftcards...");
+
         //First set up some JSON for the session token
         var payload = {
             "sessionToken" : sessionToken
@@ -85,25 +92,35 @@ angular.module('angularLocalightApp')
         //Query the backend using our session token
         Giftcards.get(payload,
         function(data, status) {
+
             ///Success save giftcards in scope
             $scope.giftcards = data;
 
             //Get the total value of all the Giftcards
             $scope.getTotalValue();
 
-            //Show(true)/Hide(false) the loading spinner
-            $scope.loading = false;
+            //Stop Loading
+            loadingSpinner.stopLoading(loadRequest);
         },
 
         function(err)
         {
+            //Stop the loading spinner
+            loadingSpinner.stopLoading(loadRequest);
+
             //Error, Inform the user of the status
             if (err.status == 401) {
+
                //Session is invalid! Redirect to 404
                $location.path("/");
+
+               //Show an error
+               loadingSpinner.showError("No Session Found!","Session Token is invalid");
             } else {
-               //An unexpected error has occured, log into console
-               console.log("Status: " + err.status + " " + err.data.msg);
+
+                //An unexpected error has occured, log into console
+                loadingSpinner.showError("Status: " + err.status + " " + err.data.msg,
+                "Status: " + err.status + " " + err.data.msg);
             }
         });
 	}
@@ -269,7 +286,7 @@ angular.module('angularLocalightApp')
 
 	//Function to go back to selecting merchants
 	$scope.goTo = function(place) {
-        
+
 		//Save our final amount if the path is to pay
 		if(place == "/merchants/" + $scope.Id + "/tilt") {
 			$cookies.put('igosdmbmtv', $scope.trueAmount);

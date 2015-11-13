@@ -1,6 +1,5 @@
 <!-- The Loading Spinner that will show on page load -->
-<div ng-class = "{spinner: loading}" ng-init = "loading = true;">
-</div>
+<div ng-include src = "'views/loadingSpinner.html'"></div>
 
 <section data-ng-init="getGiftcards()">
     <div class="">
@@ -26,7 +25,7 @@
         <h3 class="listSectionHeader">Gifts received</h3>
     </div>
     <div class="list-group flatRowList">
-        <a class="list-group-item flatRowListItem totalAmount" my-touchstart="goTo('/merchants')">
+        <a class="list-group-item flatRowListItem totalAmount" ng-click="goTo('/merchants')">
         <!-- Line breaks to space the list so it's easier to click -->
             <table>
                 <tr>

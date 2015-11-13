@@ -8,13 +8,17 @@
  * Controller of the angularLocalightApp
  */
 angular.module('angularLocalightApp')
-  .controller('ListgiftcardsCtrl', function ($scope, $cookies, Giftcards, rotationCheck, $location, GivenGifts) {
+  .controller('ListgiftcardsCtrl', function ($scope, $cookies, Giftcards, rotationCheck, $location, GivenGifts, loadingSpinner) {
 
     this.awesomeThings = [
       'HTML5 Boilerplate',
       'AngularJS',
       'Karma'
     ];
+
+    //Initialize the loading service
+    $scope.loadHandler = loadingSpinner.loading;
+    $scope.errorHandler = loadingSpinner.error;
 
     //Reset the rotation alert boolean
     rotationCheck.reset();
@@ -39,14 +43,20 @@ angular.module('angularLocalightApp')
         // Find a list of Giftcards
     	$scope.getGiftcards = function() {
 
+            //Start loading
+            var loadRequest = loadingSpinner.load("Getting Giftcards...");
+
             //First set up some JSON for the session token
             var payload = {
                 "sessionToken" : sessionToken
             }
 
             //Query the backend using our session token
-            Giftcards.get(payload,
-            function(data, status) {
+            Giftcards.get(payload, function(data, status) {
+
+                //Stop Loading
+                loadingSpinner.stopLoading(loadRequest);
+
                 ///Success save giftcards in scope
                 $scope.giftcards = data;
 
@@ -59,19 +69,32 @@ angular.module('angularLocalightApp')
 
             function(err)
             {
+                //Stop the loading spinner
+                loadingSpinner.stopLoading(loadRequest);
+
                 //Error, Inform the user of the status
                 if (err.status == 401) {
+
                    //Session is invalid! Redirect to 404
                    $location.path("/");
+
+                   //Show an error
+                   loadingSpinner.showError("No Session Found!","Session Token is invalid");
+
                 } else {
+
                    //An unexpected error has occured, log into console
-                   console.log("Status: " + err.status + " " + err.data.msg);
+                   loadingSpinner.showError("Status: " + err.status + " " + err.data.msg,
+                   "Status: " + err.status + " " + err.data.msg);
                 }
             });
     	}
 
         // Find a list of the given Giftcards
     	$scope.getSentGiftcards = function() {
+
+            //Start loading
+            var loadRequest = loadingSpinner.load("Getting Sent Giftcards...");
 
             //First set up some JSON for the session token
             var payload = {
@@ -81,11 +104,12 @@ angular.module('angularLocalightApp')
             //Query the backend using our session token
             GivenGifts.get(payload,
             function(data, status) {
+
+                //Stop the loading spinner
+                loadingSpinner.stopLoading(loadRequest);
+
                 ///Success save giftcards in scope
                 $scope.sentGiftcards = data;
-
-                //Show(true)/Hide(false) the loading spinner
-                $scope.loading = false;
             },
 
             function(err)
@@ -94,9 +118,13 @@ angular.module('angularLocalightApp')
                 if (err.status == 401) {
                    //Session is invalid! Redirect to 404
                    $location.path("/");
+
+                   //Show an error
+                   loadingSpinner.showError("No Session Found!","Session Token is invalid");
                 } else {
                    //An unexpected error has occured, log into console
-                   console.log("Status: " + err.status + " " + err.data.msg);
+                   loadingSpinner.showError("Status: " + err.status + " " + err.data.msg,
+                   "Status: " + err.status + " " + err.data.msg);
                 }
             });
     	}

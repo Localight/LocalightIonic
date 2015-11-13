@@ -8,13 +8,17 @@
  * Controller of the angularLocalightApp
  */
 angular.module('angularLocalightApp')
-  .controller('ConfirmationTimeoutCtrl', function ($scope, $timeout, $location, $routeParams, $cookies, LocationById) {
+  .controller('ConfirmationTimeoutCtrl', function ($scope, $timeout, $location, $routeParams, $cookies, LocationById, loadingSpinner) {
 
     this.awesomeThings = [
       'HTML5 Boilerplate',
       'AngularJS',
       'Karma'
     ];
+
+    //Initialize the loading service
+    $scope.loadHandler = loadingSpinner.loading;
+    $scope.errorHandler = loadingSpinner.error;
 
     //get our session token from the cookies
     var sessionToken = $cookies.get("sessionToken");
@@ -28,6 +32,9 @@ angular.module('angularLocalightApp')
         //Get our location
         $scope.getLocation = function() {
 
+            //Start loading
+            var loadRequest = loadingSpinner.load("Getting Location...");
+
             //First set up some JSON for the session token
             var payload = {
                 "id" : merchantId,
@@ -37,21 +44,29 @@ angular.module('angularLocalightApp')
             //Send the payload to the backend
             LocationById.get(payload,
                 function(data, status) {
+
+                //Stop Loading
+                loadingSpinner.stopLoading(loadRequest);
+
                 //Success! Save the response to our scope!
                 $scope.merchantLocation = data;
 
-                //Show(true)/Hide(false) the loading spinner
-                $scope.loading = false;
-
             }, function(err) {
+
+                //Stop Loading
+                loadingSpinner.stopLoading(loadRequest);
 
                 //Error, Inform the user of the status
                 if (err.status == 401) {
                    //Session is invalid! Redirect to 404
                    $location.path("/");
+
+                   //Show an error
+                   loadingSpinner.showError("No Session Found!","Session Token is invalid");
                 } else {
                    //An unexpected error has occured, log into console
-                   console.log("Status: " + err.status + " " + err.data.msg);
+                   loadingSpinner.showError("Status: " + err.status + " " + err.data.msg,
+                   "Status: " + err.status + " " + err.data.msg);
                 }
             });
         }

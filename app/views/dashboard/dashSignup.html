@@ -1,6 +1,5 @@
 <!-- The Loading Spinner that will show on page load -->
-<div ng-class = "{spinner: loading}" ng-init = "loading = false">
-</div>
+<div ng-include src = "'views/loadingSpinner.html'"></div>
 
 <form class = "authContainer center" name = "joinForm" ng-submit = "signUp()">
 

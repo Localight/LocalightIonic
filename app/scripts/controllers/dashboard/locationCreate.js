@@ -8,10 +8,14 @@
  * Controller of the angularLocalightApp
  */
 angular.module('angularLocalightApp')
-  .controller('CreatelocationCtrl', function ($scope, $cookies, $location, $route, Owners, Locations) {
+  .controller('CreatelocationCtrl', function ($scope, $cookies, $location, $route, Owners, Locations, loadingSpinner) {
 
     //get our session token from the cookies
     var sessionToken = $cookies.get("sessionToken");
+
+    //Initialize the loading service
+    $scope.loadHandler = loadingSpinner.loading;
+    $scope.errorHandler = loadingSpinner.error;
 
     //Switch the view from the first and second "page" of the process
     $scope.switchPage = function() {
@@ -129,8 +133,8 @@ angular.module('angularLocalightApp')
     //Create the location
     $scope.submitLocation = function() {
 
-        //Show(true)/Hide(false) the loading spinner
-        $scope.loading = true;
+        //Start loading
+        var loadRequest = loadingSpinner.load("Getting Giftcards...");
 
         //First set up some JSON for the session token
         var payload = {
@@ -152,8 +156,8 @@ angular.module('angularLocalightApp')
                 $scope.newLocation = data;
                 $location.path("/dashboard/main");
 
-                //Show(true)/Hide(false) the loading spinner
-                $scope.loading = false;
+                //Stop Loading
+                loadingSpinner.stopLoading(loadRequest);
             },
             function(err) {
 
@@ -173,8 +177,8 @@ angular.module('angularLocalightApp')
                    $scope.error.text = "Sorry, an error has occured connecting to the database";
                 }
 
-                //Show(true)/Hide(false) the loading spinner
-                $scope.loading = false;
+                //Stop Loading
+                loadingSpinner.stopLoading(loadRequest);
             });
     }
 

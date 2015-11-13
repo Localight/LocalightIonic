@@ -8,13 +8,17 @@
  * Controller of the angularLocalightApp
  */
 angular.module('angularLocalightApp')
-  .controller('EditlocationCtrl', function ($scope, $cookies, $location, $route, $routeParams, Owners, LocationById) {
+  .controller('EditlocationCtrl', function ($scope, $cookies, $location, $route, $routeParams, Owners, LocationById, loadingSpinner) {
 
     this.awesomeThings = [
       'HTML5 Boilerplate',
       'AngularJS',
       'Karma'
     ];
+
+    //Initialize the loading service
+    $scope.loadHandler = loadingSpinner.loading;
+    $scope.errorHandler = loadingSpinner.error;
 
     //get our session token from the cookies
     var sessionToken = $cookies.get("sessionToken");
@@ -35,6 +39,9 @@ angular.module('angularLocalightApp')
 
     //Initialized function to get location info to auto fill old data
     $scope.getLocation = function() {
+
+        //Start loading
+        var loadRequest = loadingSpinner.load("Getting Location...");
 
         //First set up some JSON for the session token
         var payload = {
@@ -58,8 +65,8 @@ angular.module('angularLocalightApp')
                 $scope.state = $scope.merchantLocation.state;
                 $scope.zipcode= $scope.merchantLocation.zipcode;
 
-                //Show(true)/Hide(false) the loading spinner
-                $scope.loading = false;
+                //Stop Loading
+                loadingSpinner.stopLoading(loadRequest);
         },
         function(err)
         {
@@ -68,8 +75,10 @@ angular.module('angularLocalightApp')
                //Session is invalid! Redirect to 404
                $location.path("/");
             } else {
-               //An unexpected error has occured, log into console
-               console.log("Status: " + err.status + " " + err.data.msg);
+
+                //An unexpected error has occured, log into console
+                loadingSpinner.showError("Status: " + err.status + " " + err.data.msg,
+                "Status: " + err.status + " " + err.data.msg);
             }
         })
      };
@@ -174,8 +183,8 @@ angular.module('angularLocalightApp')
     //Update the location
     $scope.updateLocation = function() {
 
-        //Show(true)/Hide(false) the loading spinner
-        $scope.loading = true;
+        //Start loading
+        var loadRequest = loadingSpinner.load("Updating Location...");
 
         //First set up some JSON for the session token
         var payload = {
@@ -197,8 +206,8 @@ angular.module('angularLocalightApp')
             //Success! Redirect back to the main page
             $location.path("/dashboard/main");
 
-            //Show(true)/Hide(false) the loading spinner
-            $scope.loading = false;
+            //Stop Loading
+            loadingSpinner.stopLoading(loadRequest);
         },
 
         function(err) {
@@ -219,8 +228,8 @@ angular.module('angularLocalightApp')
                $scope.error.text = "Sorry, an error has occured connecting to the database";
             }
 
-            //Show(true)/Hide(false) the loading spinner
-            $scope.loading = false;
+            //Stop Loading
+            loadingSpinner.stopLoading(loadRequest);
         });
     }
 

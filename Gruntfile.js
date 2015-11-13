@@ -77,7 +77,7 @@ module.exports = function(grunt) {
       },
       livereload: {
         options: {
-          open: true,
+          open: false,
           middleware: function(connect) {
             return [
               connect.static('.tmp'),
@@ -112,7 +112,7 @@ module.exports = function(grunt) {
       },
       dist: {
         options: {
-          open: true,
+          open: false,
           base: '<%= yeoman.dist %>'
         }
       }
@@ -455,7 +455,7 @@ module.exports = function(grunt) {
         },
         constants: {
           ENV: {
-            API_BASE: 'http://localhost:3000'
+            API_BASE: 'http://jnode.ngrok.kondeo.com:8080'
           }
         }
       },
@@ -513,7 +513,7 @@ module.exports = function(grunt) {
       return;
     }
 
-    console.log("\nYou didn't specify an environment! Available: prod, dist\n");
+    console.log("\nYou didn't specify an environment! Available: dev, prod\n");
   });
 
   grunt.registerTask('production', 'Compile then start a connect web server', function(target) {

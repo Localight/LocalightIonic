@@ -1,0 +1,27 @@
+<!-- The Loading Spinner that will show on page load requests -->
+<div class = "loadContainer"
+ng-if = "$parent.loadHandler.length > 0 ||
+$parent.errorHandler.length > 0">
+
+    <div ng-class = "{spinner: $parent.loadHandler.length > 0 ||
+    $parent.errorHandler.length > 0}">
+    </div>
+
+    <div class = "handlerContainer"
+        ng-if = "$parent.loadHandler.length > 0 &&
+        $parent.errorHandler.length == 0"
+        ng-repeat = "load in $parent.loadHandler">
+
+        <h3>{{load.msg}}</h3>
+
+    </div>
+
+    <div class = "handlerContainer"
+        ng-if = "$parent.errorHandler.length > 0"
+        ng-repeat = "error in $parent.errorHandler">
+
+        <h3>{{error}}</h3>
+
+    </div>
+
+</div>

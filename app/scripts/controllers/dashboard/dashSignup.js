@@ -8,12 +8,16 @@
  * Controller of the angularLocalightApp
  */
 angular.module('angularLocalightApp')
-  .controller('SignuppanelCtrl', function ($scope, $cookies, $location, $timeout, JoinOwner) {
+  .controller('SignuppanelCtrl', function ($scope, $cookies, $location, $timeout, JoinOwner, loadingSpinner) {
     this.awesomeThings = [
       'HTML5 Boilerplate',
       'AngularJS',
       'Karma'
     ];
+
+    //Initialize the loading service
+    $scope.loadHandler = loadingSpinner.loading;
+    $scope.errorHandler = loadingSpinner.error;
 
     //Boolean for if we receive errors
     $scope.submitError;
@@ -51,8 +55,8 @@ angular.module('angularLocalightApp')
                "stripeCustomerId": "0"
             }
 
-            //Show(true)/Hide(false) the loading spinner
-            $scope.loading = true;
+            //Start loading
+            var loadRequest = loadingSpinner.load("Signing you in...");
 
             JoinOwner.submit(payload,
             function(data, status){
@@ -66,12 +70,17 @@ angular.module('angularLocalightApp')
                 //Finally redirect to the main page
                 $location.path("/dashboard/main");
 
-                //Show(true)/Hide(false) the loading spinner
-                $scope.loading = false;
+                //Stop Loading
+                loadingSpinner.stopLoading(loadRequest);
             },
             function(err)
             {
-                $scope.isError = true;
+                //Create the error object
+                $scope.error = {
+                    isError : true,
+                    text: ""
+                };
+                
                 if(err.status == 401)
                 {
                     $scope.error.text = "Sorry, the entered account information is incorrect.";
@@ -83,8 +92,8 @@ angular.module('angularLocalightApp')
                     $scope.error.text = "Sorry, an error has occured connecting to the database";
                 }
 
-                //Show(true)/Hide(false) the loading spinner
-                $scope.loading = false;
+                //Stop Loading
+                loadingSpinner.stopLoading(loadRequest);
             });
         }
 

@@ -8,7 +8,11 @@
  * Controller of the angularLocalightApp
  */
 angular.module('angularLocalightApp')
-  .controller('ThankyouCtrl', function ($scope, $routeParams, $cookies, $location, $window, rotationCheck, Giftcards, LocationById, Thanks) {
+  .controller('ThankyouCtrl', function ($scope, $routeParams, $cookies, $location, $window, rotationCheck, Giftcards, LocationById, Thanks, loadingSpinner) {
+
+      //Initialize the loading service
+      $scope.loadHandler = loadingSpinner.loading;
+      $scope.errorHandler = loadingSpinner.error;
 
       //Reset the rotation alert boolean
       rotationCheck.reset();
@@ -45,6 +49,9 @@ angular.module('angularLocalightApp')
     //Get our location
     $scope.getLocation = function() {
 
+        //Start loading
+        var loadRequest = loadingSpinner.load("Getting Location...");
+
         //First set up some JSON for the session token
         var payload = {
             "id" : $scope.Id,
@@ -64,18 +71,26 @@ angular.module('angularLocalightApp')
             " to get ..."
 
 
-            //Show(true)/Hide(false) the loading spinner, if everything is loaded
-            if($scope.giftcards) $scope.loading = false;
+            //Stop Loading
+            loadingSpinner.stopLoading(loadRequest);
 
         }, function(err) {
+
+            //Stop Loading
+            loadingSpinner.stopLoading(loadRequest);
 
             //Error, Inform the user of the status
             if (err.status == 401) {
                //Session is invalid! Redirect to 404
                $location.path("/");
+
+               //Show an error
+               loadingSpinner.showError("No Session Found!","Session Token is invalid");
             } else {
-               //An unexpected error has occured, log into console
-               console.log("Status: " + err.status + " " + err.data.msg);
+
+                //An unexpected error has occured, log into console
+                loadingSpinner.showError("Status: " + err.status + " " + err.data.msg,
+                "Status: " + err.status + " " + err.data.msg);
             }
         });
     }
@@ -98,6 +113,9 @@ angular.module('angularLocalightApp')
 
     // Find a list of Giftcards
 	$scope.getGiftcards = function() {
+
+        //Start loading
+        var loadRequest = loadingSpinner.load("Getting Giftcards...");
 
         //First set up some JSON for the session token
         var payload = {
@@ -148,17 +166,30 @@ angular.module('angularLocalightApp')
             //Now query the backend for the location
             $scope.getLocation();
 
+            //Stop Loading
+            loadingSpinner.stopLoading(loadRequest);
+
         },
 
         function(err)
         {
+
+            //Stop Loading
+            loadingSpinner.stopLoading(loadRequest);
+
             //Error, Inform the user of the status
             if (err.status == 401) {
+
                //Session is invalid! Redirect to 404
                $location.path("/");
+
+               //Show an error
+               loadingSpinner.showError("No Session Found!","Session Token is invalid");
             } else {
-               //An unexpected error has occured, log into console
-               console.log("Status: " + err.status + " " + err.data.msg);
+
+                //An unexpected error has occured, log into console
+                loadingSpinner.showError("Status: " + err.status + " " + err.data.msg,
+                "Status: " + err.status + " " + err.data.msg);
             }
         });
 	}
@@ -186,6 +217,9 @@ angular.module('angularLocalightApp')
     //Send the thank you
     $scope.sendThanks = function() {
 
+        //Start loading
+        var loadRequest = loadingSpinner.load("Getting Giftcards...");
+
         //First set up some JSON for the session token
         var payload = {
            "sessionToken" : sessionToken,
@@ -197,6 +231,9 @@ angular.module('angularLocalightApp')
         Thanks.submit(payload,
         function(data, status) {
 
+            //Stop Loading
+            loadingSpinner.stopLoading(loadRequest);
+
             //Success, save the response in scope
             $scope.thankResponse = data;
 
@@ -204,6 +241,10 @@ angular.module('angularLocalightApp')
             $location.path("/localism");
         },
         function(err) {
+
+            //Stop Loading
+            loadingSpinner.stopLoading(loadRequest);
+
             //Create the error object
             $scope.error = {
                 isError : true,

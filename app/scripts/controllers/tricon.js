@@ -8,7 +8,11 @@
  * Controller of the angularLocalightApp
  */
 angular.module('angularLocalightApp')
-  .controller('TriconCtrl', function ($scope, $routeParams, $location, rotationCheck, $cookies, LocationById, Spend, $timeout) {
+  .controller('TriconCtrl', function ($scope, $routeParams, $location, rotationCheck, $cookies, LocationById, Spend, $timeout, loadingSpinner) {
+
+      //Initialize the loading service
+      $scope.loadHandler = loadingSpinner.loading;
+      $scope.errorHandler = loadingSpinner.error;
 
     //Reset the rotation alert boolean
     rotationCheck.reset();
@@ -41,6 +45,9 @@ angular.module('angularLocalightApp')
         //Get our location
         $scope.getLocation = function() {
 
+            //Start loading
+            var loadRequest = loadingSpinner.load("Getting Location...");
+
             //First set up some JSON for the session token
             var payload = {
                 "id" : $scope.Id,
@@ -53,24 +60,34 @@ angular.module('angularLocalightApp')
                 //Success! Save the response to our scope!
                 $scope.merchantLocation = data;
 
-                //Show(true)/Hide(false) the loading spinner
-                $scope.loading = false;
+                //Stop Loading
+                loadingSpinner.stopLoading(loadRequest);
 
             }, function(err) {
 
+                //Stop Loading
+                loadingSpinner.stopLoading(loadRequest);
+
                 //Error, Inform the user of the status
                 if (err.status == 401) {
+
                    //Session is invalid! Redirect to 404
                    $location.path("/");
+
+                   //Show an error
+                   loadingSpinner.showError("No Session Found!","Session Token is invalid");
                 } else {
-                   //An unexpected error has occured, log into console
-                   console.log("Status: " + err.status + " " + err.data.msg);
+
+                    //An unexpected error has occured, log into console
+                    loadingSpinner.showError("Status: " + err.status + " " + err.data.msg,
+                    "Status: " + err.status + " " + err.data.msg);
                 }
             });
         }
 
 		//Shuffles an array using the Fisher-Yates algorithm
 		$scope.shuffle = function(array) {
+
 		  var currentIndex = array.length, temporaryValue, randomIndex ;
 
 		  // While there remain elements to shuffle...
@@ -109,6 +126,9 @@ angular.module('angularLocalightApp')
 			if($scope.pressedTricon.length > 2)
 			{
 
+                //Start loading
+                var loadRequest = loadingSpinner.load("Validating Tricon...");
+
                 //Send the data to the backend and make sure it's good!
                 var payload = {
                     "id" : $scope.Id,
@@ -125,6 +145,9 @@ angular.module('angularLocalightApp')
 
                         //Go to the confirmation page
                         $location.path("/merchants/" + $scope.Id + "/confirmation");
+
+                        //Stop the loading spinner
+                        loadingSpinner.stopLoading(loadRequest);
                 },
                 function(err)
                 {
@@ -134,6 +157,9 @@ angular.module('angularLocalightApp')
                         //Bad session
                         //Redirect them to a 404
                         $location.path("#/");
+
+                        //Show an error
+                        loadingSpinner.showError("No Session Found!","Session Token is invalid");
                     }
                     //If they enter the wrong tricon key
                     else if(err.status == 404)
@@ -152,8 +178,10 @@ angular.module('angularLocalightApp')
                         }, 375);
                     }
                     else {
-                        //log the status
-                        console.log("Status:" + err.status + " " + err.data.msg);
+
+                        //An unexpected error has occured, log into console
+                        loadingSpinner.showError("Status: " + err.status + " " + err.data.msg,
+                        "Status: " + err.status + " " + err.data.msg);
                     }
                     return;
                 });
