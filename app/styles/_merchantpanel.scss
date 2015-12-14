@@ -1,0 +1,177 @@
+/**
+***********************
+    MERCHANT PANEL
+***********************
+**/
+
+.authContainer {
+    padding: 10px;
+    color: $standard;
+
+    h1 {
+        margin-top: 0px;
+    }
+}
+
+.authInput {
+
+    @extend .waterfall;
+
+    margin-top: 10px;
+    font-size: 1.5em;
+    color: $standard;
+    background-color: $inverseStandardAlphaDark;
+    border-radius: 3px;
+}
+
+.authButton {
+    @extend .giftcardButtonSave;
+
+    color: $useItNow;
+    border-style: none;
+    margin-top: 10px;
+    display: inline-block;
+
+    &:disabled {
+        background-color: $inverseStandardAlphaLight;
+        color: $standardAlphaDark;
+    }
+
+}
+
+.authWarning {
+    @extend .form-incomplete;
+    @extend .blackText;
+
+    margin-top: 10px;
+
+}
+
+.radioContainer {
+
+    .joinRadio {
+        width: 30px;
+        height: 30px;
+        vertical-align: top;
+    }
+
+    .radioText {
+        font-size: 25px;
+        font-weight: initial;
+    }
+
+}
+
+.selectedTricon {
+    display: inline-block;
+}
+
+.triconPage {
+    height: 100%;
+}
+
+.triconHeader {
+    @extend .center;
+
+    color: $inverseStandard;
+    height: 56px;
+    margin-bottom: 0px;
+    margin-top: 5px;
+}
+
+.triconBreak {
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+
+.locationFooterButtons {
+
+    .locationButtonLeft {
+
+        padding-top: 15px !important;
+        display: inline-block;
+        float: left;
+        margin-left: 20px;
+    }
+
+    .locationButtonRight {
+
+        padding-top: 15px;
+        padding-right: 0px;
+
+        display: inline-block;
+        float: right;
+        margin-right: 15px;
+
+        .payText {
+            vertical-align: middle;
+            padding-right: 10px;
+        }
+    }
+
+    margin-bottom: 5px;
+
+}
+
+.locationContainer {
+    @extend .giftcardContainer;
+
+    margin-top: 10px;
+
+    a {
+        color: $inverseStandard;
+        text-decoration: none;
+    }
+
+    h2 {
+        margin-top: 0px;
+    }
+
+    .locationArrow {
+        position: relative;
+        color: black;
+        font-size: 40px;
+        float: right;
+    }
+
+    &:hover {
+        background-color: $containerHover;
+    }
+}
+
+.locationTriconContainer {
+    display: inline-block;
+    margin-left: -10px;
+    margin-right: -10px;
+    margin-bottom: -20px;
+    .locationTricon {
+        //Radical and awesome css zooming to resize the tricons
+        @include transform(rotate(180deg) scale(0.675));
+    }
+}
+
+.codeContainer {
+    height: 80px;
+}
+
+.confirmCode {
+    @extend .locationTriconContainer;
+
+    height: 70px;
+    display: inline-flex;
+
+    margin-left: -10px;
+    margin-right: -10px;
+
+    .locationTricon {
+
+        //Radical and awesome css zooming to resize the tricons
+        @include transform(rotate(180deg) scale(0.675));
+    }
+}
+
+/**
+***********************
+    END MERCHANT PANEL
+***********************
+**/
