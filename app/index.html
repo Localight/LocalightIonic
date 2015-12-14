@@ -1,165 +1,51 @@
-<!doctype html>
-<!-- Declaring on HTML for background purposes -->
-<html ng-app="angularLocalightApp"
-ng-controller="BodyCtrl">
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
+    <title></title>
 
-<head>
-  <meta charset="utf-8">
-  <title></title>
-  <meta name="description" content="">
-  <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no, target-densityDpi=device-dpi" />
-  <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
-  <!-- build:css(.) styles/vendor.css -->
-  <!-- bower:css -->
-  <link rel="stylesheet" href="bower_components/angular-native-datepicker/build/themes/default.css" />
-  <link rel="stylesheet" href="bower_components/angular-native-datepicker/build/themes/default.date.css" />
-  <link rel="stylesheet" href="bower_components/angular-native-datepicker/build/themes/default.time.css" />
-  <!-- endbower -->
-  <!-- endbuild -->
-  <!-- build:css(.tmp) styles/main.css -->
-  <link rel="stylesheet" href="styles/main.css">
-  <!-- endbuild -->
-  <script>
-    !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?
-    n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;
-    n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;
-    t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,
-    document,'script','//connect.facebook.net/en_US/fbevents.js');
+    <!-- build:css styles/vendor.css -->
+    <!-- bower:css -->
+    <link rel="stylesheet" href="bower_components/ionic/release/css/ionic.css" />
+    <!-- endbower -->
+    <!-- endbuild -->
+    <link href="styles/style.css" rel="stylesheet">
 
-    fbq('init', '395057070694912');
-    fbq('track', "PageView");</script>
-    <noscript><img height="1" width="1" style="display:none"
-    src="https://www.facebook.com/tr?id=395057070694912&ev=PageView&noscript=1"
-    /></noscript>
-</head>
+    <!-- IF using Sass (run gulp sass first), then uncomment below and remove the CSS includes above
+    <link href="styles/ionic.app.css" rel="stylesheet">
+    -->
 
-<body>
-  <!--[if lte IE 8]>
-      <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
-    <![endif]-->
+    <!-- ionic/angularjs js -->
+    <!-- build:js scripts/vendor.js -->
+    <!-- bower:js -->
+    <script src="bower_components/angular/angular.js"></script>
+    <script src="bower_components/angular-animate/angular-animate.js"></script>
+    <script src="bower_components/angular-sanitize/angular-sanitize.js"></script>
+    <script src="bower_components/angular-ui-router/release/angular-ui-router.js"></script>
+    <script src="bower_components/ionic/release/js/ionic.js"></script>
+    <script src="bower_components/ionic/release/js/ionic-angular.js"></script>
+    <script src="bower_components/ngCordova/dist/ng-cordova.js"></script>
+    <!-- endbower -->
+    <!-- endbuild -->
 
-  <!-- Add your site or application content here -->
-  <!-- No Navbar
-    <div class="header">
-      <div class="navbar navbar-default" role="navigation">
-        <div class="container">
-          <div class="navbar-header">
+    <!-- cordova script (this will be a 404 during development) -->
+    <script src="cordova.js"></script>
 
-            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#js-navbar-collapse">
-              <span class="sr-only">Toggle navigation</span>
-              <span class="icon-bar"></span>
-              <span class="icon-bar"></span>
-              <span class="icon-bar"></span>
-            </button>
+    <!-- your app's js -->
+    <!-- build:js scripts/scripts.js -->
+    <script src="scripts/app.js"></script>
+    <script src="scripts/configuration.js"></script>
+    <!-- endbuild -->
+  </head>
+  <body ng-app="starter">
 
-            <a class="navbar-brand" href="#/">angularLocalight</a>
-          </div>
-
-          <div class="collapse navbar-collapse" id="js-navbar-collapse">
-
-            <ul class="nav navbar-nav">
-              <li class="active"><a href="#/">Home</a></li>
-              <li><a ng-href="#/about">About</a></li>
-              <li><a ng-href="#/">Contact</a></li>
-            </ul>
-          </div>
-        </div>
-      </div>
-    </div>
--->
-
-  <!-- Our View -->
-  <div class="fn-app">
-    <div class="container" id="content">
-      <div ng-view=""></div>
-    </div>
-  </div>
-
-  <!-- Our Background Image -->
-  <div id = "localCity" class = "localCity">
-      <!-- The darker Overlay -->
-      <div ng-class="{darkBlurBodyBg: isDark('/amount')
-        || isDark('/tilt')
-        || isDark('/tricon')
-        || isDark('/confirmation')}">
-    </div>
-  </div>
-
-  <!-- Google Analytics: change UA-XXXXX-X to be your site's ID -->
-  <script>
-    ! function(A, n, g, u, l, a, r) {
-      A.GoogleAnalyticsObject = l, A[l] = A[l] || function() {
-          (A[l].q = A[l].q || []).push(arguments)
-        }, A[l].l = +new Date, a = n.createElement(g),
-        r = n.getElementsByTagName(g)[0], a.src = u, r.parentNode.insertBefore(a, r)
-    }(window, document, 'script', 'https://www.google-analytics.com/analytics.js', 'ga');
-
-    ga('create', 'UA-XXXXX-X');
-    ga('send', 'pageview');
-  </script>
-
-
-
-
-
-  <!-- build:js(.) scripts/vendor.js -->
-  <!-- bower:js -->
-  <script src="bower_components/jquery/dist/jquery.js"></script>
-  <script src="bower_components/angular/angular.js"></script>
-  <script src="bower_components/angular-animate/angular-animate.js"></script>
-  <script src="bower_components/angular-cookies/angular-cookies.js"></script>
-  <script src="bower_components/angular-resource/angular-resource.js"></script>
-  <script src="bower_components/angular-route/angular-route.js"></script>
-  <script src="bower_components/angular-sanitize/angular-sanitize.js"></script>
-  <script src="bower_components/angular-scroll/angular-scroll.js"></script>
-  <script src="bower_components/angular-touch/angular-touch.js"></script>
-  <script src="bower_components/bootstrap-sass/assets/javascripts/bootstrap.js"></script>
-  <script src="bower_components/bootstrap-sass-official/assets/javascripts/bootstrap.js"></script>
-  <script src="bower_components/angular-native-datepicker/build/angular-datepicker.js"></script>
-  <!-- endbower -->
-  <!-- endbuild -->
-
-  <!-- build:js({.tmp,app}) scripts/scripts.js -->
-  <script src="scripts/app.js"></script>
-  <script src="scripts/controllers/main.js"></script>
-  <script src="scripts/controllers/bodyBg.js"></script>
-  <script src="scripts/controllers/giftCreate.js"></script>
-  <script src="scripts/directives/touching.js"></script>
-  <script src="scripts/services/occasionservice.js"></script>
-  <script src="scripts/controllers/giftList.js"></script>
-  <script src="scripts/controllers/giftView.js"></script>
-  <script src="scripts/controllers/merchants.js"></script>
-  <script src="scripts/controllers/enterAmount.js"></script>
-  <script src="scripts/controllers/tiltScreen.js"></script>
-  <script src="scripts/controllers/tricon.js"></script>
-  <script src="scripts/controllers/confirmTimeout.js"></script>
-  <script src="scripts/controllers/thankYou.js"></script>
-  <script src="scripts/controllers/localism.js"></script>
-  <script src="scripts/services/users.js"></script>
-  <script src="scripts/services/giftcards.js"></script>
-  <script src="scripts/services/locations.js"></script>
-  <script src="scripts/controllers/confirmSent.js"></script>
-  <script src="scripts/controllers/dashboard/dashSignup.js"></script>
-  <script src="scripts/controllers/dashboard/dashLogin.js"></script>
-  <script src="scripts/controllers/dashboard/dashList.js"></script>
-  <script src="scripts/services/owners.js"></script>
-  <script src="scripts/controllers/dashboard/locationCreate.js"></script>
-  <script src="scripts/controllers/dashboard/locationEdit.js"></script>
-  <script src="scripts/services/rotateservice.js"></script>
-  <script src="scripts/controllers/dashboard/dashHome.js"></script>
-  <script src="scripts/services/loadingspinner.js"></script>
-  <script src="scripts/controllers/dashboard/followup.js"></script>
-  <script src="scripts/controllers/dashboard/additionalinfo.js"></script>
-  <script src="scripts/controllers/terms.js"></script>
-  <script src="scripts/directives/loadingspinner.js"></script>
-  <!-- endbuild -->
-
-  <script src="/scripts/config/env.js"></script>
-
-  <!-- Stripe -->
-  <script type="text/javascript" src="https://js.stripe.com/v2/"></script>
-  <!-- build:remove:prod -->
-  <!-- /build -->
-</body>
-
+    <ion-pane>
+      <ion-header-bar class="bar-stable">
+        <h1 class="title">Ionic Blank Starter</h1>
+      </ion-header-bar>
+      <ion-content>
+      </ion-content>
+    </ion-pane>
+  </body>
 </html>
