@@ -6,6 +6,7 @@
 angular
   .module('localightApp', [
     'ionic',
+    'ngCordova',
     'ngAnimate',
     'ngCookies',
     'ngResource',
