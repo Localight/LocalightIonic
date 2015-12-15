@@ -6,6 +6,65 @@ $icon-font-path: "../bower_components/bootstrap-sass-official/assets/fonts/boots
     Imports
 ******/
 
+    /******
+        Ionic Imports
+        (Commented Imports conflict with our CSS currently)
+        This has been taken from the actual ionic.scss which simply imports more sass
+    ******/
+
+    // Ionic Variables
+    @import "../bower_components/ionic/scss/_mixins.scss";
+    @import "../bower_components/ionic/scss/_variables.scss";
+
+    //Ionic Base
+    @import "../bower_components/ionic/scss/_reset.scss";
+    @import "../bower_components/ionic/scss/_scaffolding.scss";
+    @import "../bower_components/ionic/scss/_type.scss";
+
+    //Ionic Components
+    @import "../bower_components/ionic/scss/_action-sheet.scss";
+    @import "../bower_components/ionic/scss/_backdrop.scss";
+    @import "../bower_components/ionic/scss/_bar.scss";
+    @import "../bower_components/ionic/scss/_tabs.scss";
+    @import "../bower_components/ionic/scss/_menu.scss";
+    @import "../bower_components/ionic/scss/_modal.scss";
+    @import "../bower_components/ionic/scss/_popover.scss";
+    @import "../bower_components/ionic/scss/_popup.scss";
+    @import "../bower_components/ionic/scss/_loading.scss";
+    @import "../bower_components/ionic/scss/_items.scss";
+    @import "../bower_components/ionic/scss/_list.scss";
+    @import "../bower_components/ionic/scss/_badge.scss";
+    @import "../bower_components/ionic/scss/_slide-box.scss";
+    @import "../bower_components/ionic/scss/_refresher.scss";
+    @import "../bower_components/ionic/scss/_spinner.scss";
+
+    //Ionic Forms
+    // @import "../bower_components/ionic/scss/_form.scss";
+    @import "../bower_components/ionic/scss/_checkbox.scss";
+    @import "../bower_components/ionic/scss/_toggle.scss";
+    @import "../bower_components/ionic/scss/_radio.scss";
+    @import "../bower_components/ionic/scss/_range.scss";
+    @import "../bower_components/ionic/scss/_select.scss";
+    @import "../bower_components/ionic/scss/_progress.scss";
+
+    // Ionic Buttons
+    @import "../bower_components/ionic/scss/_button.scss";
+    @import "../bower_components/ionic/scss/_button-bar.scss";
+
+    //Ionic Util
+    @import "../bower_components/ionic/scss/_grid.scss";
+    @import "../bower_components/ionic/scss/_util.scss";
+    @import "../bower_components/ionic/scss/_platform.scss";
+
+    // Ionic Animations
+    @import "../bower_components/ionic/scss/_animations.scss";
+    @import "../bower_components/ionic/scss/_transitions.scss";
+
+
+    /******
+        Localight Imports
+    ******/
+
     //Import the colors
     @import 'colors';
 
