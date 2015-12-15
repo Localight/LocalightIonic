@@ -1,0 +1,67 @@
+<!-- The Loading Spinner that will show on page load -->
+<loading-spinner></loading-spinner>
+
+<div>
+
+    <!-- Our Value that we will be spending -->
+    <table class = "sub-header">
+       <tr>
+           <td class="amountText">${{amount}}</td>
+
+           <td class = "enterPadding" ng-show = "!clicked || warning || totalWarning">
+               <div ng-show = "!clicked">
+                   <h5 class ="linkText"> Your total balance is ${{totalValue}}.</h5>
+                   <h6 class ="linkText"> Enter the amount you would like to spend.</h6>
+               </div>
+               <!-- Warning no values greater than $500 -->
+               <div ng-show = "warning || totalWarning">
+                   <h5 class ="linkText"> Your total balance is ${{totalValue}}.</h5>
+                   <h6 class ="linkText" ng-show = "warning"> Please stay within $500</h6>
+                   <h6 class ="linkText" ng-show = "totalWarning"> Please stay within your ${{totalValue}} balance</h6>
+               </div>
+           </td>
+
+           <td class="enteredAmount" ng-click="goTo('/merchants/{{Id}}/tilt')" ng-show="clicked && !warning && !totalWarning">
+                <p class="payText">Pay</p>
+                <div class = "authArrowContainer">
+                    <img src="../images/arrows/right-facing-arrow-blu.png" width = "100%" height = "100%">
+                </div>
+           </td>
+       <tr>
+   </table>
+
+    <!-- Our table for spending, the dialpad -->
+    <table class="dialPad" align="center">
+
+        <tr ng-repeat="n in tableLayout">
+			<!-- Using inline styles for our randomization so we can edit this later-->
+			<td ng-repeat="i in n">
+            <!--Need to use table values for press buttont hat way we dont send th wrong values -->
+			<div my-touchstart="pressButton({{tableValues[$parent.$index][$index]}}, $event);" my-touchend="pressButton(-1, $event);" style="background-position: -{{i*100}}px 0px;" class="dialButton dialSheet"></div></td>
+		</tr>
+        <tr>
+			<!-- Using inline styles for our randomization so we can edit this later-->
+            <td ng-click="goTo('/merchants')">
+                <div class = "dialBack">
+                    <div class = "authArrowContainer">
+                        <img src = "../images/arrows/left-facing-arrow-red.png" width = "100%" height = "100%">
+                    </div>
+                    <p class = "dialBackText">Back</p>
+                </div>
+            </td>
+            <td>
+			<div my-touchstart="pressButton(0, $event);" my-touchend="pressButton(-1, $event);" style="background-position: -0px 0px;" class="dialButton dialSheet"></div>
+            </td>
+            <td class = "center">
+                <div class = "dialBackSpace">
+                    <div class = "buttonDel center" ng-show = "clicked == true" ng-click = "backSpace()">
+                    </div>
+                </div>
+            </td>
+		</tr>
+    </table>
+
+    <!-- Place the Small localight logo -->
+    <img class="localightLogoBottom" ng-src="../images/variousIcons/logo-localight-outline-wht.png" alt="Localight" height="45px" width="45px">
+
+</div>

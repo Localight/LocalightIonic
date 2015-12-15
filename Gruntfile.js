@@ -36,14 +36,14 @@ module.exports = function (grunt) {
       options: {
         space: '  ',
         wrap: '"use strict";\n\n {%= __ngModule %}',
-        name: 'config',
+        name: 'envConfig',
         dest: '<%= yeoman.app %>/<%= yeoman.scripts %>/configuration.js'
       },
       development: {
         constants: {
           ENV: {
             name: 'development',
-            apiEndpoint: 'http://dev.yoursite.com:10000/'
+            API_BASE: 'http://jnode.ngrok.kondeo.com:8080'
           }
         }
       },
@@ -51,7 +51,7 @@ module.exports = function (grunt) {
         constants: {
           ENV: {
             name: 'production',
-            apiEndpoint: 'http://api.yoursite.com/'
+            API_BASE: 'https://db.localight.com'
           }
         }
       }
@@ -161,7 +161,7 @@ module.exports = function (grunt) {
       }
     },
 
-    
+
     // Compiles Sass to CSS and generates necessary files if requested
     compass: {
       options: {
@@ -190,7 +190,7 @@ module.exports = function (grunt) {
         }
       }
     },
-    
+
 
     // Reads HTML for usemin blocks to enable smart builds that automatically
     // concat, minify and revision files. Creates configurations in memory so
@@ -411,7 +411,6 @@ module.exports = function (grunt) {
         }]
       }
     }
-
   });
 
   // Register tasks for all Cordova commands
@@ -502,14 +501,30 @@ module.exports = function (grunt) {
     'watch:karma'
   ]);
 
+  grunt.loadNpmTasks('grunt-ng-constant');
+
   grunt.registerTask('serve', function (target) {
     if (target === 'compress') {
       return grunt.task.run(['compress', 'ionic:serve']);
     }
 
-    grunt.config('concurrent.ionic.tasks', ['ionic:serve', 'watch']);
-    grunt.task.run(['wiredep', 'init', 'concurrent:ionic']);
+    if (target === 'prod') {
+
+        grunt.config('concurrent.ionic.tasks', ['ionic:serve', 'watch']);
+        grunt.task.run(['wiredep', 'prodinit', 'concurrent:ionic']);
+      return;
+    }
+
+    if (target === 'dev') {
+
+        grunt.config('concurrent.ionic.tasks', ['ionic:serve', 'watch']);
+        grunt.task.run(['wiredep', 'devinit', 'concurrent:ionic']);
+      return;
+    }
+
+    console.log("\nYou didn't specify an environment! Available: dev, prod\n");
   });
+
   grunt.registerTask('emulate', function() {
     grunt.config('concurrent.ionic.tasks', ['ionic:emulate:' + this.args.join(), 'watch']);
     return grunt.task.run(['init', 'concurrent:ionic']);
@@ -522,7 +537,17 @@ module.exports = function (grunt) {
     return grunt.task.run(['init', 'ionic:build:' + this.args.join()]);
   });
 
-  grunt.registerTask('init', [
+  grunt.registerTask('prodinit', [
+    'clean',
+    'ngconstant:production',
+    'wiredep',
+    'concurrent:server',
+    'autoprefixer',
+    'newer:copy:app',
+    'newer:copy:tmp'
+  ]);
+
+  grunt.registerTask('devinit', [
     'clean',
     'ngconstant:development',
     'wiredep',
@@ -549,7 +574,7 @@ module.exports = function (grunt) {
     'htmlmin'
   ]);
 
-  grunt.registerTask('coverage', 
+  grunt.registerTask('coverage',
     ['karma:continuous',
     'connect:coverage:keepalive'
   ]);

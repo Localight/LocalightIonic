@@ -1,0 +1,56 @@
+<!-- The Loading Spinner that will show on page load -->
+<loading-spinner></loading-spinner>
+
+<!-- ng init loading hre too because of a strange, random bug -->
+<section>
+
+	<!-- header section with give option, clique logo and available balance -->
+	<table class = "sub-header">
+		<tr>
+			<td class="navCell"><a ng-href="/#/giftcards/create">
+				<img class = "navBowTie" ng-src="../images/variousIcons/bowtie.png" alt="Give Icon">
+				Give</a></td>
+				<td class = "localightImg center">
+					<img class="" ng-src="../images/variousIcons/logo-localight-outline-blk.png" alt="Localight" height="45px" width="45px">
+				</td>
+				<td class = "textRightAlign navCell">${{totalValue}}</td>
+				<tr>
+	</table>
+
+	<!-- Occasion Icon -->
+	<img class = "center headerIcon" ng-src = "{{getOccasion(sender.icon).images.normal}}" width= "75px" height = "75px">
+
+	<!-- Our occasion Heading -->
+	<h1 class = "center heart headerOccasion">{{iconHeaders[sender.icon]}}</h1>
+
+	<!-- Our message -->
+	<h4 class = "center">${{spentAmount}} was successfully transferred.
+		Wanna send {{thanksHeader}} {{sender.name}}?</h4>
+
+	<!-- div to enter thank you note -->
+	<form>
+		<div class = "giftcardContainer thankYouNote">
+			<!-- Our text area and sign off, may be used in order to position the character counter -->
+				<!-- input box, value must be done in the controller -->
+				<textarea id = "thankYouNote" class = "thankYouNoteText" ng-model = "thanksMessage" ng-keydown="countCharacters()" type="text" ng-trim="false" maxlength = "160" rows = "4" autofocus>
+				</textarea>
+				<!-- Person's name in the lower right hand corner -->
+				<div class = "textRightAlign">
+					<p class = "heart signing">~ {{giftcards[0].toId.name}}</p>
+					<p class = "thankCharCount">{{charCount}}</p>
+				</div>
+		</div>
+
+		<!-- Show an error if we have one -->
+		<div ng-show = "error.isError" class = "authWarning">
+				<strong>{{error.text}}</strong>
+		</div>
+
+		<!-- our two buttons -->
+		<div class= "thankButtonContainer">
+			<a class="thankButtonSave" href="#/localism">Remind Me</a>
+			<a class="giftcardButtonUse" ng-click = "sendThanks()">Send It Now</a>
+		</div>
+
+	</form>
+</section>

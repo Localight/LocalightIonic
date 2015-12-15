@@ -1,0 +1,160 @@
+<!-- The Loading Spinner that will show on page load -->
+<loading-spinner></loading-spinner>
+
+<div class="container-fluid wrapper">
+
+    <!-- header section with give option, clique logo and available balance -->
+    <table class = "sub-header">
+       <tr>
+           <td class = "navCell">
+               <a href = "#/giftcards">
+                   <div class = "arrowContainer">
+                       <img height = "100%" width = "100%"
+                       src = "../images/arrows/left-facing-arrow.png">
+                   </div>
+                   <p class = "merchantBackText">Back</p>
+               </a>
+           </td>
+           <td class = "localightImg center">
+               <img ng-src="../images/variousIcons/logo-localight-outline-blk.png" alt="Localight" height="45px" width="45px">
+           </td>
+           <td class = "textRightAlign navCell">${{totalValue}}</td>
+       <tr>
+   </table>
+
+
+
+    <!-- gift section -->
+    <div class="giftcardContainer center">
+
+       <!-- Occasion Icon -->
+       <img class = "viewIcon" ng-src = "{{getOccasion(giftcard.iconId).images.normal}}" width= "35px" height = "35px">
+
+       <!-- div for our text -->
+       <div class = "giftcardText">
+          <!-- personal message -->
+          <div class = "giftcardMessage">{{giftcard.message}}</div>
+
+          <!-- From -->
+          <h3 class = "giftcardSignature">~ {{giftcard.fromId.name}}</h3>
+      </div>
+
+      <!-- gift card image -->
+      <div class = "featuredImageContainer" ng-click = "senderId()">
+          <!-- The Amount -->
+          <div class = "giftAmount">
+              <div class = "smallDollar">$</div>
+              {{(giftcard.origAmount / 100)}}
+          </div>
+          <div class = "giftBow">
+              <img src = "../images/giftAmountIcons/bow-gift-wht-shad.png" height = "100%" width = "100%">
+          </div>
+          <img class = "featuredImage" ng-src="../images/featuredMerchants/feature-card-made.jpg" alt="Merchant Image" height="50%" width="100%" />
+      </div>
+
+    </div>
+
+    <!-- Shows if gift is not spent -->
+    <div ng-if = "isValid">
+
+        <!-- amount to use at which merchant section -->
+        <div class="text-center merchantInfo blackText">
+          <h4 class="center giftcardAmount" id="useAmount">Use this ${{giftcard.origAmount / 100}} gift at</h4>
+          <h3 class="center giftcardMerchant">{{giftcard.location.locationId.name}}</h3>
+          <h5 class="center giftcardAddress" ng-if = "giftcard.location.locationId.address2">
+              {{giftcard.location.locationId.address1
+              + " " +
+              giftcard.location.locationId.address2
+              + ", " +
+              giftcard.location.locationId.city
+              + ", " +
+              giftcard.location.locationId.state
+              + " " +
+              giftcard.location.locationId.zipcode}}
+          </h5>
+          <h5 class="center giftcardAddress" ng-if = "!giftcard.location.locationId.address2">
+              {{giftcard.location.locationId.address1
+              + ", " +
+              giftcard.location.locationId.city
+              + ", " +
+              giftcard.location.locationId.state
+              + " " +
+              giftcard.location.locationId.zipcode}}
+          </h5>
+        </div>
+
+          <!-- use it now/later section -->
+          <div class="giftcardButtonContainer">
+              <a class="giftcardButtonSave" href="#/giftcards">Save For Later</a>
+              <a class="giftcardButtonUse" ng-click = "senderId()">Use It Now</a>
+          </div>
+
+      <!-- for beta -->
+      <div class="col-xs-12 text-center nearbyMerchant">
+        <h4 class = "blackText viewPresent">Present this giftcard when you visit this merchant</h4>
+      </div>
+      <div class=""></div>
+      <div class="col-xs-4 merchantArrow" ng-click="showMerchantList()"></div>
+      <div class="col-xs-4"></div>
+
+      <div class="col-xs-12 merchantList">
+        <div class="district" ng-repeat="location in locations">
+          {{location.location}}
+          <div class="shop center blackText" ng-repeat="merchant in merchantsArray">{{merchant.name}}</div>
+      </div>
+
+      </div>
+
+  </div>
+
+  <!-- Shows if gift is not spent -->
+  <div ng-if = "!isValid">
+
+      <!-- Used at and when -->
+      <div class="text-center merchantInfo blackText">
+        <h4 class="center giftcardAmount">This gift was used at</h4>
+        <h3 class="center viewGiftMerchantName">{{giftcard.location.locationId.name}}</h3>
+        <h5 class="center viewGiftAddress" ng-if = "giftcard.location.locationId.address2">
+            {{giftcard.location.locationId.address1
+            + " " +
+            giftcard.location.locationId.address2
+            + ", " +
+            giftcard.location.locationId.city
+            + ", " +
+            giftcard.location.locationId.state
+            + " " +
+            giftcard.location.locationId.zipcode}}
+        </h5>
+
+        <h5 class="center viewGiftAddress" ng-if = "!giftcard.location.locationId.address2">
+            {{giftcard.location.locationId.address1
+            + ", " +
+            giftcard.location.locationId.city
+            + ", " +
+            giftcard.location.locationId.state
+            + " " +
+            giftcard.location.locationId.zipcode}}
+        </h5>
+      </div>
+
+      <!-- Send another gift -->
+      <a ng-href = "#/giftcards/create?token={{sessionToken}}">
+          <div class="text-center merchantInfo blackText viewSendAnother">
+              <!--Make a mobile card thingy -->
+              <div class = "cardBordersDiv">       </div>
+              <p class="center sendText">Send a mobile Giftcard to your friends & family! ></p>
+          </div>
+      </a>
+
+      <!-- Are you a merchant? -->
+      <a href = "#/dashboard">
+          <div class="text-center merchantInfo blackText viewMerchantInvite">
+              <h4 class="center giftcardAmount">Are you a Long Beach merchant? [YES]</h4>
+          </div>
+      </a>
+
+  </div>
+
+
+
+</div>

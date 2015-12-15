@@ -1,0 +1,40 @@
+<!-- The Loading Spinner that will show on page load -->
+<loading-spinner></loading-spinner>
+
+<section>
+
+	<!-- div that will be displayed upside down -->
+	<div class = "upside">
+		<!-- The amount entered -->
+		<h2 class = "linkText center">${{getAmount()}}</h2>
+
+		<!-- down arrow -->
+		<div class = "upside">
+			<div class = "authArrowContainerWide center">
+				<img src = "../images/arrows/up-facing-arrow-blu.png" height = "100%" width = "100%">
+			</div>
+		</div>
+
+		<!--Merchants name (Outer upside to fix css bug) -->
+		<div class = "upside">
+			<h2 class = "linkText center upside tiltMerchant">{{merchantLocation.name}}</h2>
+		</div>
+
+		<div class = "lockBorder upside">
+			<div id = "theLock" class = "center swipeLock upside" my-touchend= "goTo('/merchants/{{Id}}/tricon')" ng-swipe-left = "goTo('/merchants/{{Id}}/tricon')" ng-swipe-right = "goTo('/merchants/{{Id}}/tricon')">
+			</div>
+		</div>
+	</div>
+
+	<!-- Some Spacing -->
+	<div class = "tiltSpacing"></div>
+
+	<!-- title your screen Icon -->
+	<img class = "center" width = "75px" height = "100px" src = "../images/animations/tilt-anim-5times@2x.gif">
+
+	<!-- Tilt your screen text -->
+	<h4 class = "whiteText center tiltText">Tilt your screen to {{getMerchant()}} staff</h4>
+
+	<!-- Place the Small localight logo -->
+    <img class="center tiltLocalight" ng-src="../images/variousIcons/logo-localight-outline-wht.png" alt="Localight" height="45px" width="45px">
+</section>
