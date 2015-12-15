@@ -65,7 +65,6 @@ body, html {
 }
 
 .container{
-    position:relative !important;
     @include animation('fadein 3s');
 }
 
