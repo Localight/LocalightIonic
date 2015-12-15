@@ -39,11 +39,19 @@ module.exports = function (grunt) {
         name: 'envConfig',
         dest: '<%= yeoman.app %>/<%= yeoman.scripts %>/configuration.js'
       },
+      local: {
+        constants: {
+          ENV: {
+            name: 'local',
+            API_BASE: 'http://example.com'
+          }
+        }
+      },
       development: {
         constants: {
           ENV: {
             name: 'development',
-            API_BASE: 'http://jnode.ngrok.kondeo.com:8080'
+            API_BASE: 'http://dev.localight.com:3001'
           }
         }
       },
@@ -508,10 +516,10 @@ module.exports = function (grunt) {
       return grunt.task.run(['compress', 'ionic:serve']);
     }
 
-    if (target === 'prod') {
+    if (target === 'local') {
 
         grunt.config('concurrent.ionic.tasks', ['ionic:serve', 'watch']);
-        grunt.task.run(['wiredep', 'prodinit', 'concurrent:ionic']);
+        grunt.task.run(['wiredep', 'localinit', 'concurrent:ionic']);
       return;
     }
 
@@ -522,7 +530,7 @@ module.exports = function (grunt) {
       return;
     }
 
-    console.log("\nYou didn't specify an environment! Available: dev, prod\n");
+    console.log("\nYou didn't specify an environment! Available: dev, local\n");
   });
 
   grunt.registerTask('emulate', function() {
@@ -537,9 +545,9 @@ module.exports = function (grunt) {
     return grunt.task.run(['init', 'ionic:build:' + this.args.join()]);
   });
 
-  grunt.registerTask('prodinit', [
+  grunt.registerTask('localinit', [
     'clean',
-    'ngconstant:production',
+    'ngconstant:local',
     'wiredep',
     'concurrent:server',
     'autoprefixer',
