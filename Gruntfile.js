@@ -51,7 +51,15 @@ module.exports = function (grunt) {
         constants: {
           ENV: {
             name: 'development',
-            API_BASE: 'http://dev.localight.com'
+            API_BASE: 'http://dev.localight.com:3001'
+          }
+        }
+      },
+      demo: {
+        constants: {
+          ENV: {
+            name: 'demo',
+            API_BASE: 'http://demo.localight.com:3000'
           }
         }
       },
@@ -92,7 +100,7 @@ module.exports = function (grunt) {
     // The actual grunt server settings
     connect: {
       options: {
-        port: 9000,
+        port: 8100,
         // Change this to '0.0.0.0' to access the server from outside.
         hostname: '0.0.0.0'
       },
@@ -525,12 +533,19 @@ module.exports = function (grunt) {
 
     if (target === 'dev') {
 
-        grunt.config('concurrent.ionic.tasks', ['ionic:serve', 'watch']);
+        grunt.config('concurrent.ionic.tasks', ['ionic:serve:9000', 'watch']);
         grunt.task.run(['wiredep', 'devinit', 'concurrent:ionic']);
       return;
     }
 
-    console.log("\nYou didn't specify an environment! Available: dev, local\n");
+    if (target === 'demo') {
+
+        grunt.config('concurrent.ionic.tasks', ['ionic:serve', 'watch']);
+        grunt.task.run(['wiredep', 'demoinit', 'concurrent:ionic']);
+      return;
+    }
+
+    console.log("\nYou didn't specify an environment! (e.g 'grunt serve:environment') Available: local, dev, demo\n");
   });
 
   grunt.registerTask('emulate', function() {
@@ -542,7 +557,7 @@ module.exports = function (grunt) {
     return grunt.task.run(['init', 'concurrent:ionic']);
   });
   grunt.registerTask('build', function() {
-    return grunt.task.run(['init', 'ionic:build:' + this.args.join()]);
+    return grunt.task.run(['prodinit', 'ionic:build:' + this.args.join()]);
   });
 
   grunt.registerTask('localinit', [
@@ -558,6 +573,26 @@ module.exports = function (grunt) {
   grunt.registerTask('devinit', [
     'clean',
     'ngconstant:development',
+    'wiredep',
+    'concurrent:server',
+    'autoprefixer',
+    'newer:copy:app',
+    'newer:copy:tmp'
+  ]);
+
+  grunt.registerTask('demoinit', [
+    'clean',
+    'ngconstant:demo',
+    'wiredep',
+    'concurrent:server',
+    'autoprefixer',
+    'newer:copy:app',
+    'newer:copy:tmp'
+  ]);
+
+  grunt.registerTask('prodinit', [
+    'clean',
+    'ngconstant:production',
     'wiredep',
     'concurrent:server',
     'autoprefixer',
