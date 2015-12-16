@@ -169,7 +169,8 @@ module.exports = function (grunt) {
     wiredep: {
       app: {
         src: ['<%= yeoman.app %>/index.html'],
-        ignorePath:  /\.\.\//
+        ignorePath:  /\.\.\//,
+                exclude: ['bower_components/ionic/release/css']
       },
       sass: {
         src: ['<%= yeoman.app %>/styles/{,*/}*.{scss,sass}'],
@@ -545,7 +546,7 @@ module.exports = function (grunt) {
       return;
     }
 
-    console.log("\nYou didn't specify an environment! (e.g 'grunt serve:environment') Available: local, dev, demo\n");
+    console.log("\nYou didn't specify an environment! Available: local, dev, demo\n");
   });
 
   grunt.registerTask('emulate', function() {
