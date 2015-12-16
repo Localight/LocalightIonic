@@ -34,6 +34,7 @@ body, html {
     width: 100%;
     position: fixed !important;
     background-size: contain;
+    //Background transition downward from the top
     @include transition(background-position 500ms ease-in);
     //Background position covered in JS
 }
