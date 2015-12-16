@@ -340,6 +340,12 @@ table, div, td, tr, label {
     border: initial;
 }
 
+//Fix the cloned input fields on focus/scroll
+.cloned-text-input {
+  display: none !important;
+  height: inherit;
+}
+
 //Got the default css for h tags to ovveride Ionic's
 
 //Variable for Headers
