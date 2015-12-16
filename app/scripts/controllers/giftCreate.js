@@ -9,7 +9,8 @@
 */
 angular.module('localightApp')
 .controller('CreategiftcardCtrl', function($scope, $http, $routeParams, $location, $window, rotationCheck, $timeout,
-    $log, $q, $cookies, OccasionService, Users, Join, Giftcards, LocationByCode, $document, loadingSpinner) {
+    $log, $q, $cookies, OccasionService, Users, Join, Giftcards, LocationByCode, $document, loadingSpinner,
+    $ionicScrollDelegate) {
 
         this.awesomeThings = [
             'HTML5 Boilerplate',
@@ -727,7 +728,7 @@ angular.module('localightApp')
                         document.getElementById("clique_input_phonenumber").focus();
 
                         //Go back to the top
-                        $window.scrollTo(0, 0);
+                        $ionicScrollDelegate.scrollTop();
                     }, 250);
                 }
 
