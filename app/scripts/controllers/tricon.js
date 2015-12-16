@@ -112,7 +112,7 @@ angular.module('localightApp')
                 }
 
                 //Set our message for the loading spinner
-                loadingSpinner.setMessage("/locations/" + $scope.Id + "/spend", "Validating Tricon...");
+                loadingSpinner.setMessage("/locations/" + $scope.Id + "/spend", "Validating Tricon...", true);
 
                 Spend.spendGiftcard(payload,
                 function (data, status) {
@@ -122,7 +122,43 @@ angular.module('localightApp')
 
                         //Go to the confirmation page
                         $location.path("/merchants/" + $scope.Id + "/confirmation");
-                });
+                    },
+
+                    function(err)
+                    {
+                        //Check for unauthorized
+                        if(err.status == 401 || err.status == 500)
+                        {
+                            //Bad session
+                            //Redirect them to a 404
+                            $location.path("#/");
+
+                            //Show an error
+                            loadingSpinner.showError("No Session Found!","Session Token is invalid");
+                        }
+                        //If they enter the wrong tricon key
+                        else if(err.status == 404)
+                        {
+                            //Reset everything
+                            $scope.pressedTricon = "";
+                            triconArray = [];
+
+                            //Display the error
+                            $scope.errorMsg = "Sorry, that is the incorrect tricon code, please try again.";
+
+                            //Shake the screen
+                            $scope.shaky = true;
+                            $timeout(function () {
+                                $scope.shaky = false;
+                            }, 375);
+                        }
+                        else {
+
+                            //An unexpected error has occured, log into console
+                            loadingSpinner.showError("Status: " + err.status + " " + err.data.msg,
+                            "Status: " + err.status + " " + err.data.msg);
+                        }
+                    });
 			}
 		}
 
