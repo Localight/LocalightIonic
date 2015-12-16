@@ -29,18 +29,24 @@ body, html {
     right: 0;
     left: 0;
     z-index: -3;
+
     //Essentially, 100% of the viewport, plus the disappearing iPhone navbar
     height: calc(100% + 88px);
     width: 100%;
     position: fixed !important;
     background-size: contain;
-    //Background transition downward from the top
-    @include transition(background-position 500ms ease);
+
     //Background position covered in JS
+    //Going to have a general guess of the background on page load,
+    //and then move it into position once page is fully loaded
+    background-position: 100% 200px;
+
+    //Background transition downward from the top
+    @include transition(background-position 750ms ease 250ms);
 }
 
 .bgFade {
-    @include transition(background 500ms ease);
+    @include transition(background 750ms ease 250ms);
     background-image: url('../images/backgrounds/local-street-bg-blur7.png');
 }
 
