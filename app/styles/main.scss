@@ -298,6 +298,7 @@ $icon-font-path: "../bower_components/bootstrap-sass-official/assets/fonts/boots
 
     table {
         width: 100%;
+        display: block
     }
 
     img {
@@ -338,9 +339,10 @@ $icon-font-path: "../bower_components/bootstrap-sass-official/assets/fonts/boots
 
         height: 40px;
         width: 32px;
-        position: absolute;
+        position: relative;
+        float: right;
         right: 20px;
-        top: calc(15% - 10px);
+        margin-top: 5px;
     }
 
     .fromText {
@@ -372,6 +374,7 @@ $icon-font-path: "../bower_components/bootstrap-sass-official/assets/fonts/boots
         font-size: 12px;
         font-family: $familyStandard !important;
         padding-left: 50px;
+        width: 250px;
     }
 
     .fromTextSent {
