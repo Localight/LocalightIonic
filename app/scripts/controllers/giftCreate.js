@@ -98,17 +98,14 @@ angular.module('localightApp')
                 //Find the angular element requested
                 var element = angular.element(document.getElementById(elementId));
 
-                //Scroll to the selected element
-                $document.scrollToElement(element, 0, 1000, function(t) {
-                    if (callback) {
-                        //Call the callback after the timeout
-                        $timeout(function () {
-                            callback();
-                        }, 100);
-                    }
-                    //Use cubic easing math
-                    return 1 - (--t) * t * t * t
-                });
+                //Scroll to the selected element (bottom)
+                $ionicScrollDelegate.scrollBottom();
+                if (callback) {
+                    //Call the callback after the timeout
+                    $timeout(function () {
+                        callback();
+                    }, 100);
+                }
             }, 100);
         }
 
@@ -147,6 +144,11 @@ angular.module('localightApp')
         $scope.flipCard = function() {
             //Do this in a timeout to support showing the card and then flipping
             $timeout(function() {
+                //First scroll to the bottom to show the code
+                $ionicScrollDelegate.resize();
+                $ionicScrollDelegate.scrollBy(0, 200);
+
+
                 //Add the classes to the front and back
                 var frontCard = $window.document.getElementById("front");
                 var backCard = $window.document.getElementById("back");
@@ -288,6 +290,18 @@ angular.module('localightApp')
             }, 25);
         }
 
+        //date picker options, call back on date
+        $scope.dateOptions = {
+            onClose: function(e) {
+
+                $timeout(function () {
+                    //Timeout, focus on the cc, scroll to bottom
+                    $ionicScrollDelegate.scrollBottom();
+                    document.getElementById("clique_input_creditcardnumber1").focus();
+                }, 250);
+            }
+        }
+
         //Formats the phone contact for contact pasting
         $scope.formatContact = function(elementId) {
 
@@ -326,6 +340,8 @@ angular.module('localightApp')
                     $scope.validContact = true;
 
                     $timeout(function () {
+                        $ionicScrollDelegate.resize();
+                        $ionicScrollDelegate.scrollBottom();
                         document.getElementById("clique_input_email").focus();
                     }, 250);
                 }
@@ -383,6 +399,8 @@ angular.module('localightApp')
                 if($scope.clique_input_phonenumber_validity && tel.length > 12)
                 {
                     $timeout(function () {
+                        $ionicScrollDelegate.resize();
+                        $ionicScrollDelegate.scrollBottom();
                         document.getElementById("clique_input_email").focus();
                     }, 250);
                 }
@@ -392,17 +410,6 @@ angular.module('localightApp')
         /****
         * Credit Card Validation
         ****/
-
-        $scope.dateOptions = {
-            onClose: function(e) {
-                document.getElementById('clique_date_selection').blur();
-
-                    $scope.dateDirty = true;
-                    document.getElementById("clique_input_creditcardnumber1").focus();
-
-                    $scope.$apply();
-            }
-        }
 
         //Icon URLs for CCs
         //Default, Visa, Mastercard, Amex, Discover
@@ -552,13 +559,20 @@ angular.module('localightApp')
             //Fetch email from giftcard form
             var email = $scope.gc.email;
 
+            $scope.validEmail = false;
+
             //Regex for all valid emails. To add a TLD, edit the final OR statement.
             var emailRegex = /[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+(?:[A-Z]{2}|co|com|org|net|edu|gov|mil|biz|info|mobi|name|aero|asia|jobs|museum)\b/;
             //Test the form email against the regex
             if (emailRegex.test(email)) {
-                return true;
-            } else {
-                return false;
+
+                //First set valid email to true to show fields
+                $scope.validEmail = true;
+
+                //Time out to scroll tothe bottom
+                $timeout(function () {
+                    $ionicScrollDelegate.scrollBottom();
+                }, 100);
             }
         }
 

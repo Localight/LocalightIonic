@@ -166,7 +166,7 @@
         <input id="clique_date_selection"
         name="clique_date_selection"
         type="text"
-        ng-click="dateDirty=true;"
+        ng-click = "dateDirty = true"
         onclick="document.getElementById('clique_input_occasion').blur();"
         pick-a-date="gc.date"
         pick-a-date-options="dateOptions"
@@ -394,12 +394,12 @@
             <label class="inputlabel">
               <img alt="Enter Email Address" src="../images/variousIcons/emailsign_blk.png" />
             </label>
-            <input type="email" name="clique_input_email" id="clique_input_email" class="PageTwoInput" ng-focus="setActiveField('clique_email')" placeholder="you@email.com" ng-model="gc.email" required>
-            <img class = "phoneEmailCheck" src = "../images/variousIcons/checkmark-blk.png" ng-show = "validateEmail()">
+            <input type="email" name="clique_input_email" id="clique_input_email" class="PageTwoInput" ng-focus="setActiveField('clique_email')" ng-keyup="validateEmail()" placeholder="you@email.com" ng-model="gc.email" required>
+            <img class = "phoneEmailCheck" src = "../images/variousIcons/checkmark-blk.png" ng-show = "validEmail">
          </div>
 
           <!--Schedule Gift-->
-          <div data-ng-hide="(giftcardForm2.$valid && clique_input_phonenumber_validity && validateEmail())" class="form-incomplete blackText createGiftCardWidth">
+          <div data-ng-hide="(giftcardForm2.$valid && clique_input_phonenumber_validity && validEmail)" class="form-incomplete blackText createGiftCardWidth">
             <strong>Please complete all information</strong>
           </div>
 
@@ -409,7 +409,7 @@
           </div>
 
 
-            <button class="proceed_button createGiftCardWidth center" ng-disabled="!(giftcardForm2.$valid && clique_input_phonenumber_validity && validateEmail()) || loading || disableSubmit" ng-click = "submitGiftcard()">Submit</button>
+            <button class="proceed_button createGiftCardWidth center" ng-disabled="!(giftcardForm2.$valid && clique_input_phonenumber_validity && validEmail) || loading || disableSubmit" ng-click = "submitGiftcard()">Submit</button>
         </div>
     </div>
    </form>
