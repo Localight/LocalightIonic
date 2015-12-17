@@ -10,7 +10,7 @@
 angular.module('localightApp')
 .controller('CreategiftcardCtrl', function($scope, $http, $routeParams, $location, $window, rotationCheck, $timeout,
     $log, $q, $cookies, OccasionService, Users, Join, Giftcards, LocationByCode, $document, loadingSpinner,
-    $ionicScrollDelegate) {
+    $ionicScrollDelegate, $ionicPopup) {
 
         this.awesomeThings = [
             'HTML5 Boilerplate',
@@ -222,7 +222,12 @@ angular.module('localightApp')
                     }, function(err){
 
                         //Show an alert to the user
-                        alert("Wrong code, please check the code you entered, or try another.");
+                        var alertPopup = $ionicPopup.alert({
+                            title: 'Localight',
+                            template: 'Wrong code, please check the code you entered, or try another.'
+                          });
+                          alertPopup.then(function(res) {
+                          });
                     });
 
                 }
