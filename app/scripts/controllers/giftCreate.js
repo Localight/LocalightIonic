@@ -9,7 +9,7 @@
 */
 angular.module('localightApp')
 .controller('CreategiftcardCtrl', function($scope, $location, $timeout, $cookies,
-    $ionicScrollDelegate, $ionicPopup,
+    $ionicScrollDelegate, $ionicPopup, $cordovaKeyboard,
     rotationCheck, OccasionService, Users, Join, Giftcards, LocationByCode, loadingSpinner) {
 
         this.awesomeThings = [
@@ -78,6 +78,11 @@ angular.module('localightApp')
         //General functions
         //****
 
+        //Function to close the keyboard
+        $scope.closeKeyboard = function() {
+            $cordovaKeyboard.close();
+        }
+
         //Fuction to focus on a field if the user presses Enter
         $scope.keyPress = function(keyEvent, input) {
 
@@ -143,7 +148,7 @@ angular.module('localightApp')
             //Timeout prevents android keyboard from hiding
             $timeout(function() {
                 document.getElementById('clique_input_from').focus();
-            }, 100);
+            }, 10);
         };
 
         //Flag for send selection flag
@@ -182,7 +187,7 @@ angular.module('localightApp')
 
                         //Blur the code input field
                         $timeout(function () {
-                                document.getElementById("clique_input_code").blur();
+                                $cordovaKeyboard.close();
                         }, 100);
                     }, function(err){
 
@@ -513,6 +518,7 @@ angular.module('localightApp')
                 //scroll/focus on the continue button
                 //Scroll to the bottom, and focus on the cc
                 $timeout(function () {
+                    $ionicScrollDelegate.resize();
                     $ionicScrollDelegate.scrollBottom();
                     $scope.hideCCSpacer = true;
                     document.getElementById('continue_button').focus();

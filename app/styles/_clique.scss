@@ -130,6 +130,8 @@ label.inputlabel {
   position: relative;
 
   @include perspective(750px);
+  //Explicitly add webkit for ionic iOS
+  -webkit-perspective: 750px;
 }
 
 /* use dummy container to set aspect ration of card */
@@ -150,7 +152,11 @@ label.inputlabel {
   background-color: $inverseStandardAlphaLight; /* translucent background */
 
    @include transition(transform 1.5s);
+   //Explicitly add webkit for ionic iOS
+   -webkit-transition: transform 1.5s;
    @include backFaceVisibility(hidden);
+   //Explicitly add webkit for ionic iOS
+   -webkit-backface-visibility: hidden;
 }
 
 #front {
@@ -162,10 +168,14 @@ label.inputlabel {
 
 #front.flipped {
   @include transform(rotateY(180deg));
+  //Explicitly add webkit for ionic iOS
+  -webkit-transform: rotateY(180deg);
 }
 
 #back {
   @include transform(rotateY(180deg));
+  //Explicitly add webkit for ionic iOS
+  -webkit-transform: rotateY(180deg);
 }
 
 .blackstrip {
@@ -191,6 +201,8 @@ label.inputlabel {
 
 #back.flipped {
   @include transform(rotateY(360deg));
+  //Explicitly add webkit for ionic iOS
+  -webkit-transform: rotateY(360deg);
 }
 
 #clique_code {
@@ -198,6 +210,8 @@ label.inputlabel {
 
   /* somehow needed for Google Chrome to display the flip card correctly */
   @include backFaceVisibility(hidden);
+  //Explicitly add webkit for ionic iOS
+  -webkit-backface-visibility: hidden;
 
 }
 
@@ -332,6 +346,8 @@ label.inputlabel {
   display: table;
   text-align: center;
   @include transition(opacity 2s);
+  //Explicitly add webkit for ionic iOS
+  -webkit-transition: opacity 2s;
 
   .complete {
       opacity: 0.9;

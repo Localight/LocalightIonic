@@ -9,9 +9,10 @@
     </author>
     <content src="index.html" />
     <access origin="*" />
+
+
     <feature name="Keyboard">
-        <param name="ios-package" value="IonicKeyboard" onload="true"/>
+      <param name="ios-package" value="IonicKeyboard" onload="true" />
     </feature>
-    <preference name="EnableViewportScale" value="true"/>
-    <preference name="Fullscreen" value="false" />
+    <preference name="KeyboardDisplayRequiresUserAction" value="false"/>
 </widget>

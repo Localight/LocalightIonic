@@ -36,11 +36,14 @@
       <!--Amount-->
       <div id="clique_amt_selection" class = "currentInput" ng-hide="amountSelected">
         <span class="leftarrow"></span>
-        <div id="clique_amt_scrollwindow">
-          <span ng-repeat="price in prices" class="price" ng-class="{active: isAmount(price)}" ng-click="setActiveField('clique_from');setSecondaryField(2);setAmount(price);">
+        <ion-scroll id="clique_amt_scrollwindow"
+        direction="x"
+        scrollbard-x="false">
+          <span ng-repeat="price in prices" class="price" ng-class="{active: isAmount(price)}"
+          ng-click="setActiveField('clique_from');setSecondaryField(2);setAmount(price);">
             <small>$</small>{{price}}
           </span>
-        </div>
+      </ion-scroll>
         <span class="rightarrow"></span>
       </div>
       <div id="clique_amt" ng-show="amountSelected"
@@ -175,8 +178,7 @@
         <input id="clique_date_selection"
         name="clique_date_selection"
         type="text"
-        ng-click = "dateDirty = true"
-        onclick="document.getElementById('clique_input_occasion').blur();"
+        ng-click = "dateDirty = true;closeKeyboard();"
         pick-a-date="gc.date"
         pick-a-date-options="dateOptions"
         placeholder="Select Send Date"

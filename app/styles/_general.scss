@@ -8,7 +8,6 @@
 body {
     z-index: -1;
     background: transparent;
-    position: static !important;
 }
 
 html {
@@ -77,6 +76,7 @@ body, html {
 .ionicContainer{
     @include animation('fadein 3s');
 }
+
 
 .container, .fn-app {
     height: 100% !important;
