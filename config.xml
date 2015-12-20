@@ -1,12 +1,17 @@
 <?xml version='1.0' encoding='utf-8'?>
-<widget id="com.example.LocalIonic" version="0.0.1" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
-    <name>LocalIonic</name>
+<widget id="com.localism.Localight" version="1.0.0" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
+    <name>Localight</name>
     <description>
-        A sample Apache Cordova application that responds to the deviceready event.
+        The local giftcard for local merchants and makers!
     </description>
-    <author email="dev@cordova.apache.org" href="http://cordova.io">
-        Apache Cordova Team
+    <author email="hello@localight.com" href="http://cordova.io">
+        Localism
     </author>
     <content src="index.html" />
     <access origin="*" />
+    <feature name="Keyboard">
+        <param name="ios-package" value="IonicKeyboard" onload="true"/>
+    </feature>
+    <preference name="EnableViewportScale" value="true"/>
+    <preference name="Fullscreen" value="false" />
 </widget>

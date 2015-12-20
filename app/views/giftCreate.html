@@ -151,7 +151,7 @@
             </label>
 
             <div id="clique_input_occasion_wrapper" class="rightColumn">
-              <textarea id="clique_input_occasion" name="clique_input_occasion" maxlength="100" minlength = "1" ng-trim="false" ng-model="gc.occasion" ng-focus = "occasionFocused = true;setActiveField('clique_occasion');" ng-blur = "occasionFocused = false" autofocus></textarea>
+              <textarea id="clique_input_occasion" name="clique_input_occasion" maxlength="100" minlength = "1" ng-trim="false" ng-model="gc.occasion" ng-focus = "occasionFocused = true;setActiveField('clique_occasion');" ng-blur = "occasionFocused = false"></textarea>
               <span id="occCharCount" ng-show = "occasionFocused">{{100 - gc.occasion.length}} characters left</span>
             </div>
             <!--note: <textarea maxlength="100"> is only supported in HTML 5-->
@@ -301,9 +301,6 @@
         <div data-ng-show="tokenizeFailure" class="text-danger form-incomplete createGiftCardWidth">
           <strong>Oops, something went wrong! Please check your card information</strong>
         </div>
-
-        <!-- No Longer used as it breaks Ionic Scrolling
-         <div style="height:200px;" ng-hide="hideCCSpacer"></div> -->
 
     </div>
 

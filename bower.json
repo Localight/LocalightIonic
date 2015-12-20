@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "dependencies": {
     "ionic": "v1.1.0",
-    "ngCordova": "v0.1.20-alpha",
+    "ngCordova": "~0.1.23-alpha",
     "angular-cookies": "1.4.8",
     "angular-resource": "~1.4.8",
     "angular-route": "~1.4.8",
