@@ -8,17 +8,15 @@
 * Controller of the localightApp
 */
 angular.module('localightApp')
-.controller('CreategiftcardCtrl', function($scope, $http, $routeParams, $location, $window, rotationCheck, $timeout,
-    $log, $q, $cookies, OccasionService, Users, Join, Giftcards, LocationByCode, $document, loadingSpinner,
-    $ionicScrollDelegate, $ionicPopup) {
+.controller('CreategiftcardCtrl', function($scope, $location, $timeout, $cookies,
+    $ionicScrollDelegate, $ionicPopup,
+    rotationCheck, OccasionService, Users, Join, Giftcards, LocationByCode, loadingSpinner) {
 
         this.awesomeThings = [
             'HTML5 Boilerplate',
             'AngularJS',
             'Karma'
         ];
-
-        $scope.cc = {};
 
         //****
         //Page initialization
@@ -29,6 +27,9 @@ angular.module('localightApp')
 
         //Giftcard form object
         $scope.gc = {};
+
+        //Credit card form object
+        $scope.cc = {};
 
         //Credit card verification fields
         $scope.cardIndex = 0;
@@ -79,45 +80,26 @@ angular.module('localightApp')
 
         //Fuction to focus on a field if the user presses Enter
         $scope.keyPress = function(keyEvent, input) {
+
             if (keyEvent.which === 13) document.getElementById(input).focus();
         }
 
-        //Chops off end character for specified field
+        //Chops off end character for the code field
         document.getElementById("clique_input_code").oninput = function () {
             if (this.value.length > 5) {
                 this.value = this.value.slice(0,5);
             }
         }
 
-        //Scroll to element by HTML ID
-        $scope.scrollToElement = function(elementId, callback) {
-
-            //Pause before executing scroll to allow other events to complete
-            $timeout(function() {
-
-                //Find the angular element requested
-                var element = angular.element(document.getElementById(elementId));
-
-                //Scroll to the selected element (bottom)
-                $ionicScrollDelegate.scrollBottom();
-                if (callback) {
-                    //Call the callback after the timeout
-                    $timeout(function () {
-                        callback();
-                    }, 100);
-                }
-            }, 100);
-        }
-
         //Sets the current active field background
         $scope.setActiveField = function(fieldId) {
 
             if ($scope.activeField && $scope.activeField != fieldId) {
-                $window.document.getElementById($scope.activeField).style.backgroundColor = 'transparent';
+                document.getElementById($scope.activeField).style.backgroundColor = 'transparent';
             }
 
             $scope.activeField = fieldId;
-            $window.document.getElementById($scope.activeField).style.backgroundColor = "white";
+            document.getElementById($scope.activeField).style.backgroundColor = "white";
         };
 
         $scope.setSecondaryField = function(next) {
@@ -125,33 +107,24 @@ angular.module('localightApp')
                 $scope.secondaryIndex = next;
                 $scope.secondaryField = $scope.inputFields[next];
             }
-            $window.document.getElementById($scope.secondaryField).style.backgroundColor = "rgba(255, 255, 255, 0.35)";
+            document.getElementById($scope.secondaryField).style.backgroundColor = "rgba(255, 255, 255, 0.35)";
         }
 
         //Set the secondary field to clique_amt_selection
         $scope.setSecondaryField(0);
 
-        //Scroll to clique_payment_card when clique_date_selection is valid
-        $scope.$watch('giftcardForm.clique_date_selection.$valid', function(newValue, oldValue) {
-            if (newValue) {
-                //Scroll to the bottom
-                $scope.scrollToElement("clique_payment_card", function() {
-                    document.getElementById('clique_input_creditcardnumber1').focus();
-                });
-            }
-        });
-
         $scope.flipCard = function() {
             //Do this in a timeout to support showing the card and then flipping
             $timeout(function() {
+
                 //First scroll to the bottom to show the code
                 $ionicScrollDelegate.resize();
-                $ionicScrollDelegate.scrollBy(0, 200);
+                $ionicScrollDelegate.scrollBy(0, 225);
 
 
                 //Add the classes to the front and back
-                var frontCard = $window.document.getElementById("front");
-                var backCard = $window.document.getElementById("back");
+                var frontCard = document.getElementById("front");
+                var backCard = document.getElementById("back");
 
                 frontCard.className = frontCard.className + " flipped";
                 backCard.className = backCard.className + " flipped";
@@ -203,14 +176,6 @@ angular.module('localightApp')
                         $scope.location = data;
 
                         $scope.showCard = false;
-
-                        // if (event && (event.target.id === 'clique_input_code')) setTimeout(function() {
-                        //     event.target.blur();
-                        // }, 20);
-
-                        //Scroll to the requested element
-                        //Now done by the flip card
-                        //$scope.scrollToElement(scrollId);
 
                         //And set the active field to the occasions
                         $scope.setActiveField(document.getElementById("clique_input_code").getAttribute("nextId"));
@@ -311,7 +276,7 @@ angular.module('localightApp')
         $scope.formatContact = function(elementId) {
 
             //Remove all special scharacters from like a paste from contacts
-            var element = $window.document.getElementById(elementId);
+            var element = document.getElementById(elementId);
 
             //Timeout to start a new thread so we can catch the paste
             $timeout(function() {
@@ -363,7 +328,7 @@ angular.module('localightApp')
             //First check if the key pressed was backspace, if it was, dont do the function
             if (!event || event.keyCode != 8) {
 
-                var element = $window.document.getElementById(elementId);
+                var element = document.getElementById(elementId);
 
                 $scope.clique_input_phonenumber_validity = true;
                 var tel = '(';
@@ -542,16 +507,21 @@ angular.module('localightApp')
          */
         $scope.validateCard = function() {
             if ($scope.validCC && $scope.dateValidated && $scope.cvcValidated && $scope.zipValidated) {
-                $scope.cardValidated = true;
 
+                $scope.cardValidated = true;
                 //Since the card is validated
                 //scroll/focus on the continue button
-                $scope.scrollToElement("continue_button", function() {
+                //Scroll to the bottom, and focus on the cc
+                $timeout(function () {
+                    $ionicScrollDelegate.scrollBottom();
                     $scope.hideCCSpacer = true;
                     document.getElementById('continue_button').focus();
-                });
+                }, 100);
 
-            } else {
+            }
+
+            else {
+
                 $scope.cardValidated = false;
                 $scope.cardType = "";
             }

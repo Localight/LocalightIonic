@@ -12,7 +12,15 @@
       <!-- To, remove ng click to fix functionality -->
       <div id="clique_to" class = "currentInput createTo">
         <label class="inputlabel" for="giftRecipientName">To</label>
-        <input type="text" name="clique_input_to" id="clique_input_to" ng-model="gc.to" class="heart rightColumn" minlength = "1" maxlength="16" placeholder="First Name" ng-focus="setActiveField('clique_to');" ng-keypress="keyPress($event, 'clique_input_from')" autocomplete="off" autocorrect="off" spellcheck="false" required>
+        <input type="text" name="clique_input_to"
+        id="clique_input_to"
+        ng-model="gc.to" class="heart rightColumn"
+        minlength = "1" maxlength="16"
+        placeholder="First Name"
+        ng-focus="setActiveField('clique_to');"
+        ng-keypress="keyPress($event, 'clique_input_from')"
+        autocomplete="off" autocorrect="off"
+        spellcheck="false" required>
       </div>
 
       <!-- Some Error Checking -->
@@ -35,7 +43,8 @@
         </div>
         <span class="rightarrow"></span>
       </div>
-      <div id="clique_amt" ng-show="amountSelected" ng-click="amountSelected = false;gc.amount = null">
+      <div id="clique_amt" ng-show="amountSelected"
+      ng-click="amountSelected = false;gc.amount = null">
         <label class="inputlabel">$</label>
         <div class="helveticaInput rightColumn">{{gc.amount}}</div>
       </div>
@@ -355,7 +364,9 @@
         {{gc.to}}
       </div>
       <!--Phone Number-->
-      <div id="clique_phonenumber" class = "createGiftCardWidth currentInput" ng-class="{nextInput: !dirty.PhoneNumber}">
+      <div id="clique_phonenumber"
+      class = "createGiftCardWidth currentInput"
+      ng-class="{nextInput: !dirty.PhoneNumber}">
         <label class="inputlabel" for="clique_input_phonenumber">
           <img alt="Enter Phone Number" src="../images/variousIcons/phone.png" />
         </label>
@@ -374,7 +385,8 @@
       </div>
 
       <!-- Waterfall the next part -->
-      <div class = "waterfall" ng-show = "clique_input_phonenumber_validity && gc.phoneNumber.length >= 13">
+      <div class = "waterfall"
+      ng-show = "clique_input_phonenumber_validity && gc.phoneNumber.length >= 13">
 
           <!--From-->
           <div>
