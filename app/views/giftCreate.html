@@ -12,7 +12,15 @@
       <!-- To, remove ng click to fix functionality -->
       <div id="clique_to" class = "currentInput createTo">
         <label class="inputlabel" for="giftRecipientName">To</label>
-        <input type="text" name="clique_input_to" id="clique_input_to" ng-model="gc.to" class="heart rightColumn" minlength = "1" maxlength="16" placeholder="First Name" ng-focus="setActiveField('clique_to');" ng-keypress="keyPress($event, 'clique_input_from')" autocomplete="off" autocorrect="off" spellcheck="false" required>
+        <input type="text" name="clique_input_to"
+        id="clique_input_to"
+        ng-model="gc.to" class="heart rightColumn"
+        minlength = "1" maxlength="16"
+        placeholder="First Name"
+        ng-focus="setActiveField('clique_to');"
+        ng-keypress="keyPress($event, 'clique_input_from')"
+        autocomplete="off" autocorrect="off"
+        spellcheck="false" required>
       </div>
 
       <!-- Some Error Checking -->
@@ -28,14 +36,18 @@
       <!--Amount-->
       <div id="clique_amt_selection" class = "currentInput" ng-hide="amountSelected">
         <span class="leftarrow"></span>
-        <div id="clique_amt_scrollwindow">
-          <span ng-repeat="price in prices" class="price" ng-class="{active: isAmount(price)}" ng-click="setActiveField('clique_from');setSecondaryField(2);setAmount(price);">
+        <ion-scroll id="clique_amt_scrollwindow"
+        direction="x"
+        scrollbard-x="false">
+          <span ng-repeat="price in prices" class="price" ng-class="{active: isAmount(price)}"
+          ng-click="setActiveField('clique_from');setSecondaryField(2);setAmount(price);">
             <small>$</small>{{price}}
           </span>
-        </div>
+      </ion-scroll>
         <span class="rightarrow"></span>
       </div>
-      <div id="clique_amt" ng-show="amountSelected" ng-click="amountSelected = false;gc.amount = null">
+      <div id="clique_amt" ng-show="amountSelected"
+      ng-click="amountSelected = false;gc.amount = null">
         <label class="inputlabel">$</label>
         <div class="helveticaInput rightColumn">{{gc.amount}}</div>
       </div>
@@ -142,7 +154,7 @@
             </label>
 
             <div id="clique_input_occasion_wrapper" class="rightColumn">
-              <textarea id="clique_input_occasion" name="clique_input_occasion" maxlength="100" minlength = "1" ng-trim="false" ng-model="gc.occasion" ng-focus = "occasionFocused = true;setActiveField('clique_occasion');" ng-blur = "occasionFocused = false" autofocus></textarea>
+              <textarea id="clique_input_occasion" name="clique_input_occasion" maxlength="100" minlength = "1" ng-trim="false" ng-model="gc.occasion" ng-focus = "occasionFocused = true;setActiveField('clique_occasion');" ng-blur = "occasionFocused = false"></textarea>
               <span id="occCharCount" ng-show = "occasionFocused">{{100 - gc.occasion.length}} characters left</span>
             </div>
             <!--note: <textarea maxlength="100"> is only supported in HTML 5-->
@@ -166,7 +178,7 @@
         <input id="clique_date_selection"
         name="clique_date_selection"
         type="text"
-        ng-click="dateDirty=true;"
+        ng-click = "dateDirty = true;closeKeyboard();"
         onclick="document.getElementById('clique_input_occasion').blur();"
         pick-a-date="date"
         pick-a-date-options="dateOptions"
@@ -294,8 +306,6 @@
           <strong>Oops, something went wrong! Please check your card information</strong>
         </div>
 
-        <div style="height:200px;" ng-hide="hideCCSpacer"></div>
-
     </div>
 
 
@@ -355,7 +365,9 @@
         {{gc.to}}
       </div>
       <!--Phone Number-->
-      <div id="clique_phonenumber" class = "createGiftCardWidth currentInput" ng-class="{nextInput: !dirty.PhoneNumber}">
+      <div id="clique_phonenumber"
+      class = "createGiftCardWidth currentInput"
+      ng-class="{nextInput: !dirty.PhoneNumber}">
         <label class="inputlabel" for="clique_input_phonenumber">
           <img alt="Enter Phone Number" src="../images/variousIcons/phone.png" />
         </label>
@@ -374,7 +386,8 @@
       </div>
 
       <!-- Waterfall the next part -->
-      <div class = "waterfall" ng-show = "clique_input_phonenumber_validity && gc.phoneNumber.length >= 13">
+      <div class = "waterfall"
+      ng-show = "clique_input_phonenumber_validity && gc.phoneNumber.length >= 13">
 
           <!--From-->
           <div>
@@ -394,12 +407,12 @@
             <label class="inputlabel">
               <img alt="Enter Email Address" src="../images/variousIcons/emailsign_blk.png" />
             </label>
-            <input type="email" name="clique_input_email" id="clique_input_email" class="PageTwoInput" ng-focus="setActiveField('clique_email')" placeholder="you@email.com" ng-model="gc.email" required>
-            <img class = "phoneEmailCheck" src = "../images/variousIcons/checkmark-blk.png" ng-show = "validateEmail()">
+            <input type="email" name="clique_input_email" id="clique_input_email" class="PageTwoInput" ng-focus="setActiveField('clique_email')" ng-keyup="validateEmail()" placeholder="you@email.com" ng-model="gc.email" required>
+            <img class = "phoneEmailCheck" src = "../images/variousIcons/checkmark-blk.png" ng-show = "validEmail">
          </div>
 
           <!--Schedule Gift-->
-          <div data-ng-hide="(giftcardForm2.$valid && clique_input_phonenumber_validity && validateEmail())" class="form-incomplete blackText createGiftCardWidth">
+          <div data-ng-hide="(giftcardForm2.$valid && clique_input_phonenumber_validity && validEmail)" class="form-incomplete blackText createGiftCardWidth">
             <strong>Please complete all information</strong>
           </div>
 
@@ -409,7 +422,7 @@
           </div>
 
 
-            <button class="proceed_button createGiftCardWidth center" ng-disabled="!(giftcardForm2.$valid && clique_input_phonenumber_validity && validateEmail()) || loading || disableSubmit" ng-click = "submitGiftcard()">Submit</button>
+            <button class="proceed_button createGiftCardWidth center" ng-disabled="!(giftcardForm2.$valid && clique_input_phonenumber_validity && validEmail) || loading || disableSubmit" ng-click = "submitGiftcard()">Submit</button>
         </div>
     </div>
    </form>

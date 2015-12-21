@@ -2,12 +2,12 @@
 
 /**
  * @ngdoc function
- * @name angularLocalightApp.controller:FollowupCtrl
+ * @name localightApp.controller:FollowupCtrl
  * @description
  * # FollowupCtrl
- * Controller of the angularLocalightApp
+ * Controller of the localightApp
  */
-angular.module('angularLocalightApp')
+angular.module('localightApp')
   .controller('FollowupCtrl', function () {
     this.awesomeThings = [
       'HTML5 Boilerplate',

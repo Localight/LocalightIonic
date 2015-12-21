@@ -2,12 +2,12 @@
 
 /**
  * @ngdoc function
- * @name angularLocalightApp.controller:AdditionalinfoCtrl
+ * @name localightApp.controller:AdditionalinfoCtrl
  * @description
  * # AdditionalinfoCtrl
- * Controller of the angularLocalightApp
+ * Controller of the localightApp
  */
-angular.module('angularLocalightApp')
+angular.module('localightApp')
   .controller('AdditionalinfoCtrl', function ($scope, $cookies, $location, $timeout, Owners, loadingSpinner) {
 
     this.awesomeThings = [

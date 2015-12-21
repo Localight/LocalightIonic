@@ -87,7 +87,7 @@ label.inputlabel {
   color: $standard;
   font-size: 1.6em;
   display: inline-block;
-  padding: 3px 0 0; /* top, left/right, bottom */
+  padding: 7px 0 0; /* top, left/right, bottom */
   height: 38px;
   width: 25%;
   min-width: 68px;
@@ -124,7 +124,9 @@ label.inputlabel {
 #flip_container {
   width: 70%;
   max-width: 350px;
-  margin: auto;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 20px;
   position: relative;
 
   @include perspective(750px);

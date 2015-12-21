@@ -1,12 +1,70 @@
 $icon-font-path: "../bower_components/bootstrap-sass-official/assets/fonts/bootstrap/";
 // bower:scss
-@import "bootstrap-sass/assets/stylesheets/_bootstrap.scss";
-@import "bootstrap-sass-official/assets/stylesheets/_bootstrap.scss";
 // endbower
 
 /******
     Imports
 ******/
+
+    /******
+        Ionic Imports
+        (Commented Imports conflict with our CSS currently)
+        This has been taken from the actual ionic.scss which simply imports more sass
+        May need to comment out forms and type
+    ******/
+
+    // Ionic Variables
+    @import "../bower_components/ionic/scss/_mixins.scss";
+    @import "../bower_components/ionic/scss/_variables.scss";
+
+    //Ionic Base
+    @import "../bower_components/ionic/scss/_reset.scss";
+    @import "../bower_components/ionic/scss/_scaffolding.scss";
+    @import "../bower_components/ionic/scss/_type.scss";
+
+    //Ionic Components
+    @import "../bower_components/ionic/scss/_action-sheet.scss";
+    @import "../bower_components/ionic/scss/_backdrop.scss";
+    @import "../bower_components/ionic/scss/_bar.scss";
+    @import "../bower_components/ionic/scss/_tabs.scss";
+    @import "../bower_components/ionic/scss/_menu.scss";
+    @import "../bower_components/ionic/scss/_modal.scss";
+    @import "../bower_components/ionic/scss/_popover.scss";
+    @import "../bower_components/ionic/scss/_popup.scss";
+    @import "../bower_components/ionic/scss/_loading.scss";
+    @import "../bower_components/ionic/scss/_items.scss";
+    @import "../bower_components/ionic/scss/_list.scss";
+    @import "../bower_components/ionic/scss/_badge.scss";
+    @import "../bower_components/ionic/scss/_slide-box.scss";
+    @import "../bower_components/ionic/scss/_refresher.scss";
+    @import "../bower_components/ionic/scss/_spinner.scss";
+
+    //Ionic Forms
+    @import "../bower_components/ionic/scss/_form.scss";
+    @import "../bower_components/ionic/scss/_checkbox.scss";
+    @import "../bower_components/ionic/scss/_toggle.scss";
+    @import "../bower_components/ionic/scss/_radio.scss";
+    @import "../bower_components/ionic/scss/_range.scss";
+    @import "../bower_components/ionic/scss/_select.scss";
+    @import "../bower_components/ionic/scss/_progress.scss";
+
+    // Ionic Buttons
+    @import "../bower_components/ionic/scss/_button.scss";
+    @import "../bower_components/ionic/scss/_button-bar.scss";
+
+    //Ionic Util
+    @import "../bower_components/ionic/scss/_grid.scss";
+    @import "../bower_components/ionic/scss/_util.scss";
+    @import "../bower_components/ionic/scss/_platform.scss";
+
+    // Ionic Animations
+    @import "../bower_components/ionic/scss/_animations.scss";
+    @import "../bower_components/ionic/scss/_transitions.scss";
+
+
+    /******
+        Localight Imports
+    ******/
 
     //Import the colors
     @import 'colors';
@@ -54,6 +112,7 @@ $icon-font-path: "../bower_components/bootstrap-sass-official/assets/fonts/boots
   font-size: 1.2em;
   padding-right: 1em;
   cursor: pointer;
+  margin-bottom: 5px;
 
   &:disabled {
       background-color: $placeHolder;
@@ -118,7 +177,8 @@ $icon-font-path: "../bower_components/bootstrap-sass-official/assets/fonts/boots
 }
 
 .currentInput {
-    @include transition(background-color linear 0.25s);
+  @include transition(background-color linear 0.25s);
+
   border-radius: 7px !important;
   opacity: 1 !important;
 
@@ -236,9 +296,17 @@ $icon-font-path: "../bower_components/bootstrap-sass-official/assets/fonts/boots
     margin-bottom: 5px;
     padding: 5px;
     border-radius: 3px !important;
+    display: block;
+    vertical-align: middle;
 
     table {
         width: 100%;
+        display: block
+    }
+
+    img {
+        vertical-align: middle;
+        margin-right: 5px;
     }
 
     .glyphAlign {
@@ -267,15 +335,17 @@ $icon-font-path: "../bower_components/bootstrap-sass-official/assets/fonts/boots
     .dollarIcon {
         margin-right: 5px;
         margin-left: 2px;
+        margin-bottom: 2px;
     }
 
     .dollarArrowSolidContainer {
 
         height: 40px;
         width: 32px;
-        position: absolute;
+        position: relative;
+        float: right;
         right: 20px;
-        top: calc(50% - 20px);
+        margin-top: 5px;
     }
 
     .fromText {
@@ -306,7 +376,8 @@ $icon-font-path: "../bower_components/bootstrap-sass-official/assets/fonts/boots
 
         font-size: 12px;
         font-family: $familyStandard !important;
-        padding-left: 45px;
+        padding-left: 50px;
+        width: 250px;
     }
 
     .fromTextSent {
@@ -327,8 +398,19 @@ $icon-font-path: "../bower_components/bootstrap-sass-official/assets/fonts/boots
         height: 50px;
         width: 35px;
         right: 20px;
-        position: absolute;
-        top: calc(50% - 25px);
+        position: relative;
+        float: right;
+        bottom: 65px;
+    }
+
+    .whiteHeader {
+        color: $inverseStandard;
+        font-weight: 300 !important;
+        margin: 2px;
+    }
+
+    .whiteText {
+        margin: 2px;
     }
 }
 
@@ -346,6 +428,9 @@ $icon-font-path: "../bower_components/bootstrap-sass-official/assets/fonts/boots
     font-size: 1.4em;
     border-radius: 5px;
     border: 1px solid $inverseStandard;
+    position: absolute;
+    margin-top: -5px;
+    right: 20px;
 }
 
 .giftlistAmountSpent {
@@ -379,17 +464,19 @@ $icon-font-path: "../bower_components/bootstrap-sass-official/assets/fonts/boots
     vertical-align: -webkit-baseline-middle;
     margin-bottom: 0px;
     display: inline;
+    font-weight: normal;
+    line-height: inherit;
 }
 
 .listProfileIcon {
     height: 29px;
     width: 41px;
     opacity: .3;
+    vertical-align: bottom;
 }
 
 .listSectionHeader {
     margin-top: 20px;
-    padding-left: 10px;
     color: $inverseStandard;
     font-weight: 300 !important;
 }
@@ -491,7 +578,7 @@ $icon-font-path: "../bower_components/bootstrap-sass-official/assets/fonts/boots
         position: absolute;
         font-size: 30px;
         margin-top: 15px;
-        width: 66px;
+        width: 70px;
         text-align: center;
         border-radius: 5px;
         border-style: solid;
@@ -499,6 +586,9 @@ $icon-font-path: "../bower_components/bootstrap-sass-official/assets/fonts/boots
         border-width: 1px;
 
         margin-left: 20px;
+
+        padding-bottom: 10px;
+        padding-top: 5px;
 
         .smallDollar {
             font-size: 15px;
@@ -513,7 +603,7 @@ $icon-font-path: "../bower_components/bootstrap-sass-official/assets/fonts/boots
         height: 33px;
         position: absolute;
         margin-top: 1px;
-        margin-left: 66px;
+        margin-left: 70px;
     }
 }
 
@@ -540,6 +630,7 @@ $icon-font-path: "../bower_components/bootstrap-sass-official/assets/fonts/boots
     margin-top: 5px;
     font-size: 14px;
     margin-bottom: 0px;
+    text-align: center;
 }
 
 .viewBackText {
@@ -615,7 +706,7 @@ $icon-font-path: "../bower_components/bootstrap-sass-official/assets/fonts/boots
     display: inline-block;
     color: $standard;
     font-size: 21px;
-    vertical-align: -webkit-baseline-middle;
+    vertical-align: middle;
 }
 
 .whiteHeader{
@@ -705,6 +796,10 @@ $icon-font-path: "../bower_components/bootstrap-sass-official/assets/fonts/boots
 .localightLogoBottom {
     @extend .center;
     margin-top: 10px;
+}
+
+.dialHeader {
+    height: 80px !important;
 }
 
 /**
@@ -1023,6 +1118,10 @@ $icon-font-path: "../bower_components/bootstrap-sass-official/assets/fonts/boots
     right: -5px;
     bottom: 27px;
     padding-left: 23px;
+}
+
+.sendAnotherContainer {
+    margin-top: 20px;
 }
 
 /**

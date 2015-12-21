@@ -2,12 +2,12 @@
 
 /**
  * @ngdoc function
- * @name angularLocalightApp.controller:ThankyouCtrl
+ * @name localightApp.controller:ThankyouCtrl
  * @description
  * # ThankyouCtrl
- * Controller of the angularLocalightApp
+ * Controller of the localightApp
  */
-angular.module('angularLocalightApp')
+angular.module('localightApp')
   .controller('ThankyouCtrl', function ($scope, $routeParams, $cookies, $timeout, $location, $window, rotationCheck,
       Giftcards, LocationById, Thanks, loadingSpinner, OccasionService) {
 

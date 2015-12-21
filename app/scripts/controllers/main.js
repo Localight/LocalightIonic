@@ -2,12 +2,12 @@
 
 /**
  * @ngdoc function
- * @name angularLocalightApp.controller:MainCtrl
+ * @name localightApp.controller:MainCtrl
  * @description
  * # MainCtrl
- * Controller of the angularLocalightApp
+ * Controller of the localightApp
  */
-angular.module('angularLocalightApp')
+angular.module('localightApp')
   .controller('MainCtrl', function ($scope, rotationCheck) {
       //Reset the rotation alert boolean
       rotationCheck.reset();

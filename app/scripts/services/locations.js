@@ -2,14 +2,14 @@
 
 /**
  * @ngdoc service
- * @name angularLocalightApp.locations
+ * @name localightApp.locations
  * @description
  * # locations
- * Service in the angularLocalightApp.
+ * Service in the localightApp.
  */
 
 //Get all the giftcards, or create one
-angular.module('angularLocalightApp')
+angular.module('localightApp')
   .service('Locations', ['$resource', 'ENV', function($resource, ENV) {
 
     return $resource(ENV.API_BASE + '/locations', {}, {
@@ -27,7 +27,7 @@ angular.module('angularLocalightApp')
   }]);
 
 //Get a location by it's ID
-angular.module('angularLocalightApp')
+angular.module('localightApp')
   .factory('LocationById', ['$resource', 'ENV', function($resource, ENV) {
 
     return $resource(ENV.API_BASE + '/locations/:id', {
@@ -50,7 +50,7 @@ angular.module('angularLocalightApp')
 
 
   //Get all of the locations under an owner
-  angular.module('angularLocalightApp')
+  angular.module('localightApp')
     .factory('LocationByOwner', ['$resource', 'ENV', function($resource, ENV) {
 
       return $resource(ENV.API_BASE + '/locations/owner/:id', {
@@ -67,7 +67,7 @@ angular.module('angularLocalightApp')
 
 
 //Get a Location by it's location code
-angular.module('angularLocalightApp')
+angular.module('localightApp')
   .factory('LocationByCode', ['$resource', 'ENV', function($resource, ENV) {
 
     return $resource(ENV.API_BASE + '/locations/code', {}, {
@@ -82,7 +82,7 @@ angular.module('angularLocalightApp')
 
 
 //Spend a giftcard at a location
-angular.module('angularLocalightApp')
+angular.module('localightApp')
   .factory('Spend', ['$resource', 'ENV', function($resource, ENV) {
 
     return $resource(ENV.API_BASE + '/locations/:id/spend', {

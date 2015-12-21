@@ -4,6 +4,7 @@
 ***********************
 **/
 
+//position:static to fix Ionic web scrolling on mobile
 body {
     z-index: -1;
     background: transparent;
@@ -29,16 +30,24 @@ body, html {
     right: 0;
     left: 0;
     z-index: -3;
+
     //Essentially, 100% of the viewport, plus the disappearing iPhone navbar
     height: calc(100% + 88px);
     width: 100%;
     position: fixed !important;
     background-size: contain;
+
     //Background position covered in JS
+    //Going to have a general guess of the background on page load,
+    //and then move it into position once page is fully loaded
+    background-position: 100% 200px;
+
+    //Background transition downward from the top
+    @include transition(background-position 750ms ease 250ms);
 }
 
 .bgFade {
-    @include transition(background 500ms ease-in 400ms);
+    @include transition(background 750ms ease 250ms);
     background-image: url('../images/backgrounds/local-street-bg-blur7.png');
 }
 
@@ -64,10 +73,17 @@ body, html {
     to   { opacity: 1; }
 }
 
-.container{
-    position:relative !important;
+.ionicContainer, .fn-app{
     @include animation('fadein 3s');
+    padding: 0px !important;
 }
+
+//The scroll class will create it's own random Heights
+//In Ionic, need to make sure it's 100%
+.scroll {
+    height: 100% !important;
+}
+
 
 .container, .fn-app {
     height: 100% !important;
@@ -156,6 +172,10 @@ input {
     }
 }
 
+a {
+    text-decoration: none !important;
+}
+
 .localightImg {
     @extend .center;
 
@@ -216,6 +236,7 @@ input {
 
     width: 33%;
     color: $standard;
+    vertical-align: middle;
 
     a {
         color: $standard !important;
@@ -240,7 +261,6 @@ input {
     height: 30px;
     width: 20px;
     display: inline-block;
-    padding-top: 6px;
 }
 
 .authArrowContainer {
@@ -275,6 +295,8 @@ input {
 //Variable for the scaling of our dialpad
 $dialScale: 0.85;
 .dialPad {
+    margin-left: auto;
+    margin-right: auto;
     border-collapse: separate;
     border-spacing: 0px;
 }
@@ -317,6 +339,62 @@ $dialScale: 0.85;
 }
 
 /* End Dialad Buttons */
+
+/* Ionic Overrides */
+
+table, div, td, tr, label {
+    margin: initial;
+    padding: initial;
+    vertical-align: middle;
+    border: initial;
+}
+
+//Fix the cloned input fields on focus/scroll
+// .cloned-text-input {
+//   display: none !important;
+//   height: inherit;
+// }
+
+//Got the default css for h tags to ovveride Ionic's
+
+//Variable for Headers
+$headerMargin: 15px;
+$headerSize: 32px;
+$headerScale: 1.3;
+
+//General header
+h1, h2, h3, h4, h5, h6 {
+    display: block;
+    margin-top: $headerMargin;
+    margin-bottom: $headerMargin;
+    line-height: initial;
+}
+
+h1 {
+    font-size: $headerSize * $headerScale;
+}
+
+h2 {
+    font-size: ($headerSize - 10px) * $headerScale;
+}
+
+h3  {
+    font-size: ($headerSize - 15px) * $headerScale;
+}
+
+h4  {
+    font-size: ($headerSize - 19px) * $headerScale;
+}
+
+h5 {
+    font-size: ($headerSize - 22px) * $headerScale;
+}
+
+h6 {
+    font-size: ($headerSize - 23px) * $headerScale;
+}
+
+/* End Ionic Overrides */
 
 /**
 ***********************

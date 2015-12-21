@@ -2,12 +2,12 @@
 
 /**
  * @ngdoc function
- * @name angularLocalightApp.controller:MainpanelCtrl
+ * @name localightApp.controller:MainpanelCtrl
  * @description
  * # MainpanelCtrl
- * Controller of the angularLocalightApp
+ * Controller of the localightApp
  */
-angular.module('angularLocalightApp')
+angular.module('localightApp')
   .controller('MainpanelCtrl', function ($scope, $cookies, $location, Owners, LocationByOwner, loadingSpinner) {
 
     this.awesomeThings = [

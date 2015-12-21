@@ -2,14 +2,14 @@
 
 /**
  * @ngdoc service
- * @name angularLocalightApp.Owners
+ * @name localightApp.Owners
  * @description
  * # Owners
- * Service in the angularLocalightApp.
+ * Service in the localightApp.
  */
 
  //Get an owner
-angular.module('angularLocalightApp')
+angular.module('localightApp')
   .factory('Owners', ['$resource', 'ENV', function($resource, ENV) {
 
     return $resource(ENV.API_BASE + '/owners', {}, {
@@ -29,7 +29,7 @@ angular.module('angularLocalightApp')
   }]);
 
 // Sign up an owner to the app
-angular.module('angularLocalightApp')
+angular.module('localightApp')
   .factory('JoinOwner', ['$resource', 'ENV', function($resource, ENV) {
 
     return $resource(ENV.API_BASE + '/owners/join', {}, {
@@ -43,7 +43,7 @@ angular.module('angularLocalightApp')
   }]);
 
 //Login an owner
-angular.module('angularLocalightApp')
+angular.module('localightApp')
   .factory('LoginOwner', ['$resource', 'ENV', function($resource, ENV) {
 
     return $resource(ENV.API_BASE + '/owners/login', {}, {

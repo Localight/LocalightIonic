@@ -2,12 +2,12 @@
 
 /**
  * @ngdoc function
- * @name angularLocalightApp.controller:EnterAmountCtrl
+ * @name localightApp.controller:EnterAmountCtrl
  * @description
  * # EnterAmountCtrl
- * Controller of the angularLocalightApp
+ * Controller of the localightApp
  */
-angular.module('angularLocalightApp')
+angular.module('localightApp')
   .controller('EnterAmountCtrl', function ($scope, $location, $routeParams, $cookies, Giftcards, rotationCheck, loadingSpinner) {
 
     this.awesomeThings = [

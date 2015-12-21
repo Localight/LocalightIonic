@@ -2,12 +2,12 @@
 
 /**
  * @ngdoc function
- * @name angularLocalightApp.controller:ConfirmationTimeoutCtrl
+ * @name localightApp.controller:ConfirmationTimeoutCtrl
  * @description
  * # ConfirmationTimeoutCtrl
- * Controller of the angularLocalightApp
+ * Controller of the localightApp
  */
-angular.module('angularLocalightApp')
+angular.module('localightApp')
   .controller('ConfirmationTimeoutCtrl', function ($scope, $timeout, $location, $routeParams, $cookies, LocationById, loadingSpinner) {
 
     this.awesomeThings = [

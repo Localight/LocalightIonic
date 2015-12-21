@@ -2,12 +2,12 @@
 
 /**
  * @ngdoc function
- * @name angularLocalightApp.controller:SentconfirmationCtrl
+ * @name localightApp.controller:SentconfirmationCtrl
  * @description
  * # SentconfirmationCtrl
- * Controller of the angularLocalightApp
+ * Controller of the localightApp
  */
-angular.module('angularLocalightApp')
+angular.module('localightApp')
   .controller('SentconfirmationCtrl', function ($scope, $cookies) {
 
     //Display the phone number and email to the user, and then remove them from the cookies

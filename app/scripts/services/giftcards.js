@@ -2,14 +2,14 @@
 
 /**
  * @ngdoc service
- * @name angularLocalightApp.giftcards
+ * @name localightApp.giftcards
  * @description
  * # giftcards
- * Service in the angularLocalightApp.
+ * Service in the localightApp.
  */
 
 //Create a giftcard, or return all of a user's giftcards
-angular.module('angularLocalightApp')
+angular.module('localightApp')
   .service('Giftcards', ['$resource', 'ENV', function($resource, ENV) {
 
     return $resource(ENV.API_BASE + '/giftcards', {}, {
@@ -27,7 +27,7 @@ angular.module('angularLocalightApp')
 }]);
 
 //Get a giftcard by it's ID
-angular.module('angularLocalightApp')
+angular.module('localightApp')
   .factory('GiftcardById', ['$resource', 'ENV', function($resource, ENV) {
 
     return $resource(ENV.API_BASE + '/giftcards/:id', {}, {
@@ -41,7 +41,7 @@ angular.module('angularLocalightApp')
   }]);
 
 //Get the giftcards sent by a user
-angular.module('angularLocalightApp')
+angular.module('localightApp')
 .factory('GivenGifts', ['$resource', 'ENV', function($resource, ENV) {
 
   return $resource(ENV.API_BASE + '/giftcards/given', {}, {

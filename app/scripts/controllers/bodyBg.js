@@ -2,12 +2,12 @@
 
 /**
  * @ngdoc function
- * @name angularLocalightApp.controller:BodybgCtrl
+ * @name localightApp.controller:BodybgCtrl
  * @description
  * # BodybgCtrl
- * Controller of the angularLocalightApp
+ * Controller of the localightApp
  */
-angular.module('angularLocalightApp')
+angular.module('localightApp')
   .controller('BodyCtrl', function ($scope, $location, $timeout) {
 
     //Our backGround tag

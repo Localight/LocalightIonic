@@ -2,12 +2,12 @@
 
 /**
  * @ngdoc function
- * @name angularLocalightApp.controller:ListgiftcardsCtrl
+ * @name localightApp.controller:ListgiftcardsCtrl
  * @description
  * # ListgiftcardsCtrl
- * Controller of the angularLocalightApp
+ * Controller of the localightApp
  */
-angular.module('angularLocalightApp')
+angular.module('localightApp')
   .controller('ListgiftcardsCtrl', function ($scope, $cookies, Giftcards, rotationCheck,
       $location, GivenGifts, loadingSpinner, OccasionService) {
 

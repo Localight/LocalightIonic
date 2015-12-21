@@ -2,14 +2,14 @@
 
 /**
  * @ngdoc service
- * @name angularLocalightApp.Users
+ * @name localightApp.Users
  * @description
  * # Users
- * Service in the angularLocalightApp.
+ * Service in the localightApp.
  */
 
  //Create and Get a user
-angular.module('angularLocalightApp')
+angular.module('localightApp')
   .factory('Users', ['$resource', 'ENV', function($resource, ENV) {
 
     return $resource(ENV.API_BASE + '/users', {}, {
@@ -29,7 +29,7 @@ angular.module('angularLocalightApp')
   }]);
 
 //Login an User
-angular.module('angularLocalightApp')
+angular.module('localightApp')
   .factory('Login', ['$resource', 'ENV', function($resource, ENV) {
 
     return $resource(ENV.API_BASE + '/users/login', {}, {
@@ -43,7 +43,7 @@ angular.module('angularLocalightApp')
   }]);
 
 //Sign up a user to the app
-angular.module('angularLocalightApp')
+angular.module('localightApp')
   .factory('Join', ['$resource', 'ENV', function($resource, ENV) {
 
     return $resource(ENV.API_BASE + '/users/join', {}, {
@@ -57,7 +57,7 @@ angular.module('angularLocalightApp')
   }]);
 
 //Send the thanks Email to a user
-angular.module('angularLocalightApp')
+angular.module('localightApp')
 .factory('Thanks', ['$resource', 'ENV', function($resource, ENV) {
 
   return $resource(ENV.API_BASE + '/users/thanks', {}, {

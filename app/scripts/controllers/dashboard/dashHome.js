@@ -2,12 +2,12 @@
 
 /**
  * @ngdoc function
- * @name angularLocalightApp.controller:DashboardCtrl
+ * @name localightApp.controller:DashboardCtrl
  * @description
  * # DashboardCtrl
- * Controller of the angularLocalightApp
+ * Controller of the localightApp
  */
-angular.module('angularLocalightApp')
+angular.module('localightApp')
   .controller('DashboardCtrl', function () {
     this.awesomeThings = [
       'HTML5 Boilerplate',

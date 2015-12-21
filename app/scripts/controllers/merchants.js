@@ -2,12 +2,12 @@
 
 /**
  * @ngdoc function
- * @name angularLocalightApp.controller:MerchantsCtrl
+ * @name localightApp.controller:MerchantsCtrl
  * @description
  * # MerchantsCtrl
- * Controller of the angularLocalightApp
+ * Controller of the localightApp
  */
-angular.module('angularLocalightApp')
+angular.module('localightApp')
   .controller('MerchantsCtrl', function ($scope, rotationCheck, Giftcards, Locations, $cookies, $location, loadingSpinner) {
 
     this.awesomeThings = [

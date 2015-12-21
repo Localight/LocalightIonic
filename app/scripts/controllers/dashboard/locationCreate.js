@@ -2,12 +2,12 @@
 
 /**
  * @ngdoc function
- * @name angularLocalightApp.controller:CreatelocationCtrl
+ * @name localightApp.controller:CreatelocationCtrl
  * @description
  * # CreatelocationCtrl
- * Controller of the angularLocalightApp
+ * Controller of the localightApp
  */
-angular.module('angularLocalightApp')
+angular.module('localightApp')
   .controller('CreatelocationCtrl', function ($scope, $cookies, $location, $route, Owners, Locations, loadingSpinner) {
 
     //get our session token from the cookies

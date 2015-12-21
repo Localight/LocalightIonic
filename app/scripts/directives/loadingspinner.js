@@ -2,11 +2,11 @@
 
 /**
  * @ngdoc directive
- * @name angularLocalightApp.directive:loadingSpinner
+ * @name localightApp.directive:loadingSpinner
  * @description
  * # loadingSpinner
  */
-angular.module('angularLocalightApp')
+angular.module('localightApp')
   .directive('loadingSpinner', function () {
     return {
       replace: false,

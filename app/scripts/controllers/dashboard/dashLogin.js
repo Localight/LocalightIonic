@@ -2,12 +2,12 @@
 
 /**
  * @ngdoc function
- * @name angularLocalightApp.controller:LoginpanelCtrl
+ * @name localightApp.controller:LoginpanelCtrl
  * @description
  * # LoginpanelCtrl
- * Controller of the angularLocalightApp
+ * Controller of the localightApp
  */
-angular.module('angularLocalightApp')
+angular.module('localightApp')
   .controller('LoginpanelCtrl', function ($scope, $cookies, $location, LoginOwner, loadingSpinner) {
     this.awesomeThings = [
       'HTML5 Boilerplate',

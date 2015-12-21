@@ -2,12 +2,12 @@
 
 /**
  * @ngdoc function
- * @name angularLocalightApp.controller:LocalismCtrl
+ * @name localightApp.controller:LocalismCtrl
  * @description
  * # LocalismCtrl
- * Controller of the angularLocalightApp
+ * Controller of the localightApp
  */
-angular.module('angularLocalightApp')
+angular.module('localightApp')
   .controller('LocalismCtrl', function ($scope, $cookies, rotationCheck, Giftcards, loadingSpinner) {
 
         this.awesomeThings = [

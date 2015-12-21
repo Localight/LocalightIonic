@@ -2,12 +2,12 @@
 
 /**
  * @ngdoc service
- * @name angularLocalightApp.loadingSpinner
+ * @name localightApp.loadingSpinner
  * @description
  * # loadingSpinner
- * Service in the angularLocalightApp.
+ * Service in the localightApp.
  */
-angular.module('angularLocalightApp')
+angular.module('localightApp')
   .service('loadingSpinner', function ($timeout) {
 
       //The super cool loading stack system!

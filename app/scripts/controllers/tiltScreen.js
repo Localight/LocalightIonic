@@ -2,12 +2,12 @@
 
 /**
  * @ngdoc function
- * @name angularLocalightApp.controller:TiltScreenCtrl
+ * @name localightApp.controller:TiltScreenCtrl
  * @description
  * # TiltScreenCtrl
- * Controller of the angularLocalightApp
+ * Controller of the localightApp
  */
-angular.module('angularLocalightApp')
+angular.module('localightApp')
   .controller('TiltScreenCtrl', function ($scope, $location, $routeParams, $cookies, $timeout, LocationById, rotationCheck, loadingSpinner) {
 
     this.awesomeThings = [

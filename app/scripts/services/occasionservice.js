@@ -2,10 +2,10 @@
 
 /**
  * @ngdoc service
- * @name angularLocalightApp.OccasionService
+ * @name localightApp.OccasionService
  * @description
  * # OccasionService
- * Service in the angularLocalightApp.
+ * Service in the localightApp.
  */
 
  /*
@@ -15,7 +15,7 @@
  * throughout the entire app
  */
 
-angular.module('angularLocalightApp')
+angular.module('localightApp')
   .service('OccasionService', function(){
 
   //Our array of occasions

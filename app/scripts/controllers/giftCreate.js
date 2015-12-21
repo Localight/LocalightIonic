@@ -2,22 +2,21 @@
 
 /**
 * @ngdoc function
-* @name angularLocalightApp.controller:CreategiftcardCtrl
+* @name localightApp.controller:CreategiftcardCtrl
 * @description
 * # CreategiftcardCtrl
-* Controller of the angularLocalightApp
+* Controller of the localightApp
 */
-angular.module('angularLocalightApp')
-.controller('CreategiftcardCtrl', function($scope, $http, $routeParams, $location, $window, rotationCheck, $timeout,
-    $log, $q, $cookies, OccasionService, Users, Join, Giftcards, LocationByCode, $document, loadingSpinner) {
+angular.module('localightApp')
+.controller('CreategiftcardCtrl', function($scope, $location, $timeout, $cookies,
+    $ionicScrollDelegate, $ionicPopup, $cordovaKeyboard,
+    rotationCheck, OccasionService, Users, Join, Giftcards, LocationByCode, loadingSpinner) {
 
         this.awesomeThings = [
             'HTML5 Boilerplate',
             'AngularJS',
             'Karma'
         ];
-
-        $scope.cc = {};
 
         //****
         //Page initialization
@@ -28,6 +27,9 @@ angular.module('angularLocalightApp')
 
         //Giftcard form object
         $scope.gc = {};
+
+        //Credit card form object
+        $scope.cc = {};
 
         //Credit card verification fields
         $scope.cardIndex = 0;
@@ -76,50 +78,33 @@ angular.module('angularLocalightApp')
         //General functions
         //****
 
+        //Function to close the keyboard
+        $scope.closeKeyboard = function() {
+            $cordovaKeyboard.close();
+        }
+
         //Fuction to focus on a field if the user presses Enter
         $scope.keyPress = function(keyEvent, input) {
+
             if (keyEvent.which === 13) document.getElementById(input).focus();
         }
 
-        //Chops off end character for specified field
+        //Chops off end character for the code field
         document.getElementById("clique_input_code").oninput = function () {
             if (this.value.length > 5) {
                 this.value = this.value.slice(0,5);
             }
         }
 
-        //Scroll to element by HTML ID
-        $scope.scrollToElement = function(elementId, callback) {
-
-            //Pause before executing scroll to allow other events to complete
-            $timeout(function() {
-
-                //Find the angular element requested
-                var element = angular.element(document.getElementById(elementId));
-
-                //Scroll to the selected element
-                $document.scrollToElement(element, 0, 1000, function(t) {
-                    if (callback) {
-                        //Call the callback after the timeout
-                        $timeout(function () {
-                            callback();
-                        }, 100);
-                    }
-                    //Use cubic easing math
-                    return 1 - (--t) * t * t * t
-                });
-            }, 100);
-        }
-
         //Sets the current active field background
         $scope.setActiveField = function(fieldId) {
 
             if ($scope.activeField && $scope.activeField != fieldId) {
-                $window.document.getElementById($scope.activeField).style.backgroundColor = 'transparent';
+                document.getElementById($scope.activeField).style.backgroundColor = 'transparent';
             }
 
             $scope.activeField = fieldId;
-            $window.document.getElementById($scope.activeField).style.backgroundColor = "white";
+            document.getElementById($scope.activeField).style.backgroundColor = "white";
         };
 
         $scope.setSecondaryField = function(next) {
@@ -127,28 +112,24 @@ angular.module('angularLocalightApp')
                 $scope.secondaryIndex = next;
                 $scope.secondaryField = $scope.inputFields[next];
             }
-            $window.document.getElementById($scope.secondaryField).style.backgroundColor = "rgba(255, 255, 255, 0.35)";
+            document.getElementById($scope.secondaryField).style.backgroundColor = "rgba(255, 255, 255, 0.35)";
         }
 
         //Set the secondary field to clique_amt_selection
         $scope.setSecondaryField(0);
 
-        //Scroll to clique_payment_card when clique_date_selection is valid
-        $scope.$watch('giftcardForm.clique_date_selection.$valid', function(newValue, oldValue) {
-            if (newValue) {
-                //Scroll to the bottom
-                $scope.scrollToElement("clique_payment_card", function() {
-                    document.getElementById('clique_input_creditcardnumber1').focus();
-                });
-            }
-        });
-
         $scope.flipCard = function() {
             //Do this in a timeout to support showing the card and then flipping
             $timeout(function() {
+
+                //First scroll to the bottom to show the code
+                $ionicScrollDelegate.resize();
+                $ionicScrollDelegate.scrollBy(0, 225);
+
+
                 //Add the classes to the front and back
-                var frontCard = $window.document.getElementById("front");
-                var backCard = $window.document.getElementById("back");
+                var frontCard = document.getElementById("front");
+                var backCard = document.getElementById("back");
 
                 frontCard.className = frontCard.className + " flipped";
                 backCard.className = backCard.className + " flipped";
@@ -167,7 +148,7 @@ angular.module('angularLocalightApp')
             //Timeout prevents android keyboard from hiding
             $timeout(function() {
                 document.getElementById('clique_input_from').focus();
-            }, 100);
+            }, 10);
         };
 
         //Flag for send selection flag
@@ -201,25 +182,22 @@ angular.module('angularLocalightApp')
 
                         $scope.showCard = false;
 
-                        // if (event && (event.target.id === 'clique_input_code')) setTimeout(function() {
-                        //     event.target.blur();
-                        // }, 20);
-
-                        //Scroll to the requested element
-                        //Now done by the flip card
-                        //$scope.scrollToElement(scrollId);
-
                         //And set the active field to the occasions
                         $scope.setActiveField(document.getElementById("clique_input_code").getAttribute("nextId"));
 
                         //Blur the code input field
                         $timeout(function () {
-                                document.getElementById("clique_input_code").blur();
+                                $cordovaKeyboard.close();
                         }, 100);
                     }, function(err){
 
                         //Show an alert to the user
-                        alert("Wrong code, please check the code you entered, or try another.");
+                        var alertPopup = $ionicPopup.alert({
+                            title: 'Localight',
+                            template: 'Wrong code, please check the code you entered, or try another.'
+                          });
+                          alertPopup.then(function(res) {
+                          });
                     });
 
                 }
@@ -287,11 +265,23 @@ angular.module('angularLocalightApp')
             }, 25);
         }
 
+        //date picker options, call back on date
+        $scope.dateOptions = {
+            onClose: function(e) {
+
+                $timeout(function () {
+                    //Timeout, focus on the cc, scroll to bottom
+                    $ionicScrollDelegate.scrollBottom();
+                    document.getElementById("clique_input_creditcardnumber1").focus();
+                }, 250);
+            }
+        }
+
         //Formats the phone contact for contact pasting
         $scope.formatContact = function(elementId) {
 
             //Remove all special scharacters from like a paste from contacts
-            var element = $window.document.getElementById(elementId);
+            var element = document.getElementById(elementId);
 
             //Timeout to start a new thread so we can catch the paste
             $timeout(function() {
@@ -325,6 +315,8 @@ angular.module('angularLocalightApp')
                     $scope.validContact = true;
 
                     $timeout(function () {
+                        $ionicScrollDelegate.resize();
+                        $ionicScrollDelegate.scrollBottom();
                         document.getElementById("clique_input_email").focus();
                     }, 250);
                 }
@@ -341,7 +333,7 @@ angular.module('angularLocalightApp')
             //First check if the key pressed was backspace, if it was, dont do the function
             if (!event || event.keyCode != 8) {
 
-                var element = $window.document.getElementById(elementId);
+                var element = document.getElementById(elementId);
 
                 $scope.clique_input_phonenumber_validity = true;
                 var tel = '(';
@@ -382,6 +374,8 @@ angular.module('angularLocalightApp')
                 if($scope.clique_input_phonenumber_validity && tel.length > 12)
                 {
                     $timeout(function () {
+                        $ionicScrollDelegate.resize();
+                        $ionicScrollDelegate.scrollBottom();
                         document.getElementById("clique_input_email").focus();
                     }, 250);
                 }
@@ -391,17 +385,6 @@ angular.module('angularLocalightApp')
         /****
         * Credit Card Validation
         ****/
-
-        $scope.dateOptions = {
-            onClose: function(e) {
-                document.getElementById('clique_date_selection').blur();
-
-                    $scope.dateDirty = true;
-                    document.getElementById("clique_input_creditcardnumber1").focus();
-
-                    $scope.$apply();
-            }
-        }
 
         //Icon URLs for CCs
         //Default, Visa, Mastercard, Amex, Discover
@@ -529,16 +512,23 @@ angular.module('angularLocalightApp')
          */
         $scope.validateCard = function() {
             if ($scope.validCC && $scope.dateValidated && $scope.cvcValidated && $scope.zipValidated) {
-                $scope.cardValidated = true;
 
+                $scope.cardValidated = true;
                 //Since the card is validated
                 //scroll/focus on the continue button
-                $scope.scrollToElement("continue_button", function() {
+                //Scroll to the bottom, and focus on the cc
+                $timeout(function () {
+                    $ionicScrollDelegate.resize();
+                    $ionicScrollDelegate.scrollBottom();
                     $scope.hideCCSpacer = true;
                     document.getElementById('continue_button').focus();
-                });
+                    $ionicScrollDelegate.scrollBottom();
+                }, 100);
 
-            } else {
+            }
+
+            else {
+
                 $scope.cardValidated = false;
                 $scope.cardType = "";
             }
@@ -551,13 +541,20 @@ angular.module('angularLocalightApp')
             //Fetch email from giftcard form
             var email = $scope.gc.email;
 
+            $scope.validEmail = false;
+
             //Regex for all valid emails. To add a TLD, edit the final OR statement.
             var emailRegex = /[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+(?:[A-Z]{2}|co|com|org|net|edu|gov|mil|biz|info|mobi|name|aero|asia|jobs|museum)\b/;
             //Test the form email against the regex
             if (emailRegex.test(email)) {
-                return true;
-            } else {
-                return false;
+
+                //First set valid email to true to show fields
+                $scope.validEmail = true;
+
+                //Time out to scroll tothe bottom
+                $timeout(function () {
+                    $ionicScrollDelegate.scrollBottom();
+                }, 100);
             }
         }
 
@@ -727,7 +724,7 @@ angular.module('angularLocalightApp')
                         document.getElementById("clique_input_phonenumber").focus();
 
                         //Go back to the top
-                        $window.scrollTo(0, 0);
+                        $ionicScrollDelegate.scrollTop();
                     }, 250);
                 }
 

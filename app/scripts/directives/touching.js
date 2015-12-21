@@ -2,12 +2,12 @@
 
 /**
  * @ngdoc directive
- * @name angularLocalightApp.directive:touching
+ * @name localightApp.directive:touching
  * @description
  * # touching
  */
 
-angular.module('angularLocalightApp')
+angular.module('localightApp')
 .directive('myTouchstart', ['$parse', function($parse) {
       return function(scope, element, attr) {
 

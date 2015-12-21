@@ -2,12 +2,12 @@
 
 /**
  * @ngdoc function
- * @name angularLocalightApp.controller:EditlocationCtrl
+ * @name localightApp.controller:EditlocationCtrl
  * @description
  * # EditlocationCtrl
- * Controller of the angularLocalightApp
+ * Controller of the localightApp
  */
-angular.module('angularLocalightApp')
+angular.module('localightApp')
   .controller('EditlocationCtrl', function ($scope, $cookies, $location, $route, $routeParams, Owners, LocationById, loadingSpinner) {
 
     this.awesomeThings = [

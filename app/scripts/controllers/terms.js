@@ -2,12 +2,12 @@
 
 /**
  * @ngdoc function
- * @name angularLocalightApp.controller:TermsCtrl
+ * @name localightApp.controller:TermsCtrl
  * @description
  * # TermsCtrl
- * Controller of the angularLocalightApp
+ * Controller of the localightApp
  */
-angular.module('angularLocalightApp')
+angular.module('localightApp')
   .controller('TermsCtrl', function () {
 
     this.awesomeThings = [
