@@ -21,7 +21,7 @@
 	<img class = "center headerIcon" ng-src = "{{getOccasion(sender.icon).images.normal}}" width= "75px" height = "75px">
 
 	<!-- Our occasion Heading -->
-	<h1 class = "center heart headerOccasion">{{iconHeaders[sender.icon]}}</h1>
+	<h1 class = "center heart headerOccasion">{{getOccasion(sender.icon).header}}</h1>
 
 	<!-- Our message -->
 	<h4 class = "center">${{spentAmount}} was successfully transferred.

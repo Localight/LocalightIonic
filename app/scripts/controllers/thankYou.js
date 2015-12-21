@@ -71,7 +71,7 @@ angular.module('localightApp')
                 } else {
                     //Initialize our thanks message
                     $scope.thanksMessage = $scope.sender.name +
-                    " I used the Local Giftcard at " + $scope.merchantLocation.name +
+                    ", I used the Local Giftcard at " + $scope.merchantLocation.name +
                     " to get ...";
                     $scope.thanksHeader = " a thank you to ";
                 }
@@ -206,34 +206,7 @@ angular.module('localightApp')
     $scope.getOccasion = function(Id) {
         return OccasionService.getOccasionsById(Id);
     }
-
-    //Array of Occasion headings
-	$scope.iconHeaders =
-	[
-		//Anniversary
-		"Happy Anniversary!",
-		//Baby
-		"Congratulations on the Baby!",
-		//Birthday
-		"Happy Birthday!",
-		//Congrats
-		"Congratulations!",
-		//Present (Custom Icon)
-		"Enjoy Your Gift!",
-		//Get Well Soon
-		"Get Well Soon!",
-		//Love
-		"Love You!",
-		//Sympathy
-		"Feel Better Soon!",
-		//Thank You
-		"Thank You!",
-		//Wedding
-		"Congratulations on the Wedding!"
-	]
-
-
-
+    
     //Init
     $scope.getGiftcards();
     $scope.countCharacters();

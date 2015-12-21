@@ -27,6 +27,7 @@ angular.module('localightApp')
           selected: '../images/occasionIcons/occasion-birthday-icon-blk.png',
           iconId: "0"
         },
+        header: 'Happy Birthday!',
         alt: 'Birthday',
         text: 'Variety is the spice of life. So I’m giving you the gift of choice!'
       },
@@ -37,6 +38,7 @@ angular.module('localightApp')
           selected: '../images/occasionIcons/occasion-anniversary-icon-blk.png',
           iconId: "1"
         },
+        header: 'Happy Anniversary!',
         alt: 'Anniversary',
         text: 'You remind me of time itself for you are my Past, Future, and Forever. Happy Anniversary!'
       },
@@ -47,6 +49,7 @@ angular.module('localightApp')
           selected: '../images/occasionIcons/occasion-love-icon-blk.png',
           iconId: "2"
         },
+        header: 'Thank you!',
         alt: 'I Love You',
         text: 'I Iove you for all that you are, all you have been, and all you\'re yet to be.'
       },
@@ -57,6 +60,7 @@ angular.module('localightApp')
           selected: '../images/occasionIcons/occasion-getwell-icon-blk.png',
           iconId: "3"
         },
+        header: 'Get Well Soon!',
         alt: 'Get Well',
         text: 'I look forward to your speedy recovery. Get well soon!'
       },
@@ -67,6 +71,7 @@ angular.module('localightApp')
           selected: '../images/occasionIcons/occasion-congrats-icon-blk.png',
           iconId: "4"
         },
+        header: 'Congratulations!',
         alt: 'Congrats',
         text: 'Spread joy. Chase your wildest dreams. Congratulations!'
       },
@@ -77,6 +82,7 @@ angular.module('localightApp')
           selected: '../images/occasionIcons/occasion-wedding-icon-blk.png',
           iconId: "5"
         },
+        header: 'Congratulations on the Wedding!',
         alt: 'Wedding',
         text: 'Falling in love is easy. Staying in love is AMAZING. Congrats on your marriage!'
       },
@@ -87,6 +93,7 @@ angular.module('localightApp')
           selected: '../images/occasionIcons/occasion-baby-icon-blk.png',
           iconId: "6"
         },
+        header: 'Congratulations on the Baby!',
         alt: 'Baby',
         text: 'Congratulations on the birth of your child!'
       },
@@ -97,6 +104,7 @@ angular.module('localightApp')
           selected: '../images/occasionIcons/occasion-sympathy-icon-blk.png',
           iconId: "7"
         },
+        header: 'Feel Better Soon!',
         alt: 'Sympathy',
         text: 'Our collective hearts are heavy with sympathy.'
       },
@@ -107,6 +115,7 @@ angular.module('localightApp')
           selected: '../images/occasionIcons/occasion-thankyou-icon-blk.png',
           iconId: "8"
         },
+        header: 'Thank You!',
         alt: 'Thank You',
         text: 'You’re the best! You deserve some retail therapy.'
       },
@@ -117,6 +126,7 @@ angular.module('localightApp')
           selected: '../images/occasionIcons/occasion-custom-icon-blk.png',
           iconId: "9"
         },
+        header: 'Thank you!',
         alt: 'Holiday',
         text: "Here's wishing you Happy Holidays and a prosperous New Year!"
       }

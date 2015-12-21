@@ -179,9 +179,11 @@
         name="clique_date_selection"
         type="text"
         ng-click = "dateDirty = true;closeKeyboard();"
-        pick-a-date="gc.date"
+        onclick="document.getElementById('clique_input_occasion').blur();"
+        pick-a-date="date"
         pick-a-date-options="dateOptions"
         placeholder="Select Send Date"
+        ng-model="gc.sendDate"
         class="createGiftCardWidth center roundWhiteBorder currentInput datePicker"
         />
     </div>
