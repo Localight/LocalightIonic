@@ -10,6 +10,7 @@ $icon-font-path: "../bower_components/bootstrap-sass-official/assets/fonts/boots
         Ionic Imports
         (Commented Imports conflict with our CSS currently)
         This has been taken from the actual ionic.scss which simply imports more sass
+        May need to comment out forms and type
     ******/
 
     // Ionic Variables
@@ -19,7 +20,7 @@ $icon-font-path: "../bower_components/bootstrap-sass-official/assets/fonts/boots
     //Ionic Base
     @import "../bower_components/ionic/scss/_reset.scss";
     @import "../bower_components/ionic/scss/_scaffolding.scss";
-    // @import "../bower_components/ionic/scss/_type.scss";
+    @import "../bower_components/ionic/scss/_type.scss";
 
     //Ionic Components
     @import "../bower_components/ionic/scss/_action-sheet.scss";
@@ -39,7 +40,7 @@ $icon-font-path: "../bower_components/bootstrap-sass-official/assets/fonts/boots
     @import "../bower_components/ionic/scss/_spinner.scss";
 
     //Ionic Forms
-    // @import "../bower_components/ionic/scss/_form.scss";
+    @import "../bower_components/ionic/scss/_form.scss";
     @import "../bower_components/ionic/scss/_checkbox.scss";
     @import "../bower_components/ionic/scss/_toggle.scss";
     @import "../bower_components/ionic/scss/_radio.scss";
