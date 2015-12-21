@@ -175,7 +175,8 @@ $icon-font-path: "../bower_components/bootstrap-sass-official/assets/fonts/boots
 }
 
 .currentInput {
-    @include transition(background-color linear 0.25s);
+  @include transition(background-color linear 0.25s);
+
   border-radius: 7px !important;
   opacity: 1 !important;
 

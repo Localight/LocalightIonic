@@ -153,7 +153,7 @@ module.exports = function (grunt) {
 
     autoprefixer: {
       options: {
-        browsers: ['last 1 version']
+        browsers: ['last 5 versions']
       },
       dist: {
         files: [{
