@@ -522,6 +522,7 @@ angular.module('localightApp')
                     $ionicScrollDelegate.scrollBottom();
                     $scope.hideCCSpacer = true;
                     document.getElementById('continue_button').focus();
+                    $ionicScrollDelegate.scrollBottom();
                 }, 100);
 
             }

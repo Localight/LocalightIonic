@@ -73,8 +73,15 @@ body, html {
     to   { opacity: 1; }
 }
 
-.ionicContainer{
+.ionicContainer, .fn-app{
     @include animation('fadein 3s');
+    padding: 0px !important;
+}
+
+//The scroll class will create it's own random Heights
+//In Ionic, need to make sure it's 100%
+.scroll {
+    height: 100% !important;
 }
 
 
