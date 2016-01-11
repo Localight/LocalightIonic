@@ -1,10 +1,39 @@
 /* Ionic Overrides */
 
+body, .ionic-body, html {
+
+    font-size: 16px;
+}
+
 table, div, td, tr, label {
     margin: initial;
     padding: initial;
-    vertical-align: middle;
+    vertical-align: initial;
     border: initial;
+    line-height: initial;
+}
+
+p {
+    margin: initial;
+}
+
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, i, u, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed, fieldset,
+figure, figcaption, footer, header, hgroup,
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+    margin: initial;
+    padding: initial;
+    border: initial;
+    font-size: initial;
 }
 
 //Fix the cloned input fields on focus/scroll
@@ -51,6 +80,30 @@ h5 {
 
 h6 {
     font-size: ($headerSize - 23px) * $headerScale;
+}
+
+
+
+//General form input
+textarea, input,
+input[type="text"], input[type="password"],
+input[type="datetime"], input[type="datetime-local"],
+input[type="date"], input[type="month"],
+input[type="time"], input[type="week"],
+input[type="number"], input[type="email"],
+input[type="url"], input[type="search"],
+input[type="tel"], input[type="color"] {
+
+    display: initial;
+    padding-top: initial;
+    padding-left: initial;
+    height: initial;
+    color: initial;
+    vertical-align: initial;
+    font-size: initial;
+    line-height: initial;
+    border: initial;
+
 }
 
 /* End Ionic Overrides */

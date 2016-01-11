@@ -29,30 +29,30 @@ $familyDigital: 'profontwindowsregular',Courier,serif;
 /* Font Styles */
 .heart {
   font-family: $familyFancy;
-  font-size: 2.4em;
+  font-size: 2.4em !important;
   padding: 0 1%;
   font-weight: normal !important;
 }
 
 .profont {
   font-family: $familyDigital;
-  font-size: 2em;
+  font-size: 1.35em !important;
   padding: 0 2%;
 }
 
 .helveticaInput {
-  font-size: 1.5em;
-  line-height: 45px;
+  font-size: 1.5em !important;
+  line-height: 45px !important;
   padding-left: 2%;
 }
 
 .helveticaText {
-  font-size: 1em;
-  line-height: 45px;
+  font-size: 1em !important;
+  line-height: 45px !important;
   padding-left: 2%;
 }
 
 .bold {
-  font-weight: bold;
+  font-weight: bold !important;
 }
 /* End Font Styles */
