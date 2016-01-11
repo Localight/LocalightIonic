@@ -66,6 +66,9 @@ $icon-font-path: "../bower_components/bootstrap-sass-official/assets/fonts/boots
         Localight Imports
     ******/
 
+    //Override Ionic Styles
+    @import 'ionicFixes';
+
     //Import the colors
     @import 'colors';
 

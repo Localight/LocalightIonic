@@ -340,62 +340,6 @@ $dialScale: 0.85;
 
 /* End Dialad Buttons */
 
-/* Ionic Overrides */
-
-table, div, td, tr, label {
-    margin: initial;
-    padding: initial;
-    vertical-align: middle;
-    border: initial;
-}
-
-//Fix the cloned input fields on focus/scroll
-// .cloned-text-input {
-//   display: none !important;
-//   height: inherit;
-// }
-
-//Got the default css for h tags to ovveride Ionic's
-
-//Variable for Headers
-$headerMargin: 15px;
-$headerSize: 32px;
-$headerScale: 1.3;
-
-//General header
-h1, h2, h3, h4, h5, h6 {
-    display: block;
-    margin-top: $headerMargin;
-    margin-bottom: $headerMargin;
-    line-height: initial;
-}
-
-h1 {
-    font-size: $headerSize * $headerScale;
-}
-
-h2 {
-    font-size: ($headerSize - 10px) * $headerScale;
-}
-
-h3  {
-    font-size: ($headerSize - 15px) * $headerScale;
-}
-
-h4  {
-    font-size: ($headerSize - 19px) * $headerScale;
-}
-
-h5 {
-    font-size: ($headerSize - 22px) * $headerScale;
-}
-
-h6 {
-    font-size: ($headerSize - 23px) * $headerScale;
-}
-
-/* End Ionic Overrides */
-
 /**
 ***********************
   END GENERAL STYLES
