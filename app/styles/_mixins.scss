@@ -80,6 +80,15 @@
   border-radius: $args;
 }
 
+//Box shadow, Vendor Independent
+ @mixin boxShadow($args...) {
+   -webkit-box-shadow: $args;
+   -moz-box-shadow: $args;
+   -ms-box-shadow: $args;
+   -o-box-shadow: $args;
+   box-shadow: $args;
+}
+
 //Mixin for placeholder text in the app, Vendor Independent
 
 $placeHolderSpeed: .15s;

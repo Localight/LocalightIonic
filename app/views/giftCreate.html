@@ -105,7 +105,10 @@
         nextId="clique_occasion_selection"
         pattern="\d*" required>
       </div>
-      <a class="center" href="" ng-hide="location.name" ng-click="gc.code = 10000;codeValidate($event);setSecondaryField(3);">I don't have a merchant code</a>
+      <a class="center noCode" href=""
+        ng-hide="location.name"
+        ng-click="gc.code = 10000;codeValidate($event);setSecondaryField(3);">
+        I don't have a merchant code</a>
 
       <div id="clique_code_message" ng-show = "location.name">
         <label class="inputlabel">
@@ -331,6 +334,10 @@
           ng-disabled="!(giftcardForm.$valid && gc.amount && gc.occasion && cardValidated) || loading"
           ng-click="tokenizeInfo();backendError = false;">Continue</button>
     </div>
+
+    <img ng-src = "../images/variousIcons/logo-localight-outline-blk.png"
+     class = "giftCreateLocalightLogo"
+     alt="Localight" height="45px" width="45px">
 
     <div data-ng-show="error" class="text-danger">
       <strong data-ng-bind="error"></strong>

@@ -197,6 +197,9 @@ angular.module('localightApp')
                             template: 'Wrong code, please check the code you entered, or try another.'
                           });
                           alertPopup.then(function(res) {
+
+                              //Empty the code field
+                              $scope.gc.code = "";
                           });
                     });
 
