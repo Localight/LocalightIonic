@@ -62,24 +62,10 @@
           <h4 class="center giftcardAmount" id="useAmount">Use this ${{giftcard.origAmount / 100}} gift at</h4>
           <h3 class="center giftcardMerchant">{{giftcard.location.locationId.name}}</h3>
           <h5 class="center giftcardAddress" ng-if = "giftcard.location.locationId.address2">
-              {{giftcard.location.locationId.address1
-              + " " +
-              giftcard.location.locationId.address2
-              + ", " +
-              giftcard.location.locationId.city
-              + ", " +
-              giftcard.location.locationId.state
-              + " " +
-              giftcard.location.locationId.zipcode}}
+              {{giftcard.location.locationId.address1}} {{giftcard.location.locationId.address2}}, {{giftcard.location.locationId.city}}, {{giftcard.location.locationId.state}}
           </h5>
           <h5 class="center giftcardAddress" ng-if = "!giftcard.location.locationId.address2">
-              {{giftcard.location.locationId.address1
-              + ", " +
-              giftcard.location.locationId.city
-              + ", " +
-              giftcard.location.locationId.state
-              + " " +
-              giftcard.location.locationId.zipcode}}
+              {{giftcard.location.locationId.address1}}, {{giftcard.location.locationId.city}}, {{giftcard.location.locationId.state}}
           </h5>
         </div>
 
@@ -115,25 +101,11 @@
         <h4 class="center giftcardAmount">This gift was used at</h4>
         <h3 class="center viewGiftMerchantName">{{giftcard.location.locationId.name}}</h3>
         <h5 class="center viewGiftAddress" ng-if = "giftcard.location.locationId.address2">
-            {{giftcard.location.locationId.address1
-            + " " +
-            giftcard.location.locationId.address2
-            + ", " +
-            giftcard.location.locationId.city
-            + ", " +
-            giftcard.location.locationId.state
-            + " " +
-            giftcard.location.locationId.zipcode}}
+            {{giftcard.location.locationId.address1}} {{giftcard.location.locationId.address2}}, {{giftcard.location.locationId.city}}, {{giftcard.location.locationId.state}}
         </h5>
 
         <h5 class="center viewGiftAddress" ng-if = "!giftcard.location.locationId.address2">
-            {{giftcard.location.locationId.address1
-            + ", " +
-            giftcard.location.locationId.city
-            + ", " +
-            giftcard.location.locationId.state
-            + " " +
-            giftcard.location.locationId.zipcode}}
+            {{giftcard.location.locationId.address1}}, {{giftcard.location.locationId.city}}, {{giftcard.location.locationId.state}}
         </h5>
       </div>
 

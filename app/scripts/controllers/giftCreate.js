@@ -197,6 +197,9 @@ angular.module('localightApp')
                             template: 'Wrong code, please check the code you entered, or try another.'
                           });
                           alertPopup.then(function(res) {
+
+                              //Empty the code field
+                              $scope.gc.code = "";
                           });
                     });
 
@@ -437,8 +440,12 @@ angular.module('localightApp')
             if(Stripe.card.validateCardNumber(cardNumber) && (cardNumber.length == 13 || cardNumber.length == 15 || cardNumber.length == 16)) {
                 $scope.validCC = true;
 
-                //Jump to the date field
-                $scope.ccDateSwitch();
+                //Jump to the date field, if not the dev number
+                 if(cardNumber.indexOf("424242424242") != 0
+                 || cardNumber.length == 16)
+                 {
+                     $scope.ccDateSwitch();
+                 }
             }
             else {
                 $scope.validCC = false;
