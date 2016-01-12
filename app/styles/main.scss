@@ -66,6 +66,9 @@ $icon-font-path: "../bower_components/bootstrap-sass-official/assets/fonts/boots
         Localight Imports
     ******/
 
+    //Override Ionic Styles
+    @import 'ionicFixes';
+
     //Import the colors
     @import 'colors';
 
@@ -374,7 +377,7 @@ $icon-font-path: "../bower_components/bootstrap-sass-official/assets/fonts/boots
     .sentFooter {
         @extend .fromTextSpent;
 
-        font-size: 12px;
+        font-size: 12px !important;
         font-family: $familyStandard !important;
         padding-left: 50px;
         width: 250px;
@@ -429,7 +432,7 @@ $icon-font-path: "../bower_components/bootstrap-sass-official/assets/fonts/boots
     border-radius: 5px;
     border: 1px solid $inverseStandard;
     position: absolute;
-    margin-top: -5px;
+    margin-top: 10px;
     right: 20px;
 }
 
@@ -472,7 +475,7 @@ $icon-font-path: "../bower_components/bootstrap-sass-official/assets/fonts/boots
     height: 29px;
     width: 41px;
     opacity: .3;
-    vertical-align: bottom;
+    vertical-align: -webkit-baseline-middle;
 }
 
 .listSectionHeader {
